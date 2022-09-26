@@ -1,11 +1,13 @@
-flags := `pkg-config --libs --cflags sdl2` -std=c11 -Wall -Wextra -Werror -Wpedantic
+flags := -std=c11 -Wall -Wextra -Werror -Wpedantic
+conf := `pkg-config --libs --cflags sdl2`
+sdl_i := -lSDL2_image
 name := endgame
 
 all: $(name)
 
 $(name):
 	rm -rf $(name)
-	clang $(flags) -Iinc -o $(name) src/*.c
+	clang $(flags) $(conf) $(sdl_i) -Iinc -o $(name) src/*.c
 
 clean:
 	rm -rf $(name)
