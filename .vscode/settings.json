@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "window_sdl.h": "c",
+        "sdl_timer.h": "c"
+    }
+}
