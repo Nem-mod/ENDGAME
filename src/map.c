@@ -25,7 +25,6 @@ void mx_render_map(t_map *map) {
         mx_render_lp(map->start_point);
         map->start_point = map->start_point->next;
     }
-    
     // tex = mx_init_texture("resource/img/second.png");
 }
 

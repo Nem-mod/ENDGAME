@@ -30,28 +30,38 @@ int main() {
     
     // clear the window
 
-    SDL_RenderClear(w_render);
+    
     
     t_map map = mx_create_map();
-    mx_render_map(&map);
-    SDL_RenderPresent(w_render);
+    // mx_render_map(&map);
+    
 
     t_menu menu = mx_create_menu();
-    mx_render_menu(&menu);
 
 
-    SDL_RenderPresent(w_render);
-    SDL_Event event;
+    // SDL_RenderPresent(w_render);
+    bool request_exit = false;
+    while (!request_exit) {
 
-    while (SDL_WaitEvent(&event))
-    {
-       
-        if (event.type == SDL_QUIT){
-            // clean up resources before exiting
-            // SDL_DestroyTexture(tex);
-            mx_clear_map(&map);
-            mx_destroy("error creating texture");
+        mx_render_menu(&menu);
+        if (mx_handle_menu(&menu)) {
+            break;
+        }
+        SDL_Event event;
+
+        SDL_RenderPresent(w_render);
+        SDL_Delay(1000 / 60);
+        while (SDL_PollEvent(&event)) {
+        
+            if (event.type == SDL_QUIT){
+                // clean up resources before exiting
+                // SDL_DestroyTexture(tex);
+                mx_clear_map(&map);
+                mx_destroy("error creating texture");
+            }
         }
     }
+    SDL_RenderClear(w_render);
+    mx_render_map(&map);
     return 0;
 }
