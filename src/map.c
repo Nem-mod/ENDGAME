@@ -8,9 +8,9 @@ t_map mx_create_map(SDL_Window* win, SDL_Renderer* renderer) {
     map.tex = mx_init_texture(map.img_path, win, renderer);
     map.start_point = mx_create_lp(win, renderer);
     map.rectdist.h = WINDOW_HEIGHT;
-    map.rectdist.w = WINDOW_WIDTH ;
-    map.rectdist.x = WINDOW_WIDTH / 2;
-    map.rectdist.y = WINDOW_HEIGHT / 4;
+    map.rectdist.w = WINDOW_WIDTH;
+    map.rectdist.x = 0;
+    map.rectdist.y = 0;
     mx_generate_points(&map, win, renderer);
     return map;
 }
@@ -35,7 +35,7 @@ void mx_clear_map(t_map *map) {
 
 void mx_generate_points(t_map *map, SDL_Window* win, SDL_Renderer* renderer) {
     srand(time(NULL));
-    int amount = rand() % 4 + 7;
+    int amount = rand() % 4 + 4;
     t_level_point* temp_point = mx_create_lp(win, renderer);
     t_level_point* current_point = temp_point;
     map->start_point = mx_create_lp(win, renderer);

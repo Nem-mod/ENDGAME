@@ -5,8 +5,8 @@ t_menu mx_create_menu(SDL_Window* win, SDL_Renderer* renderer) {
     menu.active = true;
     menu.rect.h = 300;
     menu.rect.w = 300;
-    menu.rect.x = WINDOW_WIDTH / 2;
-    menu.rect.y = WINDOW_HEIGHT / 4;
+    menu.rect.x = (WINDOW_WIDTH - menu.rect.w) / 2 ;
+    menu.rect.y = (WINDOW_HEIGHT - menu.rect.h) / 2;
     menu.img_path = "resource/img/menu.png";
     menu.tex = mx_init_texture(menu.img_path, win, renderer);
     return menu;
@@ -14,12 +14,7 @@ t_menu mx_create_menu(SDL_Window* win, SDL_Renderer* renderer) {
 }
 void mx_render_menu(t_menu *menu, SDL_Renderer *renderer) {
     // draw the image to the window
-    SDL_Rect prect;
-    prect.h = 370;
-    prect.w = 380;
-    prect.x = 0;
-    prect.y = 0;
-    SDL_RenderCopy(renderer, menu->tex, &prect,  &menu->rect);
+    SDL_RenderCopy(renderer, menu->tex, NULL,  &menu->rect);
 }
 int mx_handle_menu(t_menu *menu) {
     int mouse_x;
