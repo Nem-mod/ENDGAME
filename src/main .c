@@ -1,5 +1,5 @@
 #include "../inc/window_sdl.h"
-#include "SDL2/SDL_image.h"
+#include "../inc/map.h"
 
 int main() {
 
@@ -11,7 +11,7 @@ int main() {
     win = SDL_CreateWindow("Our game!",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
-                                       840, 840, 0);
+                                       300 * 4, 300 * 3, 0);
     if (!win)
     {
         mx_destroy("error creating window\n");
@@ -30,18 +30,20 @@ int main() {
     // clear the window
 
     SDL_RenderClear(w_render);
+    t_map map = mx_create_map();
+    mx_render_map(&map);
 
-    SDL_Texture* tex = mx_init_texture("resource/img/map.png");
-    SDL_Rect rect;
-    rect.h = 850;
-    rect.w = 850;
-    rect.x = 100;
-    rect.y = -100;
-    // draw the image to the window
-    SDL_RenderCopy(w_render, tex, &rect, NULL);
+    // SDL_Texture* tex = mx_init_texture("resource/img/map.png");
+    // SDL_Rect rect;
+    // rect.h = 850;
+    // rect.w = 850;
+    // rect.x = 100;
+    // rect.y = -100;
+    // // draw the image to the window
+    // SDL_RenderCopy(w_render, tex, &rect, NULL);
     SDL_RenderPresent(w_render);
 
-    tex = mx_init_texture("resource/img/second.png");
+    // tex = mx_init_texture("resource/img/second.png");
 
 
 
@@ -51,7 +53,8 @@ int main() {
     {
         if (event.type == SDL_QUIT){
             // clean up resources before exiting
-            SDL_DestroyTexture(tex);
+            // SDL_DestroyTexture(tex);
+            mx_clear_map(&map);
             mx_destroy("error creating texture");
         }
     }

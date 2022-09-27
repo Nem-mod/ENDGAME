@@ -2,6 +2,14 @@
     "files.associations": {
         "window_sdl.h": "c",
         "sdl_timer.h": "c",
-        "sdl_image.h": "c"
-    }
+        "sdl_image.h": "c",
+        "level_point.h": "c"
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/seva/.ssh/ENDGAME",
+            "binaryPath": "/home/seva/.ssh/ENDGAME/endgame",
+            "binaryArgs": []
+        }
+    ]
 }
