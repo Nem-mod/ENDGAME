@@ -8,54 +8,45 @@ int main() {
         printf("error initializing SDL: %s\n", SDL_GetError());
     }
 
-    SDL_Window* win = SDL_CreateWindow("Hello, CS50!",
+    win = SDL_CreateWindow("Our game!",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
                                        640, 640, 0);
     if (!win)
     {
-        printf("error creating window: %s\n", SDL_GetError());
-        SDL_Quit();
+        mx_destroy("error creating window\n");
     }
+    
     Uint32 render_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
     SDL_Renderer* rend = SDL_CreateRenderer(win, -1, render_flags);
-    if (!rend)
+    w_render = rend;
+    if (!w_render)
     {
-      printf("error creating renderer: %s\n", SDL_GetError());
-      SDL_DestroyWindow(win);
-      SDL_Quit();
-      return 1;
+      mx_destroy("error creating renderer\n");
     }
 
     // load the image into memory using SDL_image library function
-    SDL_Surface* surface = IMG_Load("resource/img/floppa.png");
-    if (!surface)
-    {
-        printf("error creating surface\n");
-        SDL_DestroyRenderer(rend);
-        SDL_DestroyWindow(win);
-        SDL_Quit();
-        return 1;
-    }
-
-    // load the image data into the graphics hardware's memory
-    SDL_Texture* tex = SDL_CreateTextureFromSurface(rend, surface);
-    SDL_FreeSurface(surface);
-    if (!tex)
-    {
-        printf("error creating texture: %s\n", SDL_GetError());
-        SDL_DestroyRenderer(rend);
-        SDL_DestroyWindow(win);
-        SDL_Quit();
-        return 1;
-    }
-
-    // clear the window
-    SDL_RenderClear(rend);
     
+    // clear the window
+
+    SDL_RenderClear(w_render);
+
+    SDL_Texture* tex = mx_init_texture("resource/img/floppa.png");
+
     // draw the image to the window
-    SDL_RenderCopy(rend, tex, NULL, NULL);
-    SDL_RenderPresent(rend);
+    SDL_RenderCopy(w_render, tex, NULL, NULL);
+    SDL_RenderPresent(w_render);
+
+    tex = mx_init_texture("resource/img/second.png");
+
+    SDL_Rect rect;
+    rect.h = 50;
+    rect.w = 50;
+    rect.x = 0;
+    rect.y = 0;
+
+    SDL_RenderCopy(w_render, tex, NULL, &rect);
+    SDL_RenderPresent(w_render);
     SDL_Event event;
 
     while (SDL_WaitEvent(&event))
@@ -63,13 +54,8 @@ int main() {
         if (event.type == SDL_QUIT){
             // clean up resources before exiting
             SDL_DestroyTexture(tex);
-            SDL_DestroyRenderer(rend);
-            SDL_DestroyWindow(win);
-            SDL_Quit();
+            mx_destroy("error creating texture");
         }
     }
-
-    
-   
     return 0;
 }
