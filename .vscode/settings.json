@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "window_sdl.h": "c"
+        "window_sdl.h": "c",
+        "map.h": "c"
     },
     "makefile.launchConfigurations": [
         {

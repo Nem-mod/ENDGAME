@@ -19,6 +19,7 @@ typedef enum e_scenes {
 }            t_scenes;
 
 typedef struct s_window_sdl {
+    SDL_Window* window;
     SDL_Renderer* renderer;
     t_scenes scene;
     int cursor_x;
@@ -30,9 +31,9 @@ typedef struct s_window_sdl {
 
 void mx_init_menu();
 void mx_destroy(char* ms); 
-SDL_Texture* mx_init_texture(char* path);
+SDL_Texture* mx_init_texture(char* path, SDL_Window* win, SDL_Renderer* renderer);
 
-SDL_Window* win;
-SDL_Renderer* w_render;
+
+
 
 #endif

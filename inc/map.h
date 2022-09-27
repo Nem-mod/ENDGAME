@@ -10,13 +10,15 @@ typedef struct s_map
     SDL_Texture *tex;
     char* img_path;
     bool active;
+    SDL_Rect rectimg;
+    SDL_Rect rectdist;
 
     t_level_point *start_point;
 
 }               t_map;
 
 
-t_map mx_create_map();
+t_map mx_create_map(SDL_Window* win, SDL_Renderer* renderer);
 void mx_render_map(t_map *map, SDL_Renderer *renderer);
 void mx_clear_map(t_map *map);
 

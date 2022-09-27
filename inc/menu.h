@@ -11,7 +11,7 @@ typedef struct s_menu {
     
 }               t_menu;
 
-t_menu mx_create_menu();
+t_menu mx_create_menu(SDL_Window* win, SDL_Renderer* renderer);
 void mx_render_menu(t_menu *menu, SDL_Renderer *renderer);
 int mx_handle_menu(t_menu *menu);
 void mx_clear_menu(t_menu *menu);
