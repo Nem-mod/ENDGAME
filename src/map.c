@@ -35,22 +35,30 @@ void mx_clear_map(t_map *map) {
 
 void mx_generate_points(t_map *map, SDL_Window* win, SDL_Renderer* renderer) {
     srand(time(NULL));
-    int amount = rand() % 4 + 4;
+    int amount = rand() % 3 + 4;
     t_level_point* temp_point = mx_create_lp(win, renderer);
     t_level_point* current_point = temp_point;
     map->start_point = mx_create_lp(win, renderer);
+    map->start_point->rect.x = WINDOW_WIDTH - 200;
+    map->start_point->rect.y = WINDOW_HEIGHT - 200;
+    
     map->start_point->active = true;
     SDL_DestroyTexture(map->start_point->tex);
     map->start_point->tex = mx_init_texture("resource/img/mob.png", win, renderer);
     map->start_point->next = current_point;
 
-    map->start_point->active = true;
+    // map->start_point->active = true;
     map->start_point->next = current_point;
 
     for (int i = 0; i < amount; i++) {
         temp_point = mx_create_lp(win, renderer);
-        temp_point->rect.y -= (i + 1) * 900 / amount;
+        temp_point->rect.y -= 200 + i * (WINDOW_HEIGHT - 400) / (amount + 2);
+        temp_point->rect.x -= -100 + i * (WINDOW_WIDTH - 400) / (amount + 2);
         current_point->next = temp_point;
+        if (i == amount - 2) {
+            temp_point->rect.y = 250; 
+            temp_point->rect.x = 250;
+        }
         current_point = temp_point;
     }
 }
