@@ -3,7 +3,9 @@
         "window_sdl.h": "c",
         "sdl_timer.h": "c",
         "sdl_image.h": "c",
-        "level_point.h": "c"
+        "level_point.h": "c",
+        "stdio.h": "c",
+        "map.h": "c"
     },
     "makefile.launchConfigurations": [
         {

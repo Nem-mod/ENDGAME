@@ -1,5 +1,6 @@
 #include "../inc/window_sdl.h"
 #include "../inc/map.h"
+#include "../inc/menu.h"
 
 int main() {
 
@@ -30,27 +31,21 @@ int main() {
     // clear the window
 
     SDL_RenderClear(w_render);
+    
     t_map map = mx_create_map();
     mx_render_map(&map);
-
-    // SDL_Texture* tex = mx_init_texture("resource/img/map.png");
-    // SDL_Rect rect;
-    // rect.h = 850;
-    // rect.w = 850;
-    // rect.x = 100;
-    // rect.y = -100;
-    // // draw the image to the window
-    // SDL_RenderCopy(w_render, tex, &rect, NULL);
     SDL_RenderPresent(w_render);
 
-    // tex = mx_init_texture("resource/img/second.png");
+    t_menu menu = mx_create_menu();
+    mx_render_menu(&menu);
 
 
-
+    SDL_RenderPresent(w_render);
     SDL_Event event;
 
     while (SDL_WaitEvent(&event))
     {
+       
         if (event.type == SDL_QUIT){
             // clean up resources before exiting
             // SDL_DestroyTexture(tex);
