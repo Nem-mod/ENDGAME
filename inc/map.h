@@ -17,7 +17,7 @@ typedef struct s_map
 
 
 t_map mx_create_map();
-void mx_render_map(t_map *map);
+void mx_render_map(t_map *map, SDL_Renderer *renderer);
 void mx_clear_map(t_map *map);
 
 void mx_generate_points();

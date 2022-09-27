@@ -4,26 +4,27 @@
 t_map mx_create_map() {
     t_map map;
     map.active = true;
-    map.img_path = "resource/img/map.png";
+    map.img_path = "resource/img/map.jpg";
     map.start_point = mx_create_lp();
-
+    // mx_generate_points(map);
     return map;
 }
 
-void mx_render_map(t_map *map) {
+void mx_render_map(t_map *map, SDL_Renderer *renderer) {
 
     map->tex = mx_init_texture(map->img_path);
     SDL_Rect rect;
     rect.h = 300 * 4;
     rect.w = 300 * 3;
-    rect.x = 100;
-    rect.y = -100;
+    rect.x = 0;
+    rect.y = 0;
     // draw the image to the window
-    SDL_RenderCopy(w_render, map->tex, &rect, NULL);
-    mx_generate_points(map);
-    while (map->start_point->next != NULL) {
-        mx_render_lp(map->start_point);
-        map->start_point = map->start_point->next;
+    SDL_RenderCopy(renderer, map->tex, &rect, NULL);
+
+    t_level_point *temp = map->start_point;
+    while (temp->next != NULL) {
+        mx_render_lp(temp, renderer);
+        temp = temp->next;
     }
     // tex = mx_init_texture("resource/img/second.png");
 }
@@ -40,6 +41,7 @@ void mx_generate_points(t_map *map) {
     int amount = rand() % 4 + 7;
     t_level_point* temp_point = mx_create_lp();
     t_level_point* current_point = temp_point;
+    map->start_point = mx_create_lp();
     map->start_point->next = current_point;
 
     map->start_point->active = true;

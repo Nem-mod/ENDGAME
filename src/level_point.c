@@ -10,11 +10,12 @@ t_level_point* mx_create_lp() {
     point->room = ENEMY;
     point->next = NULL;
     point->img_path = "resource/img/point.png";
+    point->tex = mx_init_texture(point->img_path);
+
     return point;
 }
 
-void mx_render_lp(t_level_point* lp) {
-    lp->tex = mx_init_texture(lp->img_path);
-    printf("%s", lp->img_path);
-    SDL_RenderCopy(w_render, lp->tex, NULL, &lp->rect);
+void mx_render_lp(t_level_point* lp, SDL_Renderer *renderer) {
+    // lp->tex = mx_init_texture(lp->img_path);
+    SDL_RenderCopy(renderer, lp->tex, NULL, &lp->rect);
 }

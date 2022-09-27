@@ -31,9 +31,10 @@ int main() {
     // clear the window
 
     
-    
-    // mx_render_map(&map);
-    
+    t_menu menu = mx_create_menu();
+    t_map map = mx_create_map();
+    mx_generate_points(&map);
+
 
     t_window_sdl gameWindow;
     gameWindow.renderer = rend;
@@ -43,20 +44,26 @@ int main() {
     // SDL_RenderPresent(w_render);
     while (gameWindow.active) {
 
+        if (gameWindow.scene == MENU) {
+            mx_render_menu(&menu, gameWindow.renderer);
+            gameWindow.scene = mx_handle_menu(&menu);
+        }
+        else if (gameWindow.scene == MAP) {
+            mx_render_map(&map, gameWindow.renderer);
+        }
+        SDL_RenderPresent(gameWindow.renderer);
         SDL_Event event;
-
-        SDL_RenderPresent(w_render);
         while (SDL_PollEvent(&event)) {
         
             if (event.type == SDL_QUIT){
                 // clean up resources before exiting
                 // SDL_DestroyTexture(tex);
                 // mx_destroy("error creating texture");
-                gameWindow.active = true;
+                gameWindow.active = false;
             }
         }
         SDL_Delay(1000 / 60);
     }
-    SDL_RenderClear(w_render);
+    SDL_RenderClear(gameWindow.renderer);
     return 0;
 }

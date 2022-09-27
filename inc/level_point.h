@@ -25,6 +25,6 @@ typedef struct s_level_point
 }               t_level_point;
 
 t_level_point* mx_create_lp();
-void mx_render_lp(t_level_point* lp);
+void mx_render_lp(t_level_point* lp, SDL_Renderer *renderer);
 
 #endif

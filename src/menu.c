@@ -11,7 +11,7 @@ t_menu mx_create_menu() {
     return menu;
 
 }
-void mx_render_menu(t_menu *menu) {
+void mx_render_menu(t_menu *menu, SDL_Renderer *renderer) {
     menu->tex = mx_init_texture(menu->img_path);
     // draw the image to the window
     SDL_Rect prect;
@@ -19,7 +19,7 @@ void mx_render_menu(t_menu *menu) {
     prect.w = 380;
     prect.x = 0;
     prect.y = 0;
-    SDL_RenderCopy(w_render, menu->tex, &prect,  &menu->rect);
+    SDL_RenderCopy(renderer, menu->tex, &prect,  &menu->rect);
 }
 int mx_handle_menu(t_menu *menu) {
     int mouse_x;
