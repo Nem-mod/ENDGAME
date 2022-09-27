@@ -45,16 +45,23 @@ void mx_generate_points(t_map *map, SDL_Window* win, SDL_Renderer* renderer) {
     map->start_point->active = true;
     SDL_DestroyTexture(map->start_point->tex);
     map->start_point->tex = mx_init_texture("resource/img/mob.png", win, renderer);
+    current_point->rect.x = WINDOW_WIDTH - 350;
+    current_point->rect.x = WINDOW_HEIGHT - 350;
+
     map->start_point->next = current_point;
 
     // map->start_point->active = true;
-    map->start_point->next = current_point;
 
     for (int i = 0; i < amount; i++) {
+
         temp_point = mx_create_lp(win, renderer);
-        temp_point->rect.y -= 200 + i * (WINDOW_HEIGHT - 400) / (amount + 2);
-        temp_point->rect.x -= -100 + i * (WINDOW_WIDTH - 400) / (amount + 2);
+        temp_point->rect.y -= 300 + (i + 1) * (WINDOW_HEIGHT - 400) / (amount + 2);
         current_point->next = temp_point;
+        temp_point->rect.x -= -100 + i * (WINDOW_WIDTH - 400) / (amount + 2);
+        if (i == 1) {
+            temp_point->rect.y = WINDOW_HEIGHT - 400;
+            temp_point->rect.x = WINDOW_WIDTH - 400;
+        }
         if (i == amount - 2) {
             temp_point->rect.y = 250; 
             temp_point->rect.x = 250;
