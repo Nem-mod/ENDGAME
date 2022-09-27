@@ -24,5 +24,6 @@ void mx_clear_map(t_map *map);
 
 void mx_generate_points();
 void mx_clear_points(t_map *map);
+void mx_handle_map(t_map *map, SDL_Window* win, SDL_Renderer* renderer);
 
 #endif

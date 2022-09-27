@@ -39,6 +39,7 @@ int main() {
         }
         else if (gameWindow.scene == MAP) {
             mx_render_map(&map, gameWindow.renderer);
+            mx_handle_map(&map, gameWindow.window, gameWindow.renderer);
         }
         SDL_RenderPresent(gameWindow.renderer);
         SDL_Event event;

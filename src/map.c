@@ -39,6 +39,9 @@ void mx_generate_points(t_map *map, SDL_Window* win, SDL_Renderer* renderer) {
     t_level_point* temp_point = mx_create_lp(win, renderer);
     t_level_point* current_point = temp_point;
     map->start_point = mx_create_lp(win, renderer);
+    map->start_point->active = true;
+    SDL_DestroyTexture(map->start_point->tex);
+    map->start_point->tex = mx_init_texture("resource/img/mob.png", win, renderer);
     map->start_point->next = current_point;
 
     map->start_point->active = true;
@@ -59,3 +62,14 @@ void mx_clear_points(t_map *map) {
         map->start_point = temp;
     }
 }
+
+void mx_handle_map(t_map *map, SDL_Window* win, SDL_Renderer* renderer){
+    t_level_point* temp = map->start_point;
+    while (temp->next != NULL)
+    {
+        mx_handle_point_level(temp, win, renderer);
+        temp = temp->next;
+    }
+    
+}
+
