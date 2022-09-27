@@ -37,7 +37,8 @@ void mx_clear_map(t_map *map) {
 
 
 void mx_generate_points(t_map *map) {
-    int amount = rand() % 10 + 1;
+    srand(time(NULL));
+    int amount = rand() % 4 + 7;
     t_level_point* temp_point = mx_create_lp();
     t_level_point* current_point = temp_point;
     map->start_point->next = current_point;
@@ -47,6 +48,7 @@ void mx_generate_points(t_map *map) {
 
     for (int i = 0; i < amount; i++) {
         temp_point = mx_create_lp();
+        temp_point->rect.y -= (i + 1) * 900 / amount;
         current_point->next = temp_point;
         current_point = temp_point;
     }

@@ -5,8 +5,8 @@ t_level_point* mx_create_lp() {
     point->active = false;
     point->rect.h = 60;
     point->rect.w = 60;
-    point->rect.x = rand() % 900 / 2;
-    point->rect.y = rand() % 1200 / 2;
+    point->rect.x = 400 + rand() % 400;
+    point->rect.y = 900 - rand() % 40 - 150;
     point->room = ENEMY;
     point->next = NULL;
     point->img_path = "resource/img/point.png";
