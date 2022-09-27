@@ -13,7 +13,7 @@ typedef struct s_menu {
 
 t_menu mx_create_menu();
 void mx_render_menu(t_menu *menu);
-bool mx_handle_menu(t_menu *menu);
+int mx_handle_menu(t_menu *menu);
 void mx_clear_menu(t_menu *menu);
 
 #endif

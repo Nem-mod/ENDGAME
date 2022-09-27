@@ -21,7 +21,7 @@ void mx_render_menu(t_menu *menu) {
     prect.y = 0;
     SDL_RenderCopy(w_render, menu->tex, &prect,  &menu->rect);
 }
-bool mx_handle_menu(t_menu *menu) {
+int mx_handle_menu(t_menu *menu) {
     int mouse_x;
     int mouse_y;
     int buttons = SDL_GetMouseState(&mouse_x, &mouse_y);
@@ -33,13 +33,13 @@ bool mx_handle_menu(t_menu *menu) {
     ) {
         menu->img_path = "resource/img/floppa.png";
         if (buttons & SDL_BUTTON(SDL_BUTTON_LEFT)) {
-            return true;
+            return 1;
         }
     }
     else {
         menu->img_path = "resource/img/menu.png";
     }
-    return false;
+    return 0;
 }
 void mx_clear_menu(t_menu *menu){
     SDL_DestroyTexture(menu->tex);

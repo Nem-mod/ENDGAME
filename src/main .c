@@ -41,10 +41,17 @@ int main() {
 
     // SDL_RenderPresent(w_render);
     bool request_exit = false;
+    int render_scene = 0;
     while (!request_exit) {
 
-        mx_render_menu(&menu);
-        if (mx_handle_menu(&menu)) {
+        switch (render_scene)
+        {
+        case 0:
+            mx_render_menu(&menu);
+            render_scene = mx_handle_menu(&menu);
+            break;        
+        case 1:
+            mx_render_map(&map);
             break;
         }
         SDL_Event event;
@@ -57,7 +64,8 @@ int main() {
                 // clean up resources before exiting
                 // SDL_DestroyTexture(tex);
                 mx_clear_map(&map);
-                mx_destroy("error creating texture");
+                // mx_destroy("error creating texture");
+                request_exit = true;
             }
         }
     }
