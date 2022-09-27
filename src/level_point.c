@@ -6,7 +6,7 @@ t_level_point* mx_create_lp(SDL_Window* win, SDL_Renderer* renderer) {
     point->rect.h = 60;
     point->rect.w = 60;
     point->rect.x = 300 + rand() % 400;
-    point->rect.y = 1200 - rand() % 40 - 150;
+    point->rect.y = 1000 - rand() % 40 - 150;
     point->room = ENEMY;
     point->next = NULL;
     point->img_path = "resource/img/point.png";
