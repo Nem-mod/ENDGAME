@@ -11,7 +11,7 @@ int main() {
     win = SDL_CreateWindow("Our game!",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
-                                       640, 640, 0);
+                                       840, 840, 0);
     if (!win)
     {
         mx_destroy("error creating window\n");
@@ -31,22 +31,20 @@ int main() {
 
     SDL_RenderClear(w_render);
 
-    SDL_Texture* tex = mx_init_texture("resource/img/floppa.png");
-
+    SDL_Texture* tex = mx_init_texture("resource/img/map.png");
+    SDL_Rect rect;
+    rect.h = 850;
+    rect.w = 850;
+    rect.x = 100;
+    rect.y = -100;
     // draw the image to the window
-    SDL_RenderCopy(w_render, tex, NULL, NULL);
+    SDL_RenderCopy(w_render, tex, &rect, NULL);
     SDL_RenderPresent(w_render);
 
     tex = mx_init_texture("resource/img/second.png");
 
-    SDL_Rect rect;
-    rect.h = 50;
-    rect.w = 50;
-    rect.x = 0;
-    rect.y = 0;
 
-    SDL_RenderCopy(w_render, tex, NULL, &rect);
-    SDL_RenderPresent(w_render);
+
     SDL_Event event;
 
     while (SDL_WaitEvent(&event))
