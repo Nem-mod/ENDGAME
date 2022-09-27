@@ -11,15 +11,16 @@ typedef struct s_map
     char* img_path;
     bool active;
 
-    t_level_point *level;
+    t_level_point *start_point;
 
 }               t_map;
-
 
 
 t_map mx_create_map();
 void mx_render_map(t_map *map);
 void mx_clear_map(t_map *map);
 
+void mx_generate_points();
+void mx_clear_points(t_map *map);
 
 #endif
