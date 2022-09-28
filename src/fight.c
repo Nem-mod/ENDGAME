@@ -107,6 +107,8 @@ void mx_handle_cards(t_fightground *fg) { // Переделать на пере�
             if (fg->cards[i]->is_active == false) {
                 fg->cards[i]->is_active = true;
                 fg->cards[i]->rect.y -= 10;
+                printf("%d\n", fg->cards[i]->attack);
+
             }
             else if (fg->cards[i]->is_active == true){
                 fg->cards[i]->is_active = false;
@@ -121,14 +123,14 @@ void mx_fight(SDL_Renderer *rend, t_fightground *fg){
         fg->energy = 5;
         if (fg->player_action_av)
         {
+            
             SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
-            if(fg->energy <= 0){
-                fg->player_action_av = false;
-            }
+            mx_handle_cards(fg);
             if(mx_handle_button(fg->button_rect)) {
                 fg->player_action_av = false;
+                
             }
-            
+
         }
         break;
     }

@@ -24,14 +24,7 @@ bool mx_handle_button(SDL_Rect rect){
         mouse_x < rect.x + rect.w &&
         mouse_y > rect.y &&
         mouse_y < rect.y + rect.h) {
-        //printf(" in\n");
-        // SDL_Event event;
-
-        // while (SDL_PollEvent(&event)) {
-        //     if (event.type == SDL_MOUSEBUTTONUP) {
-        //         return true;
-        //     }
-        // } 
+      
         if (buttons & SDL_BUTTON(SDL_BUTTON_LEFT)) {
   
             SDL_Delay(100);
