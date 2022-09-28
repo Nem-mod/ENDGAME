@@ -46,7 +46,7 @@ int main() {
             //mx_clear_map(&map);
         }
         else if (gameWindow.scene == LEVEL) {
-            mx_render_fightground(fightground, gameWindow.renderer);
+            mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground);
         }
         
         SDL_RenderPresent(gameWindow.renderer);
@@ -61,7 +61,7 @@ int main() {
                 gameWindow.active = false;
             }
         }
-        SDL_Delay(1000 / 60);
+        SDL_Delay(1000 / 24);
     }
     SDL_RenderClear(gameWindow.renderer);
     SDL_DestroyRenderer(gameWindow.renderer);
