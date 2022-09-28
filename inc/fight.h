@@ -16,6 +16,9 @@ typedef struct  s_fightground {
     SDL_Rect floor_rect;
     SDL_Rect frontg_rect;
     SDL_Rect cards_rect;
+    SDL_Rect player_rect;
+    SDL_Rect enemy_rect;
+
 
     SDL_Texture *backg_texture;
     SDL_Texture *floor_texture;
