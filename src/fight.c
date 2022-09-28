@@ -39,9 +39,10 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->enemy = mx_create_character(enemy_img, 20, 1, 1, 1, 1, 1, win, rend);
 
     fg->cards_rect.h = 150;
-    fg->cards_rect.w = 450;
-    fg->cards_rect.x = (WINDOW_WIDTH - 450) / 2;
-    fg->cards_rect.y = (WINDOW_HEIGHT - 150);
+    fg->cards_rect.w = WINDOW_WIDTH;
+    fg->cards_rect.x = 0;
+    fg->cards_rect.y = (WINDOW_HEIGHT - 150); // мб это нафиг нам уже не нужно
+    fg->cards_count = 5;
    
     fg->energy = 5;
     
@@ -49,17 +50,25 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     return fg;
 }
 
-void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
-    for (int i = 0; i < 3; i++)
-    {
-        fg->cards[i] = mx_create_card(win, rend, rand() % 3);
-        fg->cards[i]->rect.x = fg->cards_rect.x  + i * 150;
-        fg->cards[i]->rect.y = fg->cards_rect.y ;
+void mx_shift_cards(t_fightground *fg) {
+    int margin = (WINDOW_WIDTH - fg->cards_count * 150) / 2;    
+
+    for (int i = 0; i < fg->cards_count; i++) {
+        fg->cards[i]->rect.x = margin + i * 150;
     }
 }
 
-void mx_handle_cards(t_fightground *fg) {
-    for (int i = 0; i < 3; i++) {
+void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
+    for (int i = 0; i < fg->cards_count; i++)
+    {
+        fg->cards[i] = mx_create_card(win, rend, mx_rand(0,2));
+        fg->cards[i]->rect.y = WINDOW_HEIGHT - 150;
+    }
+    mx_shift_cards(fg);
+}
+
+void mx_handle_cards(t_fightground *fg) { // Переделать на перетаскивания
+    for (int i = 0; i < fg->cards_count; i++) {
         if (mx_handle_button(fg->cards[i]->rect)) {
             if (fg->cards[i]->is_active == false) {
                 fg->cards[i]->is_active = true;
@@ -77,11 +86,11 @@ void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend) {
     SDL_RenderCopy(rend, fg->backg_texture, NULL, &fg->backg_rect);
     SDL_RenderCopy(rend, fg->floor_texture, NULL, &fg->floor_rect);
     SDL_RenderCopy(rend, fg->frontg_texture, NULL, &fg->frontg_rect);
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < fg->cards_count; i++) {
         SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
     }
     mx_render_character(fg->player, rend, fg->player_rect);
-     mx_render_character(fg->enemy, rend, fg->enemy_rect);
+    mx_render_character(fg->enemy, rend, fg->enemy_rect);
 }
 
 void mx_clear_fightground(t_fightground *fg) {

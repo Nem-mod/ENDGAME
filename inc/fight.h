@@ -27,7 +27,8 @@ typedef struct  s_fightground {
     
     t_character* player;
     t_character* enemy;
-    t_game_card* cards[3];
+    t_game_card* cards[5];
+    int cards_count;
 
     bool player_action_av;
     int player_energy;

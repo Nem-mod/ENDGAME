@@ -37,7 +37,7 @@ t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type typ
     return card;
 }
 
-void mx_add_buff_card(t_character *player, t_game_card *card) {
+void mx_add_buff_card(t_character *player, t_game_card *card) { // В звязи с другой механикой боя, переделать
     player->attack += card->attack;
     player->shield += card->defence;
     player->current_hp += card->heal;
