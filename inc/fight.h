@@ -2,8 +2,7 @@
 
 #include "window_sdl.h"
 #include "character.h"
-#include "enemy.h"
-
+#include "game_card.h"
 typedef struct  s_fightground {
     char *background_path;
     char *floor_path;
@@ -19,6 +18,9 @@ typedef struct  s_fightground {
     SDL_Texture *backg_texture;
     SDL_Texture *floor_texture;
     SDL_Texture *frontg_texture;
+    t_character* player;
+    t_character* enemy;
+
 }               t_fightground;
 
 t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend);
