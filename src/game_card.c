@@ -8,13 +8,14 @@ t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type typ
     switch (type)
     {
     case DMG:
-        card->img_path = "resource/img/sword-card.png";
+        card->img_path = "resource/img/card_sword.png";
         break;
     
     case ARM:
-        card->img_path = "resource/img/shield-card.png";
+        card->img_path = "resource/img/card_shield.png";
         break;
     case MG:
+        card->img_path = "resource/img/card_gold_shield.png";
         break;
     }
     card->rect.h = 150;

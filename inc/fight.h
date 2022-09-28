@@ -3,6 +3,7 @@
 #include "window_sdl.h"
 #include "character.h"
 #include "game_card.h"
+
 typedef struct  s_fightground {
     char *background_path;
     char *floor_path;
@@ -10,7 +11,6 @@ typedef struct  s_fightground {
     char **cards_path; // Будет отдельная структура для карточек
 
     int energy;
-    //t_enemy *enemy;
 
     SDL_Rect backg_rect;
     SDL_Rect floor_rect;
@@ -19,6 +19,7 @@ typedef struct  s_fightground {
     SDL_Texture *backg_texture;
     SDL_Texture *floor_texture;
     SDL_Texture *frontg_texture;
+    
     t_character* player;
     t_character* enemy;
     t_game_card* cards[3];

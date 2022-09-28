@@ -37,6 +37,9 @@ void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend) {
     SDL_RenderCopy(rend, fg->backg_texture, NULL, &fg->backg_rect);
     SDL_RenderCopy(rend, fg->floor_texture, NULL, &fg->floor_rect);
     SDL_RenderCopy(rend, fg->frontg_texture, NULL, &fg->frontg_rect);
+    for (int i = 0; i < 3; i++) {
+        SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
+    }
 }
 
 void mx_clear_fightground(t_fightground *fg) {

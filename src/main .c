@@ -1,6 +1,7 @@
 #include "../inc/window_sdl.h"
 #include "../inc/map.h"
 #include "../inc/menu.h"
+#include "../inc/fight.h"
 
 int main() {
 
@@ -26,7 +27,7 @@ int main() {
 
     t_menu menu = mx_create_menu(gameWindow.window, gameWindow.renderer);
     t_map map = mx_create_map(gameWindow.window, gameWindow.renderer);
-
+    t_fightground *fightground = mx_create_fightground(gameWindow.window, gameWindow.renderer);
    
 
     while (gameWindow.active) {
@@ -37,8 +38,9 @@ int main() {
             mx_clear_menu(&menu);
         }
         else if (gameWindow.scene == MAP) {
-            mx_render_map(&map, gameWindow.renderer);
-            mx_handle_map(&map, gameWindow.window, gameWindow.renderer);
+            //mx_render_map(&map, gameWindow.renderer);
+            //mx_handle_map(&map, gameWindow.window, gameWindow.renderer);
+            mx_render_fightground(fightground, gameWindow.renderer);
         }
 
         SDL_RenderPresent(gameWindow.renderer);
