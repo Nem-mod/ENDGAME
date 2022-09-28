@@ -5,8 +5,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
-#include<time.h>
-#include<stdbool.h>
+#include <time.h>
+#include <stdbool.h>
 #include "button.h"
 
 #define WINDOW_HEIGHT 900

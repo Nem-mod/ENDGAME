@@ -39,12 +39,12 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     char* enemy_img = "resource/img/fight/enemy.png";
     fg->enemy = mx_create_character(enemy_img, 20, 1, 1, 1, 1, 1, win, rend);
     mx_set_enemy(fg->enemy);
+
     fg->cards_rect.h = 150;
     fg->cards_rect.w = 450;
     fg->cards_rect.x = (WINDOW_WIDTH - 450) / 2;
     fg->cards_rect.y = (WINDOW_HEIGHT - 150);
     fg->cards_count = 5;
-
 
     char* button = "resource/img/button-exit.png";
     fg->button_rect.h = 50;
@@ -92,7 +92,7 @@ void mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* f
     mx_fight(win, rend, fg);
 }
 
-void mx_clear_fightground(t_fightground *fg) {
+void mx_clear_fightground(t_fightground *fg) { // клир кардс нужен
     SDL_DestroyTexture(fg->backg_texture);
     SDL_DestroyTexture(fg->floor_texture);
     SDL_DestroyTexture(fg->frontg_texture);
@@ -101,9 +101,9 @@ void mx_clear_fightground(t_fightground *fg) {
 }
 
 void mx_handle_cards(t_fightground *fg) { // Переделать на перетаскивания
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < fg->cards_count; i++) {
         if (mx_handle_button(fg->cards[i]->rect)) {
-            if (fg->cards[i]->is_active == false) {
+            if (fg->cards[i]->is_active == false && fg->energy - fg->cards[i]->cost >= 0) {
                 fg->cards[i]->is_active = true;
                 fg->cards[i]->rect.y -= 10;
                 fg->energy -= fg->cards[i]->cost;
@@ -118,35 +118,32 @@ void mx_handle_cards(t_fightground *fg) { // Переделать на пере�
 }
 
 void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
-    if(fg->player_action_av){
-        if(fg->player_action_av)
-        {
-            SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
-            if(fg->energy >= 0) {
-                mx_handle_cards(fg);
-
-            }
-            
-            if(mx_handle_button(fg->button_rect)) {
-                for (int i = 0; i < 3; i++)
-                {
-                    if(fg->cards[i]->is_active) {
-                        mx_add_buff_card(fg->player, fg->cards[i]);
-                    }
-                }
-
-                mx_calculate_attack(fg->player, fg->enemy);
-                for (int i = 0; i < 3; i++)
-                {
-                    if(fg->cards[i]->is_active) {
-                        mx_clear_card(fg->cards[i]);
-                    }
-                }
-                fg->energy = 3;
-                fg->player_action_av = false;
-            }
+    if(fg->player_action_av) {
+        SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
+        if(fg->energy >= 0) {
+            mx_handle_cards(fg);
         }
-    } else {
+        
+        if(mx_handle_button(fg->button_rect)) {
+            for (int i = 0; i < fg->cards_count; i++)
+            {
+                if(fg->cards[i]->is_active) {
+                    mx_add_buff_card(fg->player, fg->cards[i]);
+                }
+            }
+
+            mx_calculate_attack(fg->player, fg->enemy);
+            for (int i = 0; i < fg->cards_count; i++)
+            {
+                if(fg->cards[i]->is_active) {
+                    mx_clear_card(fg->cards[i]);
+                }
+            }
+            fg->energy = 3;
+            fg->player_action_av = false;
+        }
+    }
+    else {
         mx_create_cards(win, rend, fg);
         fg->player_action_av = true;
     }

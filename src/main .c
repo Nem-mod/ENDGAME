@@ -13,7 +13,7 @@ int main() {
     SDL_Window* win = SDL_CreateWindow("Our game!",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
-                                       300 * 4, 300 * 3, 0);
+                                       WINDOW_WIDTH, WINDOW_HEIGHT, 0);
     Uint32 render_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
     SDL_Renderer* rend = SDL_CreateRenderer(win, -1, render_flags);
    
@@ -36,6 +36,7 @@ int main() {
         SDL_RenderClear(gameWindow.renderer); // Каждый раз чистить экран чтоб картинки не накладывались друг на другаы
 
         if (gameWindow.scene == MENU) {
+
             mx_render_menu(&menu, gameWindow.renderer);
             gameWindow.scene = mx_handle_menu(&menu, gameWindow.renderer);
             //mx_clear_menu(&menu); // Зач чистить?
