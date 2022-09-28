@@ -10,7 +10,7 @@ t_character *mx_create_character(char *texture_path,
     c->character_path = texture_path;
 
     SDL_QueryTexture(mx_init_texture(texture_path, win, rend), NULL, NULL,
-                                    &c->character_rect.w, &c->character_rect.h);
+                                    &c->character_rect.w, &c->character_rect.h); // Тут берется размер спрайта. Нужно будет подгонять размер позже. Нужна функция для этого
     c->character_texture = mx_init_texture(texture_path, win, rend);
 
     mx_set_character(c, max_hp, attack, crit_chance, crit_dmg, dodge_chance, shield);
@@ -43,9 +43,11 @@ int mx_calculate_attack(t_character *from, t_character *to) {
     if (mx_chance(to->dodge_chance))
         return -1; // -1 означает dodge. Надо придумать чет с этим и мб переделать т.к -1 не понять нихуя
     if (mx_chance(from->crit_chance))
-        cur_dmg += from->crit_dmg;
+        cur_dmg += mx_percent_from_int(from->attack, from->crit_dmg);
     cur_dmg -= mx_percent_from_int(to->shield, SHIELD_DMG_ABSORB_PERCENT);
     cur_dmg = mx_int_dispersion(cur_dmg, DMG_DISP_PERCENT);
+    if (cur_dmg < 0)
+        cur_dmg = 0;
 
     to->current_hp -= cur_dmg; // Надо ли отнимать в функции, или лучше каждый раз вручную?
     return cur_dmg;

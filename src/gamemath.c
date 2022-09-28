@@ -10,11 +10,11 @@ int mx_rand(int min, int max) {
 }
 
 bool mx_chance(int percent) {
-    return mx_rand(0, 100) < percent ? true : false;
+    return mx_rand(1, 100) <= percent ? true : false;
 }
 
 int mx_percent_from_int(int num, int percent) {
-    return num * 100 / percent;
+    return num * percent / 100;
 }
 
 int mx_int_dispersion(int num, int percent) {

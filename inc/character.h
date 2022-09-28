@@ -3,9 +3,13 @@
 #include "window_sdl.h"
 #include "gamemath.h"
 #include <stdbool.h>
+#include <stdio.h> // for debug
 
 #define DMG_DISP_PERCENT (10)
 #define SHIELD_DMG_ABSORB_PERCENT (50)
+
+#define PLAYER_PATH "resource/img/floppa.jpeg"
+#define ENEMY_PATH "resource/img/mob.png"
 
 typedef struct   s_character {
     char *character_path;
