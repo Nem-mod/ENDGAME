@@ -18,7 +18,7 @@ t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type typ
         card->img_path = "resource/img/card_gold_shield.png";
         break;
     }
-    card->rect.h = 150;
+    card->rect.h = 150; //мб попробовать другой способ
     card->rect.w = 100;
     card->rect.x = 0;
     card->rect.y = 0;

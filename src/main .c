@@ -33,22 +33,23 @@ int main() {
     t_fightground *fightground = mx_create_fightground(gameWindow.window, gameWindow.renderer, player);
 
     while (gameWindow.active) {
+        SDL_RenderClear(gameWindow.renderer); // Каждый раз чистить экран чтоб картинки не накладывались друг на другаы
 
         if (gameWindow.scene == MENU) {
             mx_render_menu(&menu, gameWindow.renderer);
             gameWindow.scene = mx_handle_menu(&menu, gameWindow.renderer);
-            mx_clear_menu(&menu);
+            //mx_clear_menu(&menu); // Зач чистить?
         }
         else if (gameWindow.scene == MAP) {
             mx_render_map(&map, gameWindow.renderer);
             gameWindow.scene = mx_handle_map(&map, gameWindow.window, gameWindow.renderer);
-            mx_clear_map(&map);
+            //mx_clear_map(&map);
         }
         else if (gameWindow.scene == LEVEL) {
             mx_render_fightground(fightground, gameWindow.renderer);
-
+            
         }
-
+        
         SDL_RenderPresent(gameWindow.renderer);
 
         SDL_Event event;
