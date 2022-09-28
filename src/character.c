@@ -52,3 +52,7 @@ int mx_calculate_attack(t_character *from, t_character *to) {
     to->current_hp -= cur_dmg; // Надо ли отнимать в функции, или лучше каждый раз вручную?
     return cur_dmg;
 }
+
+void mx_render_character(t_character *character, SDL_Renderer *rend, SDL_Rect rect) {
+    SDL_RenderCopy(rend, character->character_texture, NULL, &rect);
+}
