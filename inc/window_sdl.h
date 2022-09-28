@@ -32,6 +32,7 @@ typedef struct s_window_sdl {
 void mx_init_menu();
 void mx_destroy(char* ms); 
 SDL_Texture* mx_init_texture(char* path, SDL_Window* win, SDL_Renderer* renderer);
+bool mx_chance(int percent);
 
 
 

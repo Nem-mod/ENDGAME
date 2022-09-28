@@ -1,7 +1,7 @@
 #pragma once
 
 #include "window_sdl.h"
-#include "stdbool.h"
+#include "character.h"
 #include "enemy.h"
 
 typedef struct  s_fightground {
@@ -10,7 +10,7 @@ typedef struct  s_fightground {
     char *frontground_path;
     char **cards_path; // Будет отдельная структура для карточек
 
-    t_enemy *enemy;
+    //t_enemy *enemy;
 
     SDL_Rect backg_rect;
     SDL_Rect floor_rect;

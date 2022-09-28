@@ -1,7 +1,11 @@
 {
     "files.associations": {
         "window_sdl.h": "c",
-        "map.h": "c"
+        "level_point.h": "c",
+        "character.h": "c",
+        "map.h": "c",
+        "gamemath.h": "c",
+        "stdbool.h": "c"
     },
     "makefile.launchConfigurations": [
         {
