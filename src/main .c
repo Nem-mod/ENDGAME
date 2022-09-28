@@ -27,7 +27,7 @@ int main() {
 
     t_menu menu = mx_create_menu(gameWindow.window, gameWindow.renderer);
     t_map map = mx_create_map(gameWindow.window, gameWindow.renderer);
-    char* palyer_img = "resource/img/player/player_stand.jpg";
+    char* palyer_img = "resource/img/player/default_player.png";
     t_character *player =  mx_create_character(palyer_img, 100, 5, 20, 50, 10, 2, win, rend);
 
     t_fightground *fightground = mx_create_fightground(gameWindow.window, gameWindow.renderer, player);
