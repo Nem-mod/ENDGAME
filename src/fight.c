@@ -39,7 +39,6 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     char* enemy_img = "resource/img/fight/enemy.png";
     fg->enemy = mx_create_character(enemy_img, 20, 1, 1, 1, 1, 1, win, rend);
     mx_set_enemy(fg->enemy);
-
     fg->cards_rect.h = 150;
     fg->cards_rect.w = 450;
     fg->cards_rect.x = (WINDOW_WIDTH - 450) / 2;
@@ -55,9 +54,9 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->continue_button = mx_create_button(fg->button_rect.w, fg->button_rect.h, fg->button_rect.x, fg->button_rect.y, button);
     fg->continue_button.tex = mx_init_texture(button, win, rend);
     
-    fg->energy = 5;
+    fg->energy = 3;
     fg->player_action_av = true;
-    
+    printf("HP enemy %d", fg->enemy->current_hp);
     mx_create_cards(win, rend, fg);
     return fg;
 }
@@ -71,7 +70,7 @@ void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     }
 }
 
-void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend) {
+void mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     SDL_RenderCopy(rend, fg->backg_texture, NULL, &fg->backg_rect);
 
     SDL_RenderCopy(rend, fg->floor_texture, NULL, &fg->floor_rect);
@@ -81,7 +80,7 @@ void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend) {
     }
     mx_render_character(fg->player, rend, fg->player_rect);
     mx_render_character(fg->enemy, rend, fg->enemy_rect);
-    mx_fight(rend, fg);
+    mx_fight(win, rend, fg);
 }
 
 void mx_clear_fightground(t_fightground *fg) {
@@ -98,32 +97,48 @@ void mx_handle_cards(t_fightground *fg) { // Переделать на пере�
             if (fg->cards[i]->is_active == false) {
                 fg->cards[i]->is_active = true;
                 fg->cards[i]->rect.y -= 10;
-                printf("%d\n", fg->cards[i]->attack);
-
+                fg->energy -= fg->cards[i]->cost;
             }
             else if (fg->cards[i]->is_active == true){
                 fg->cards[i]->is_active = false;
                 fg->cards[i]->rect.y += 10;
+                fg->energy += fg->cards[i]->cost;
             }
         }
     }
 }
 
-void mx_fight(SDL_Renderer *rend, t_fightground *fg){
-    while (fg->enemy->current_hp > 0 || fg->player->current_hp > 0) {
-        fg->energy = 5;
-        if (fg->player_action_av)
+void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
+    if(fg->player_action_av){
+        if(fg->player_action_av)
         {
-            
             SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
-            mx_handle_cards(fg);
-            if(mx_handle_button(fg->button_rect)) {
-                fg->player_action_av = false;
-                
-            }
+            if(fg->energy >= 0) {
+                mx_handle_cards(fg);
 
+            }
+            
+            if(mx_handle_button(fg->button_rect)) {
+                for (int i = 0; i < 3; i++)
+                {
+                    if(fg->cards[i]->is_active) {
+                        mx_add_buff_card(fg->player, fg->cards[i]);
+                    }
+                }
+
+                mx_calculate_attack(fg->player, fg->enemy);
+                for (int i = 0; i < 3; i++)
+                {
+                    if(fg->cards[i]->is_active) {
+                        mx_clear_card(fg->cards[i]);
+                    }
+                }
+                fg->energy = 3;
+                fg->player_action_av = false;
+            }
         }
-        break;
+    } else {
+        mx_create_cards(win, rend, fg);
+        fg->player_action_av = true;
     }
-    
 }

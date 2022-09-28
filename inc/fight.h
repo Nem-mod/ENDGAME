@@ -39,10 +39,10 @@ typedef struct  s_fightground {
 }               t_fightground;
 
 t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_character* player);
-void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend);
+void mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 void mx_clear_fightground(t_fightground *fg);
 void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 void mx_handle_cards(t_fightground *fg);
-void mx_fight(SDL_Renderer *rend, t_fightground *fg);
+void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 
 #endif
