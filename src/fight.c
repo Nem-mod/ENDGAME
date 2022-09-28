@@ -50,8 +50,8 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     char* button = "resource/img/button-exit.png";
     fg->button_rect.h = 50;
     fg->button_rect.w = 200;
-    fg->button_rect.x = (WINDOW_WIDTH - 400);
-    fg->button_rect.y = (WINDOW_HEIGHT - 100);
+    fg->button_rect.x = (WINDOW_WIDTH - 200) / 2;
+    fg->button_rect.y = (WINDOW_HEIGHT - 75) / 2;
 
     fg->continue_button = mx_create_button(fg->button_rect.w, fg->button_rect.h, fg->button_rect.x, fg->button_rect.y, button);
     fg->continue_button.tex = mx_init_texture(button, win, rend);
