@@ -24,7 +24,7 @@ typedef struct  s_bar{
     int percent;
 }               t_bar;
 
-t_bar *mx_create_bar(SDL_Window *win, SDL_Renderer *rend, t_bar_type type);
+t_bar *mx_create_bar(SDL_Window *win, SDL_Renderer *rend, t_bar_type type, SDL_Rect *base);
 void mx_render_bar(t_bar *bar, SDL_Renderer *rend);
 void mx_change_bar(t_bar *bar, int new_percent);
 void mx_clear_bar(t_bar *bar);

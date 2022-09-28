@@ -30,7 +30,7 @@ int main() {
     char* palyer_img = "resource/img/player/default_player.png";
     t_character *player =  mx_create_character(palyer_img, 100, 5, 20, 50, 10, 2, win, rend);
 
-    t_fightground *fightground = mx_create_fightground(gameWindow.window, gameWindow.renderer, player);
+    t_fightground *fightground = NULL;
 
     while (gameWindow.active) {
         SDL_RenderClear(gameWindow.renderer); // Каждый раз чистить экран чтоб картинки не накладывались друг на другаы
@@ -44,6 +44,8 @@ int main() {
         else if (gameWindow.scene == MAP) {
             mx_render_map(&map, gameWindow.renderer);
             gameWindow.scene = mx_handle_map(&map, gameWindow.window, gameWindow.renderer);
+            if (gameWindow.scene == LEVEL)
+                fightground = mx_create_fightground(gameWindow.window, gameWindow.renderer, player);
             //mx_clear_map(&map);
         }
         else if (gameWindow.scene == LEVEL) {

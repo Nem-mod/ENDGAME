@@ -21,10 +21,15 @@ void mx_render_map(t_map *map, SDL_Renderer *renderer) {
     SDL_RenderCopy(renderer, map->tex, NULL, &map->rectdist);
 
     t_level_point *temp = map->start_point;
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
     while (temp->next != NULL) {
+        if (temp->next->next != NULL)
+            SDL_RenderDrawLine(renderer, temp->rect.x + temp->rect.w / 2, temp->rect.y + temp->rect.h / 2,
+                                temp->next->rect.x + temp->next->rect.w / 2, temp->next->rect.y + temp->next->rect.h / 2); // Можно попробовать рендерить следы
         mx_render_lp(temp, renderer);
         temp = temp->next;
     }
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 
 void mx_clear_map(t_map *map) {

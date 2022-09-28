@@ -1,6 +1,6 @@
 #include "../inc/bar.h"
 
-t_bar *mx_create_bar(SDL_Window *win, SDL_Renderer *rend, t_bar_type type) {
+t_bar *mx_create_bar(SDL_Window *win, SDL_Renderer *rend, t_bar_type type, SDL_Rect *base) {
     t_bar *bar = malloc(sizeof(*bar));
 
     switch(type) {
@@ -13,14 +13,14 @@ t_bar *mx_create_bar(SDL_Window *win, SDL_Renderer *rend, t_bar_type type) {
     }
     bar->square_path = "resource/img/bar_border.png";
 
-    bar->square_rect.x = 0;
-    bar->square_rect.y = 0;
+    bar->square_rect.x = base->x + base->w / 2 - BAR_WIDTH / 2;
+    bar->square_rect.y = base->y - 20;
     bar->square_rect.h = BAR_HEIGHT;
     bar->square_rect.w = BAR_WIDTH;
     bar->square_texture = mx_init_texture(bar->square_path, win, rend);
 
-    bar->bar_rect.x = 0;
-    bar->bar_rect.y = 0;
+    bar->bar_rect.x = base->x + base->w / 2 - BAR_WIDTH / 2;
+    bar->bar_rect.y = base->y - 20;
     bar->bar_rect.h = BAR_HEIGHT;
     bar->bar_rect.w = BAR_WIDTH;
     bar->percent = 100;

@@ -2,6 +2,7 @@
 
 #include "window_sdl.h"
 #include "gamemath.h"
+#include "bar.h"
 #include <stdbool.h>
 #include <stdio.h> // for debug
 
@@ -17,6 +18,9 @@ typedef struct   s_character {
     SDL_Rect character_rect;
 
     SDL_Texture *character_texture;
+
+    t_bar *healthbar;
+    //t_bar *shieldbar;
 
     int max_hp;
     int current_hp;

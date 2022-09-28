@@ -94,17 +94,17 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
         return 2;
     }
         
-    mx_clear_fightground(fg);
+    mx_clear_fightground(&fg);
     return 1;
     
 }
 
-void mx_clear_fightground(t_fightground *fg) { // клир кардс нужен
-    SDL_DestroyTexture(fg->backg_texture);
-    SDL_DestroyTexture(fg->floor_texture);
-    SDL_DestroyTexture(fg->frontg_texture);
-    free(fg);
-    fg = NULL;
+void mx_clear_fightground(t_fightground **fg) { // клир кардс нужен
+    SDL_DestroyTexture((*fg)->backg_texture);
+    SDL_DestroyTexture((*fg)->floor_texture);
+    SDL_DestroyTexture((*fg)->frontg_texture);
+    free(*fg);
+    *fg = NULL;
 }
 
 void mx_handle_cards(t_fightground *fg) { // Переделать на перетаскивания
