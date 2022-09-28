@@ -47,7 +47,7 @@ int main() {
         }
         else if (gameWindow.scene == LEVEL) {
             mx_render_fightground(fightground, gameWindow.renderer);
-            
+            mx_handle_cards(fightground);
         }
         
         SDL_RenderPresent(gameWindow.renderer);

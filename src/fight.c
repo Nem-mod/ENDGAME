@@ -30,6 +30,7 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->player_rect.x = 150;
     fg->player_rect.y = 150;
     fg->player = player;
+
     fg->cards_rect.h = 150;
     fg->cards_rect.w = 450;
     fg->cards_rect.x = (WINDOW_WIDTH - 450) / 2;
@@ -47,6 +48,21 @@ void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
         fg->cards[i] = mx_create_card(win, rend, rand() % 3);
         fg->cards[i]->rect.x = fg->cards_rect.x  + i * 150;
         fg->cards[i]->rect.y = fg->cards_rect.y ;
+    }
+}
+
+void mx_handle_cards(t_fightground *fg) {
+    for (int i = 0; i < 3; i++) {
+        if (mx_handle_button(fg->cards[i]->rect)) {
+            if (fg->cards[i]->is_active == false) {
+                fg->cards[i]->is_active = true;
+                fg->cards[i]->rect.y -= 10;
+            }
+            else if (fg->cards[i]->is_active == true){
+                fg->cards[i]->is_active = false;
+                fg->cards[i]->rect.y += 10;
+            }   
+        }
     }
 }
 

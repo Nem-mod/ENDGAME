@@ -3,6 +3,7 @@
 #include "window_sdl.h"
 #include "character.h"
 #include "game_card.h"
+#include "button.h"
 
 typedef struct  s_fightground {
     char *background_path;
@@ -28,6 +29,8 @@ typedef struct  s_fightground {
     t_character* enemy;
     t_game_card* cards[3];
 
+    // int num_selected_cards;
+    // t_game_card *selected_cards[3];
 
 }               t_fightground;
 
@@ -35,5 +38,6 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
 void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend);
 void mx_clear_fightground(t_fightground *fg);
 void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
+void mx_handle_cards(t_fightground *fg);
 
 #endif
