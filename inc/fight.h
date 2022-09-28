@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef FIGHTGROUND_H
+#define FIGHTGROUND_H
 #include "window_sdl.h"
 #include "character.h"
 #include "game_card.h"
@@ -15,6 +15,7 @@ typedef struct  s_fightground {
     SDL_Rect backg_rect;
     SDL_Rect floor_rect;
     SDL_Rect frontg_rect;
+    SDL_Rect cards_rect;
 
     SDL_Texture *backg_texture;
     SDL_Texture *floor_texture;
@@ -29,3 +30,6 @@ typedef struct  s_fightground {
 t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend);
 void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend);
 void mx_clear_fightground(t_fightground *fg);
+void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
+
+#endif

@@ -27,10 +27,24 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend) {
 
 
     fg->energy = 5;
-    fg->cards[0] = mx_create_card(win, rend, DMG);
-    fg->cards[1] = mx_create_card(win, rend, ARM);
-    fg->cards[2] = mx_create_card(win, rend, MG);
+
+    fg->cards_rect.h = 150;
+    fg->cards_rect.w = 450;
+    fg->cards_rect.x = (WINDOW_WIDTH - 450) / 2;
+    fg->cards_rect.y = (WINDOW_HEIGHT - 150);
+   
+    
+    mx_create_cards(win, rend, fg);
     return fg;
+}
+
+void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
+    for (int i = 0; i < 3; i++)
+    {
+        fg->cards[i] = mx_create_card(win, rend, rand() % 3);
+        fg->cards[i]->rect.x = fg->cards_rect.x  + i * 150;
+        fg->cards[i]->rect.y = fg->cards_rect.y ;
+    }
 }
 
 void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend) {
