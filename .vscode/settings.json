@@ -5,7 +5,8 @@
         "character.h": "c",
         "map.h": "c",
         "gamemath.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "button.h": "c"
     },
     "makefile.launchConfigurations": [
         {

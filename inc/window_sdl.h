@@ -7,7 +7,7 @@
 #include <SDL2/SDL_timer.h>
 #include<time.h>
 #include<stdbool.h>
-
+#include "button.h"
 
 #define WINDOW_HEIGHT 900
 #define WINDOW_WIDTH 1200
@@ -15,7 +15,8 @@
 typedef enum e_scenes {
     MENU,
     MAP,
-    LEVEL
+    LEVEL,
+    EXIT
 }            t_scenes;
 
 typedef struct s_window_sdl {

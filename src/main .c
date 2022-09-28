@@ -26,31 +26,30 @@ int main() {
 
     t_menu menu = mx_create_menu(gameWindow.window, gameWindow.renderer);
     t_map map = mx_create_map(gameWindow.window, gameWindow.renderer);
-    //mx_generate_points(&map);
 
    
 
-    // SDL_RenderPresent(w_render);
     while (gameWindow.active) {
 
         if (gameWindow.scene == MENU) {
             mx_render_menu(&menu, gameWindow.renderer);
-            gameWindow.scene = mx_handle_menu(&menu);
+            gameWindow.scene = mx_handle_menu(&menu, gameWindow.renderer);
             mx_clear_menu(&menu);
         }
         else if (gameWindow.scene == MAP) {
             mx_render_map(&map, gameWindow.renderer);
             mx_handle_map(&map, gameWindow.window, gameWindow.renderer);
         }
+
         SDL_RenderPresent(gameWindow.renderer);
+
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
         
-            if (event.type == SDL_QUIT){
+            if (event.type == SDL_QUIT || gameWindow.scene == EXIT){
                 // clean up resources before exiting
                 mx_clear_map(&map);
                 mx_clear_points(&map);
-                // mx_destroy("error creating texture");
                 gameWindow.active = false;
             }
         }
