@@ -2,6 +2,7 @@
 #define GAME_CARD_H
 
 #include "window_sdl.h"
+#include "button.h"
 typedef enum e_card_type {
     DMG,
     ARM,

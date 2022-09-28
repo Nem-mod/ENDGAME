@@ -9,6 +9,7 @@ typedef struct  s_fightground {
     char *frontground_path;
     char **cards_path; // Будет отдельная структура для карточек
 
+    int energy;
     //t_enemy *enemy;
 
     SDL_Rect backg_rect;
@@ -20,6 +21,7 @@ typedef struct  s_fightground {
     SDL_Texture *frontg_texture;
     t_character* player;
     t_character* enemy;
+    t_game_card* cards[3];
 
 }               t_fightground;
 

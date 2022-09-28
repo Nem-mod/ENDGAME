@@ -25,6 +25,11 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend) {
     fg->frontg_rect.w = WINDOW_WIDTH;
     fg->frontg_texture = mx_init_texture(fg->frontground_path, win, rend);
 
+
+    fg->energy = 5;
+    fg->cards[0] = mx_create_card(win, rend, DMG);
+    fg->cards[1] = mx_create_card(win, rend, ARM);
+    fg->cards[2] = mx_create_card(win, rend, MG);
     return fg;
 }
 

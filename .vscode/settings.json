@@ -6,7 +6,8 @@
         "map.h": "c",
         "gamemath.h": "c",
         "stdbool.h": "c",
-        "button.h": "c"
+        "button.h": "c",
+        "game_card.h": "c"
     },
     "makefile.launchConfigurations": [
         {
