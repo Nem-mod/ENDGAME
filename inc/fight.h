@@ -31,7 +31,7 @@ typedef struct  s_fightground {
 
     bool player_action_av;
     int player_energy;
-    
+
     // int num_selected_cards;
     // t_game_card *selected_cards[3];
 
@@ -42,6 +42,5 @@ void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend);
 void mx_clear_fightground(t_fightground *fg);
 void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 void mx_handle_cards(t_fightground *fg);
-void mx_attack(t_character *from,  t_character to);
 
 #endif

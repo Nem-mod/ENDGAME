@@ -39,3 +39,4 @@ void mx_set_character(t_character *c,
 void mx_clear_character(t_character *character);
 int mx_calculate_attack(t_character *from, t_character *to);
 void mx_render_character(t_character *character, SDL_Renderer *rend, SDL_Rect rect);
+void mx_set_enemy(t_character *c);

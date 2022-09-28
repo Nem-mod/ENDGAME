@@ -30,7 +30,15 @@ void mx_set_character(t_character *c,
     c->dodge_chance = dodge_chance;
     c->shield = shield;
 }
-
+void mx_set_enemy(t_character *c) {
+    c->max_hp = rand() % 80;
+    c->current_hp = c->max_hp;
+    c->attack = rand() % 10;
+    c->crit_chance = rand() % 10;
+    c->crit_dmg = rand() % 10;
+    c->dodge_chance = rand() % 10;
+    c->shield = 0;
+}
 void mx_clear_character(t_character *character) {
     SDL_DestroyTexture(character->character_texture);
     free(character);
