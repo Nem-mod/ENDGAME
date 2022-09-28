@@ -25,7 +25,10 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->frontg_rect.w = WINDOW_WIDTH;
     fg->frontg_texture = mx_init_texture(fg->frontground_path, win, rend);
 
-
+    fg->player_rect.h = 150;
+    fg->player_rect.w = 150;
+    fg->player_rect.x = 150;
+    fg->player_rect.y = 150;
     fg->player = player;
     fg->cards_rect.h = 150;
     fg->cards_rect.w = 450;
@@ -54,6 +57,7 @@ void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend) {
     for (int i = 0; i < 3; i++) {
         SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
     }
+    mx_render_character(fg->player, rend, fg->player_rect);
 }
 
 void mx_clear_fightground(t_fightground *fg) {

@@ -38,3 +38,4 @@ void mx_set_character(t_character *c,
                     int dodge_chance, int shield);
 void mx_clear_character(t_character *character);
 int mx_calculate_attack(t_character *from, t_character *to);
+void mx_render_character(t_character *character, SDL_Renderer *rend, SDL_Rect rect);
