@@ -37,6 +37,7 @@ t_character* player, t_level_point *level) {
         "resource/img/fight/temp_chest.png");
         room->room_obj.tex = mx_init_texture(room->room_obj.img_path, win, rend);
     }
+    return room;
 }
 
 void mx_render_room(t_room *room, SDL_Renderer *rend) {
