@@ -78,13 +78,16 @@ void mx_clear_points(t_map *map) {
     }
 }
 
-void mx_handle_map(t_map *map, SDL_Window* win, SDL_Renderer* renderer){
+int mx_handle_map(t_map *map, SDL_Window* win, SDL_Renderer* renderer){
     t_level_point* temp = map->start_point;
+    int return_val = 1;
     while (temp->next != NULL)
     {
-        mx_handle_point_level(temp, win, renderer);
+        int temp_ans = mx_handle_point_level(temp, win, renderer);
         temp = temp->next;
+        if (temp_ans == 2)
+            return_val = temp_ans;
     }
-    
+    return return_val;
 }
 
