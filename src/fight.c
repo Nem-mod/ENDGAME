@@ -108,15 +108,9 @@ void mx_clear_fightground(t_fightground *fg) { // клир кардс нужен
 }
 
 void mx_handle_cards(t_fightground *fg) { // Переделать на перетаскивания
-<<<<<<< HEAD
-    for (int i = 0; i < fg->cards_count; i++) {
-        if (mx_handle_button(fg->cards[i]->rect)) {
-            if (fg->cards[i]->is_active == false && fg->energy - fg->cards[i]->cost >= 0) {
-=======
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
         if (mx_handle_button(fg->cards[i]->rect)) {
             if (fg->cards[i]->is_active == false && fg->cards[i]->cost <= fg->energy) {
->>>>>>> 787332dd00224dc23b260534ab15f4249853a291
                 fg->cards[i]->is_active = true;
                 fg->cards[i]->rect.y -= 10;
                 fg->energy -= fg->cards[i]->cost;
@@ -130,20 +124,6 @@ void mx_handle_cards(t_fightground *fg) { // Переделать на пере�
     }
 }
 
-<<<<<<< HEAD
-void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
-    if(fg->player_action_av) {
-        SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
-        if(fg->energy >= 0) {
-            mx_handle_cards(fg);
-        }
-        
-        if(mx_handle_button(fg->button_rect)) {
-            for (int i = 0; i < fg->cards_count; i++)
-            {
-                if(fg->cards[i]->is_active) {
-                    mx_add_buff_card(fg->player, fg->cards[i]);
-=======
 bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
     
     if(fg->player_action_av){
@@ -161,18 +141,8 @@ bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
                     if(fg->cards[i]->is_active) {
                         mx_add_buff_card(fg->player, fg->cards[i]);
                     }
->>>>>>> 787332dd00224dc23b260534ab15f4249853a291
                 }
-            }
 
-<<<<<<< HEAD
-            mx_calculate_attack(fg->player, fg->enemy);
-            for (int i = 0; i < fg->cards_count; i++)
-            {
-                if(fg->cards[i]->is_active) {
-                    mx_clear_card(fg->cards[i]);
-                }
-=======
                 mx_calculate_attack(fg->player, fg->enemy);
                 if(fg->enemy->current_hp <= 0) {
                     mx_clear_cards(fg->cards);
@@ -180,18 +150,10 @@ bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
                 }
                 fg->energy = AMOUNT_OF_ENERGY;
                 fg->player_action_av = false;
->>>>>>> 787332dd00224dc23b260534ab15f4249853a291
             }
-            fg->energy = 3;
-            fg->player_action_av = false;
         }
-<<<<<<< HEAD
-    }
-    else {
-=======
     } else {
         printf("FLoppa hp: %d\n", fg->enemy->current_hp);
->>>>>>> 787332dd00224dc23b260534ab15f4249853a291
         mx_create_cards(win, rend, fg);
         fg->player_action_av = true;
     }
