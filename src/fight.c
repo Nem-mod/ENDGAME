@@ -1,6 +1,7 @@
 #include "../inc/fight.h"
 
 t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_character* player) {
+    
     t_fightground *fg = malloc(sizeof(*fg));
 
     fg->background_path = "resource/img/fight/background.jfif";
@@ -37,14 +38,26 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->enemy_rect.y = WINDOW_HEIGHT / 1.5 - 200;
     char* enemy_img = "resource/img/fight/enemy.png";
     fg->enemy = mx_create_character(enemy_img, 20, 1, 1, 1, 1, 1, win, rend);
+    mx_set_enemy(fg->enemy);
 
     fg->cards_rect.h = 150;
-    fg->cards_rect.w = WINDOW_WIDTH;
-    fg->cards_rect.x = 0;
-    fg->cards_rect.y = (WINDOW_HEIGHT - 150); // мб это нафиг нам уже не нужно
+    fg->cards_rect.w = 450;
+    fg->cards_rect.x = (WINDOW_WIDTH - 450) / 2;
+    fg->cards_rect.y = (WINDOW_HEIGHT - 150);
     fg->cards_count = 5;
-   
+
+
+    char* button = "resource/img/button-exit.png";
+    fg->button_rect.h = 50;
+    fg->button_rect.w = 200;
+    fg->button_rect.x = (WINDOW_WIDTH - 400);
+    fg->button_rect.y = (WINDOW_HEIGHT - 100);
+
+    fg->continue_button = mx_create_button(fg->button_rect.w, fg->button_rect.h, fg->button_rect.x, fg->button_rect.y, button);
+    fg->continue_button.tex = mx_init_texture(button, win, rend);
+    
     fg->energy = 5;
+    fg->player_action_av = true;
     
     mx_create_cards(win, rend, fg);
     return fg;
@@ -67,23 +80,9 @@ void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     mx_shift_cards(fg);
 }
 
-void mx_handle_cards(t_fightground *fg) { // Переделать на перетаскивания
-    for (int i = 0; i < fg->cards_count; i++) {
-        if (mx_handle_button(fg->cards[i]->rect)) {
-            if (fg->cards[i]->is_active == false) {
-                fg->cards[i]->is_active = true;
-                fg->cards[i]->rect.y -= 10;
-            }
-            else if (fg->cards[i]->is_active == true){
-                fg->cards[i]->is_active = false;
-                fg->cards[i]->rect.y += 10;
-            }   
-        }
-    }
-}
-
 void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend) {
     SDL_RenderCopy(rend, fg->backg_texture, NULL, &fg->backg_rect);
+
     SDL_RenderCopy(rend, fg->floor_texture, NULL, &fg->floor_rect);
     SDL_RenderCopy(rend, fg->frontg_texture, NULL, &fg->frontg_rect);
     for (int i = 0; i < fg->cards_count; i++) {
@@ -91,6 +90,7 @@ void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend) {
     }
     mx_render_character(fg->player, rend, fg->player_rect);
     mx_render_character(fg->enemy, rend, fg->enemy_rect);
+    mx_fight(rend, fg);
 }
 
 void mx_clear_fightground(t_fightground *fg) {
@@ -99,4 +99,38 @@ void mx_clear_fightground(t_fightground *fg) {
     SDL_DestroyTexture(fg->frontg_texture);
     free(fg);
     fg = NULL;
+}
+
+void mx_handle_cards(t_fightground *fg) { // Переделать на перетаскивания
+    for (int i = 0; i < 3; i++) {
+        if (mx_handle_button(fg->cards[i]->rect)) {
+            if (fg->cards[i]->is_active == false) {
+                fg->cards[i]->is_active = true;
+                fg->cards[i]->rect.y -= 10;
+            }
+            else if (fg->cards[i]->is_active == true){
+                fg->cards[i]->is_active = false;
+                fg->cards[i]->rect.y += 10;
+            }
+        }
+    }
+}
+
+void mx_fight(SDL_Renderer *rend, t_fightground *fg){
+    while (fg->enemy->current_hp > 0 || fg->player->current_hp > 0) {
+        fg->energy = 5;
+        if (fg->player_action_av)
+        {
+            SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
+            if(fg->energy <= 0){
+                fg->player_action_av = false;
+            }
+            if(mx_handle_button(fg->button_rect)) {
+                fg->player_action_av = false;
+            }
+            
+        }
+        break;
+    }
+    
 }

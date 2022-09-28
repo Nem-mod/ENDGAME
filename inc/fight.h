@@ -19,6 +19,7 @@ typedef struct  s_fightground {
     SDL_Rect player_rect;
     SDL_Rect enemy_rect;
     SDL_Rect cards_rect;
+    SDL_Rect button_rect;
 
 
     SDL_Texture *backg_texture;
@@ -27,7 +28,8 @@ typedef struct  s_fightground {
     
     t_character* player;
     t_character* enemy;
-    t_game_card* cards[5];
+    t_game_card* cards[10];
+    t_button continue_button;
     int cards_count;
 
     bool player_action_av;
@@ -43,5 +45,6 @@ void mx_render_fightground(t_fightground *fg, SDL_Renderer *rend);
 void mx_clear_fightground(t_fightground *fg);
 void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 void mx_handle_cards(t_fightground *fg);
+void mx_fight(SDL_Renderer *rend, t_fightground *fg);
 
 #endif
