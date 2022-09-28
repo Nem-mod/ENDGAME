@@ -28,7 +28,7 @@ void mx_change_tex(t_level_point* lp, SDL_Window* win, SDL_Renderer* renderer ) 
     SDL_DestroyTexture(lp->tex);
     lp->tex = mx_init_texture(lp->img_path, win, renderer);
     SDL_DestroyTexture(lp->next->tex);
-    lp->next->tex = mx_init_texture("resource/img/mob.png", win, renderer);
+    lp->next->tex = mx_init_texture("resource/img/cpoint.png", win, renderer);
 }
 int mx_handle_point_level(t_level_point *lp, SDL_Window* win, SDL_Renderer* renderer) {
     int mouse_x;
@@ -42,7 +42,7 @@ int mx_handle_point_level(t_level_point *lp, SDL_Window* win, SDL_Renderer* rend
         mouse_y < lp->rect.y + lp->rect.w
         && lp->active == true
     ) {
-        lp->img_path = "resource/img/floppa.png";
+        lp->img_path = "resource/img/wpoint.png";
         if (buttons & SDL_BUTTON(SDL_BUTTON_LEFT)) {
             mx_change_tex(lp, win, renderer);
             lp->next->active = true;
@@ -52,7 +52,7 @@ int mx_handle_point_level(t_level_point *lp, SDL_Window* win, SDL_Renderer* rend
         }
     }
     else {
-        lp->img_path = "resource/img/lp.png";
+        lp->img_path = "resource/img/cpoint.png";
     }
     return return_val;
 }

@@ -44,7 +44,7 @@ void mx_generate_points(t_map *map, SDL_Window* win, SDL_Renderer* renderer) {
     
     map->start_point->active = true;
     SDL_DestroyTexture(map->start_point->tex);
-    map->start_point->tex = mx_init_texture("resource/img/mob.png", win, renderer);
+    map->start_point->tex = mx_init_texture("resource/img/cpoint.png", win, renderer);
     current_point->rect.x = WINDOW_WIDTH - 350;
     current_point->rect.x = WINDOW_HEIGHT - 350;
 

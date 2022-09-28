@@ -5,6 +5,8 @@
 #include "game_card.h"
 #include "button.h"
 
+#define AMOUNT_OF_CARDS 5
+#define AMOUNT_OF_ENERGY 3
 typedef struct  s_fightground {
     char *background_path;
     char *floor_path;
@@ -28,23 +30,22 @@ typedef struct  s_fightground {
     
     t_character* player;
     t_character* enemy;
-    t_game_card* cards[10];
+    t_game_card* cards[AMOUNT_OF_CARDS];
     t_button continue_button;
     int cards_count;
 
     bool player_action_av;
     int player_energy;
 
-    // int num_selected_cards;
-    // t_game_card *selected_cards[3];
 
 }               t_fightground;
 
 t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_character* player);
-void mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
+int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 void mx_clear_fightground(t_fightground *fg);
 void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 void mx_handle_cards(t_fightground *fg);
-void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
+bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
+void mx_clear_cards(t_game_card **cards);
 
 #endif

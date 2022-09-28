@@ -47,7 +47,7 @@ int main() {
             //mx_clear_map(&map);
         }
         else if (gameWindow.scene == LEVEL) {
-            mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground);
+            gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground);
         }
         
         SDL_RenderPresent(gameWindow.renderer);
