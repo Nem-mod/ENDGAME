@@ -1,6 +1,6 @@
 #include "../inc/fight.h"
 
-t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend) {
+t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_character* player) {
     t_fightground *fg = malloc(sizeof(*fg));
 
     fg->background_path = "resource/img/fight/background.jfif";
@@ -26,13 +26,13 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend) {
     fg->frontg_texture = mx_init_texture(fg->frontground_path, win, rend);
 
 
-    fg->energy = 5;
-
+    fg->player = player;
     fg->cards_rect.h = 150;
     fg->cards_rect.w = 450;
     fg->cards_rect.x = (WINDOW_WIDTH - 450) / 2;
     fg->cards_rect.y = (WINDOW_HEIGHT - 150);
    
+    fg->energy = 5;
     
     mx_create_cards(win, rend, fg);
     return fg;
