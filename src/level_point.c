@@ -30,10 +30,11 @@ void mx_change_tex(t_level_point* lp, SDL_Window* win, SDL_Renderer* renderer ) 
     SDL_DestroyTexture(lp->next->tex);
     lp->next->tex = mx_init_texture("resource/img/mob.png", win, renderer);
 }
-void mx_handle_point_level(t_level_point *lp, SDL_Window* win, SDL_Renderer* renderer) {
+int mx_handle_point_level(t_level_point *lp, SDL_Window* win, SDL_Renderer* renderer) {
     int mouse_x;
     int mouse_y;
     int buttons = SDL_GetMouseState(&mouse_x, &mouse_y);
+    int return_val = 1;
 
     if (mouse_x > lp->rect.x &&
         mouse_x < lp->rect.x + lp->rect.h &&
@@ -47,9 +48,11 @@ void mx_handle_point_level(t_level_point *lp, SDL_Window* win, SDL_Renderer* ren
             lp->next->active = true;
             
             lp->active = false;
+            return_val = 2;
         }
     }
     else {
         lp->img_path = "resource/img/lp.png";
     }
+    return return_val;
 }

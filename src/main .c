@@ -40,9 +40,13 @@ int main() {
             mx_clear_menu(&menu);
         }
         else if (gameWindow.scene == MAP) {
-            //mx_render_map(&map, gameWindow.renderer);
-            //mx_handle_map(&map, gameWindow.window, gameWindow.renderer);
+            mx_render_map(&map, gameWindow.renderer);
+            gameWindow.scene = mx_handle_map(&map, gameWindow.window, gameWindow.renderer);
+            mx_clear_map(&map);
+        }
+        else if (gameWindow.scene == LEVEL) {
             mx_render_fightground(fightground, gameWindow.renderer);
+
         }
 
         SDL_RenderPresent(gameWindow.renderer);
