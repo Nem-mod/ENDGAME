@@ -33,7 +33,7 @@ t_character* player, int type) {
     room->player = player;
 
     room->exit_btn = mx_create_button(150, 50, WINDOW_WIDTH / 2 - 75, WINDOW_HEIGHT - 100,
-    "resource/img/button_exit");
+    "resource/img/button-finish.png");
     room->exit_btn.tex = mx_init_texture(room->exit_btn.img_path, win, rend);
 
 

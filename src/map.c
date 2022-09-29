@@ -87,7 +87,7 @@ int mx_handle_map(t_map *map, SDL_Window* win, SDL_Renderer* renderer){
         temp = temp->next;
         if (temp_ans == 1)
             continue;
-        return temp_ans;
+        return_val = temp_ans;
     }
     return return_val;
 }
