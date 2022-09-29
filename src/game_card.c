@@ -99,14 +99,6 @@ int mx_calculate_card_attack(t_game_card *from, t_character *to) {
     return cur_dmg;
 }
 
-// void mx_add_buff_card(t_character *player, t_game_card *card) { // В звязи с другой механикой боя, переделать
-//     player->attack += card->attack;
-//     player->shield += card->defence;
-//     player->current_hp += card->heal;
-//     if (player->max_hp < player->current_hp)
-//         player->current_hp = player->max_hp;
-// }
-
 void mx_clear_card(t_game_card *card){
     SDL_DestroyTexture(card->tex);
     free(card);

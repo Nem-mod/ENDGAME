@@ -33,14 +33,14 @@ t_character* player, int type) {
     room->player = player;
 
     room->exit_btn = mx_create_button(150, 50, WINDOW_WIDTH / 2 - 75, WINDOW_HEIGHT - 100,
-    "resource/img/button-finish.png");
+                                        "resource/img/button-finish.png");
     room->exit_btn.tex = mx_init_texture(room->exit_btn.img_path, win, rend);
 
 
     if (type == CHEST) {
         room->chest_drop = 1;
         room->room_obj = mx_create_button(200, 200, 850, WINDOW_HEIGHT / 1.5 - 100, 
-        "resource/img/chest_def.png");
+                                            "resource/img/chest_def.png");
         room->room_obj.tex = mx_init_texture(room->room_obj.img_path, win, rend);
     }
     return room;

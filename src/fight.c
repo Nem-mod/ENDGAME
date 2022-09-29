@@ -63,7 +63,6 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     
     fg->energy = AMOUNT_OF_ENERGY;
     fg->player_action_av = true;
-    printf("HP enemy %d\n", fg->enemy->current_hp);
     mx_create_cards(win, rend, fg);
     return fg;
 }
@@ -77,9 +76,6 @@ void mx_shift_cards(t_fightground *fg) {
             fg->cards[i]->rect.x = margin + shif_count * 150;
             fg->cards[i]->rect.y = fg->cards_rect.y ;
             shif_count++;
-        }
-        else {
-            printf("NULL\n");
         }
     }
 }
@@ -148,7 +144,7 @@ void mx_handle_cards(t_fightground *fg) {
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
         if (fg->cards[i] != NULL) {
            if (fg->cards[i]->is_active && active_card != -1)
-                printf("ERROR!!!!!!!!!!!!!!!!!!!\n");
+                printf("ERROR!\n");
             else if(fg->cards[i]->is_active && active_card == -1)
                 active_card = i; 
         }
@@ -164,7 +160,6 @@ void mx_handle_cards(t_fightground *fg) {
             }
             else if (!(button & SDL_BUTTON(SDL_BUTTON_LEFT)) && fg->cards[i]->is_active == true) {
                 if (mx_cursor_on_button(fg->enemy_rect) || mx_cursor_on_button(fg->player_rect)) {
-                    printf("ON CHARACTER\n");
                     if (mx_cursor_on_button(fg->enemy_rect))
                         mx_activate_card(fg->enemy, fg->cards[i]);
                     else
@@ -176,7 +171,6 @@ void mx_handle_cards(t_fightground *fg) {
                     active_card = -1;
                 }
                 else {
-                    printf("NO ACTIVE\n");
                     fg->cards[i]->is_active = false;
                     fg->energy += fg->cards[i]->cost;
                     active_card = -1;
@@ -184,25 +178,9 @@ void mx_handle_cards(t_fightground *fg) {
                 }
             }
         }
-            
-
-        /*if (mx_handle_button(fg->cards[i]->rect)) {
-            if (fg->cards[i]->is_active == false && fg->cards[i]->cost <= fg->energy) {
-                fg->cards[i]->is_active = true;
-                //fg->cards[i]->rect.y -= 10;
-                fg->energy -= fg->cards[i]->cost;
-            }
-            else if (fg->cards[i]->is_active == true){
-                fg->cards[i]->is_active = false;
-                //fg->cards[i]->rect.y += 10;
-                fg->energy += fg->cards[i]->cost;
-            }
-        }*/
     }
 
     if (active_card != -1) {
-        printf("%d is active!\n", active_card);
-
         fg->cards[active_card]->rect.x = mouse_x - fg->cards[active_card]->rect.w / 2;
         fg->cards[active_card]->rect.y = mouse_y - fg->cards[active_card]->rect.h / 2;
     }
@@ -219,20 +197,6 @@ bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
             }
             
             if(mx_handle_button(fg->button_rect)) {
-                // for (int i = 0; i < AMOUNT_OF_CARDS; i++)
-                // {
-                //     if(fg->cards[i]->is_active) {
-                //         mx_add_buff_card(fg->player, fg->cards[i]);
-                //     }
-                // }
-
-                //mx_calculate_attack(fg->player, fg->enemy);
-                // for (int i = 0; i < AMOUNT_OF_CARDS; i++)
-                // {   
-                //     if(fg->cards[i]->is_active) {
-                //         mx_substract_buff_card(fg->player, fg->cards[i]);
-                //     }
-                // }
                 if(fg->enemy->current_hp <= 0) {
                     mx_clear_cards(fg->cards);
                     return false;
@@ -245,7 +209,6 @@ bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
             }
         }
     } else {
-        printf("FLoppa hp: %d\n", fg->enemy->current_hp);
         mx_calculate_character_attack(fg->enemy, fg->player);
         mx_create_cards(win, rend, fg);
         fg->player_action_av = true;

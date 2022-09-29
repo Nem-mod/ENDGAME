@@ -23,16 +23,12 @@ t_bar *mx_create_bar(SDL_Window *win, SDL_Renderer *rend, t_bar_type type, SDL_R
 
     bar->square_rect.x = bar_shift_x;
     bar->square_rect.y = bar_shift_y;
-    // bar->square_rect.x = 20;
-    // bar->square_rect.y = 20;
     bar->square_rect.h = BAR_HEIGHT;
     bar->square_rect.w = BAR_WIDTH;
     bar->square_texture = mx_init_texture(bar->square_path, win, rend);
 
     bar->bar_rect.x = bar_shift_x;
     bar->bar_rect.y = bar_shift_y;
-    // bar->bar_rect.x = 20;
-    // bar->bar_rect.y = 20;
     bar->bar_rect.h = BAR_HEIGHT;
     bar->bar_rect.w = BAR_WIDTH;
     bar->percent = 100;
