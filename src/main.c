@@ -5,6 +5,7 @@
 #include "../inc/room.h"
 #include "../inc/potions.h"
 #include "../inc/escene.h"
+#include "../inc/inventory.h"
 #include "../inc/boss_fight.h"
 
 int main() {
@@ -34,6 +35,8 @@ int main() {
     t_map map = mx_create_map(gameWindow.window, gameWindow.renderer);
     char* palyer_img = "resource/img/player/default_player.png";
     t_character *player =  mx_create_character(palyer_img, 100, 5, 20, 50, 10, 2, gameWindow.window, gameWindow.renderer);
+    t_inventory *inventory = mx_create_inventory(gameWindow.window, gameWindow.renderer);
+    mx_generate_start_cards(gameWindow.window, gameWindow.renderer, inventory);
 
     t_fightground *fightground = NULL;
     t_fightground *bossroom = NULL;
@@ -51,7 +54,7 @@ int main() {
             mx_render_map(&map, gameWindow.renderer);
             gameWindow.scene = mx_handle_map(&map, gameWindow.window, gameWindow.renderer);
             if (gameWindow.scene == LEVEL) {
-                fightground = mx_create_fightground(gameWindow.window, gameWindow.renderer, player);
+                fightground = mx_create_fightground(gameWindow.window, gameWindow.renderer, player, inventory);
             }
             else if (gameWindow.scene == ROOM)
                 room = mx_create_room(gameWindow.window, gameWindow.renderer, player, CHEST);
@@ -59,7 +62,7 @@ int main() {
                 bossroom = mx_create_bossroom(gameWindow.window, gameWindow.renderer, player);
         }
         else if (gameWindow.scene == LEVEL) {
-            gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground);
+            gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground, inventory);
             mx_render_potion_bar(potions, gameWindow.renderer);
             mx_handle_potion(potions, player);
         }
@@ -91,6 +94,7 @@ int main() {
 
         if(gameWindow.menu) {
             mx_render_menu(&menu, gameWindow.renderer);
+            mx_render_inventory(gameWindow.renderer, inventory);
             if(mx_handle_menu(&menu, gameWindow.renderer, 2) == CLOSE_MENU) {
                 gameWindow.menu = false;
             } else if(mx_handle_menu(&menu, gameWindow.renderer, 2) == EXIT) {
