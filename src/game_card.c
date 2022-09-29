@@ -28,7 +28,7 @@ t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type typ
 t_game_card * mx_get_card_sword(t_game_card *card, int lvl){
     int value = 1;
     
-    if (lvl != 0) {
+    if (lvl == 0) {
         if(mx_rand(1, 100) > 80) {
         value = 3;
         }
@@ -63,7 +63,7 @@ t_game_card * mx_get_card_sword(t_game_card *card, int lvl){
 t_game_card * mx_get_card_shield(t_game_card *card, int lvl){
     int value = 1;
 
-    if (lvl != 0) {
+    if (lvl == 0) {
         if(mx_rand(1, 100) > 90) {
             value = 3;
         }

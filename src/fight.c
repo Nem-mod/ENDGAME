@@ -1,6 +1,6 @@
 #include "../inc/fight.h"
 
-t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_character* player) {
+t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_character* player, t_inventory *inv) {
     
     t_fightground *fg = malloc(sizeof(*fg));
 
@@ -70,7 +70,7 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     
     fg->energy = AMOUNT_OF_ENERGY;
     fg->player_action_av = true;
-    mx_create_cards(win, rend, fg);
+    mx_create_cards(win, rend, fg, inv);
     return fg;
 }
 
@@ -81,15 +81,15 @@ void mx_shift_cards(t_fightground *fg) {
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
         if (fg->cards[i] != NULL) {
             fg->cards[i]->rect.x = margin + shif_count * 150;
-            fg->cards[i]->rect.y = fg->cards_rect.y ;
+            fg->cards[i]->rect.y = fg->cards_rect.y;
             shif_count++;
         }
     }
 }
 
-void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
+void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg, t_inventory *inv) {
     for (int i = 0; i < AMOUNT_OF_CARDS; i++)
-        fg->cards[i] = mx_create_card(win, rend, rand() % 2, mx_rand(1,3)); // Переделать под инвентарь
+        fg->cards[i] = mx_copy_card(inv->cards[mx_rand(0, inv->current_cards - 1)], win, rend);
     mx_shift_cards(fg);
 }
 
@@ -103,7 +103,7 @@ void mx_set_cards_pos(t_fightground* fg) {
     }
 }
 
-int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
+int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg, t_inventory *inv) {
     mx_update_fight_bars(fg);
     SDL_RenderCopy(rend, fg->backg_texture, NULL, &fg->backg_rect);
 
@@ -124,7 +124,7 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
         return DEATH;
     }
 
-    if(mx_fight(win, rend, fg)) {
+    if(mx_fight(win, rend, fg, inv)) {
         return LEVEL;
     }
     
@@ -194,7 +194,7 @@ void mx_handle_cards(t_fightground *fg) {
     }
 }
 
-bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
+bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg, t_inventory *inv){
     
     if(fg->player_action_av){
         if(fg->player_action_av) // ??????????
@@ -218,7 +218,7 @@ bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
         }
     } else {
         mx_calculate_character_attack(fg->enemy, fg->player);
-        mx_create_cards(win, rend, fg);
+        mx_create_cards(win, rend, fg, inv);
         fg->player_action_av = true;
     }
     
