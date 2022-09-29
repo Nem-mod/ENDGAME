@@ -4,6 +4,8 @@
 #include<stdbool.h>
 #include<stdlib.h>
 #include "window_sdl.h"
+#include "gamemath.h"
+
 typedef enum e_type {
     ENEMY,
     CHEST
