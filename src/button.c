@@ -10,8 +10,8 @@ t_button mx_create_button(int w, int h,int x, int y, char* img_path){
     button.d_rect.h = h;
     button.img_rect.w = w;
     button.img_rect.h = h;
-    button.img_rect.x = x;
-    button.img_rect.y = x;
+    button.img_rect.x = 0;
+    button.img_rect.y = 0;
     return button;
 }
 
