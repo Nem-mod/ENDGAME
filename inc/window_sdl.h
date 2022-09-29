@@ -16,7 +16,8 @@ typedef enum e_scenes {
     MENU,
     MAP,
     LEVEL,
-    EXIT
+    EXIT,
+    ROOM
 }            t_scenes;
 
 typedef struct s_window_sdl {
