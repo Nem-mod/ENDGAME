@@ -8,8 +8,7 @@
 
 typedef enum e_card_type {
     DMG,
-    ARM,
-    MG
+    ARM
 }   t_card_type;
 typedef struct s_game_card {
     int attack;
@@ -27,4 +26,6 @@ t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type typ
 void mx_add_buff_card(t_character *player, t_game_card *card);
 void mx_clear_card(t_game_card *card);
 
+t_game_card * mx_get_card_sword(t_game_card *card);
+t_game_card * mx_get_card_shield(t_game_card *card);
 #endif
