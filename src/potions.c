@@ -47,6 +47,7 @@ void mx_handle_potion(t_potion_bar *potions_bar, t_character *player){
                 player->current_hp += potions_bar->potions[i]->value;
             }
             potions_bar->potions_count--;
+            SDL_Delay(100);
         }
 
     }

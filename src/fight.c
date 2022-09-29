@@ -70,20 +70,34 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
 
 void mx_shift_cards(t_fightground *fg) {
     int margin = (WINDOW_WIDTH - (AMOUNT_OF_CARDS - fg->discard_cards_count) * 150) / 2;    
+    int shif_count = 0;
 
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
-        fg->cards[i]->rect.x = margin + i * 150;
+        if (fg->cards[i] != NULL) {
+            fg->cards[i]->rect.x = margin + shif_count * 150;
+            fg->cards[i]->rect.y = fg->cards_rect.y ;
+            shif_count++;
+        }
+        else {
+            printf("NULL\n");
+        }
     }
 }
 
 void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     for (int i = 0; i < AMOUNT_OF_CARDS; i++)
-    {
         fg->cards[i] = mx_create_card(win, rend, rand() % 2);
-        fg->cards[i]->rect.x = fg->cards_rect.x  + i * 155;
-        fg->cards[i]->rect.y = fg->cards_rect.y ;
-    }
     mx_shift_cards(fg);
+}
+
+void mx_set_cards_pos(t_fightground* fg) {
+    for (int i = 0; i < AMOUNT_OF_CARDS; i++)
+    {
+        if (fg->cards[i] != NULL) {
+            fg->cards[i]->rect.x = fg->cards_rect.x  + i * 155;
+            fg->cards[i]->rect.y = fg->cards_rect.y ;
+        }
+    }
 }
 
 int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
@@ -152,11 +166,15 @@ void mx_handle_cards(t_fightground *fg) { // Переделать на пере�
                     mx_clear_card(fg->cards[i]);
                     fg->cards[i] = NULL;
                     fg->discard_cards_count++;
+                    mx_shift_cards(fg);
                     active_card = -1;
                 }
                 else {
+                    printf("NO ACTIVE\n");
                     fg->cards[i]->is_active = false;
                     fg->energy += fg->cards[i]->cost;
+                    active_card = -1;
+                    mx_shift_cards(fg);
                 }
             }
         }

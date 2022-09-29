@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "room.h": "c",
-        "window_sdl.h": "c"
+        "window_sdl.h": "c",
+        "menu.h": "c"
     },
     "makefile.launchConfigurations": [
         {
