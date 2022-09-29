@@ -1,6 +1,6 @@
 flags := -std=c11 -Wall -Wextra -Werror -Wpedantic
 conf := `pkg-config --libs --cflags sdl2`
-sdl_i := -lSDL2_image
+sdl_i := -lSDL2_image -lSDL2_mixer
 name := endgame
 
 all: $(name)

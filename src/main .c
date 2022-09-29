@@ -10,6 +10,10 @@ int main() {
     {
         printf("error initializing SDL: %s\n", SDL_GetError());
     }
+
+    Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT,2,2048);
+    Mix_Music *background = Mix_LoadMUS("resource/audio/song.mp3");
+
     SDL_Window* win = SDL_CreateWindow("Our game!",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
@@ -34,6 +38,7 @@ int main() {
     t_room *room = NULL;
 
     t_potion_bar *potions = mx_create_potion_bar(gameWindow.window, gameWindow.renderer);
+    Mix_PlayMusic(background, -1);
     while (gameWindow.active) {
         SDL_RenderClear(gameWindow.renderer); // Каждый раз чистить экран чтоб картинки не накладывались друг на другаы
         if (gameWindow.scene == MENU) {
@@ -79,8 +84,10 @@ int main() {
     }
     SDL_RenderClear(gameWindow.renderer);
     SDL_DestroyRenderer(gameWindow.renderer);
+    Mix_FreeMusic(background);
     SDL_DestroyRenderer(rend);
     SDL_DestroyWindow(win);
+    Mix_CloseAudio();
     IMG_Quit();
     SDL_Quit();
     return 0;
