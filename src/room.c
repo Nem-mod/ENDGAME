@@ -52,7 +52,8 @@ int mx_render_room(t_room *room, SDL_Renderer *rend, t_potion_bar *potion_bar, S
         SDL_DestroyTexture(room->room_obj.tex);
         room->room_obj.tex = mx_init_texture(room->room_obj.img_path, win, rend);
         room->chest_drop = 0;
-        potion_bar->potions_count += 1;
+        if(potion_bar->potions_count < MAX_AMOUNT_OF_PT)
+            potion_bar->potions_count += 1;
     }
     SDL_RenderCopy(rend, room->backg_texture, NULL, &room->backg_rect);
 

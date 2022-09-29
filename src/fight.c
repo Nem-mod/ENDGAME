@@ -33,12 +33,18 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->player = player;
     
 
-    char* enemy_img = "resource/img/fight/enemy.png"; // В отдельной функции создания противника сделать рандом
+    char* enemys_img[P_OF_ENEMYS] = {
+        "resource/img/fight/enemy.png",
+        "resource/img/chest_def3.png",
+        "resource/img/mob.png",
+        }; // В отдельной функции создания противника сделать рандом
+
     fg->enemy_rect.h = 300;
     fg->enemy_rect.w = 300;
     fg->enemy_rect.x = 750;
     fg->enemy_rect.y = WINDOW_HEIGHT / 1.5 - 200;
-    fg->enemy = mx_create_character(enemy_img, 20, 1, 1, 1, 1, 1, win, rend);
+    fg->enemy = mx_create_character(enemys_img[mx_rand(1, P_OF_ENEMYS)], 20, 1, 1, 1, 1, 1, win, rend);
+
     mx_set_enemy(fg->enemy);
 
     fg->player->healthbar = mx_create_bar(win, rend, HEALTH, &fg->player_rect);
