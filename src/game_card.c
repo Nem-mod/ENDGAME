@@ -26,7 +26,13 @@ t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type typ
 }
 
 t_game_card * mx_get_card_sword(t_game_card *card){
-    int value = mx_rand(1, 3);
+    int value = 1;
+    if(mx_rand(1, 100) > 80) {
+        value = 3;
+    }
+    if(mx_rand(1, 100) > 50) {
+        value = 2;
+    }
     switch (value)
     {
     case 1:
@@ -36,11 +42,11 @@ t_game_card * mx_get_card_sword(t_game_card *card){
     
     case 2:
         card->img_path = "resource/img/card_sword2.png";
-        card->attack = 4;
+        card->attack = 6;
         break;
     case 3:
         card->img_path = "resource/img/card_sword3.png";
-        card->attack = 7;
+        card->attack = 10;
         break;
     }
     card->attack += 10 * value;
@@ -49,7 +55,14 @@ t_game_card * mx_get_card_sword(t_game_card *card){
     return card;
 }
 t_game_card * mx_get_card_shield(t_game_card *card){
-    int value = mx_rand(1, 3);
+     int value = 1;
+    if(mx_rand(1, 100) > 90) {
+        value = 3;
+    }
+    if(mx_rand(1, 100) > 60) {
+        value = 2;
+    }
+
     switch (value)
     {
     case 1:
