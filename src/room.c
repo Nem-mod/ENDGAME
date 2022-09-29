@@ -1,7 +1,7 @@
 #include "../inc/room.h"
 
 t_room *mx_create_room(SDL_Window *win, SDL_Renderer *rend,
-t_character* player, t_level_point *level) {
+t_character* player, int type) {
     t_room *room = malloc(sizeof(*room));
 
     room->background_path = "resource/img/fight/background.jfif";
@@ -32,7 +32,7 @@ t_character* player, t_level_point *level) {
     room->player_rect.y = WINDOW_HEIGHT / 1.5 - 200;
     room->player = player;
 
-    if (level->room == CHEST) {
+    if (type == CHEST) {
         room->room_obj = mx_create_button(623, 736, 750, WINDOW_HEIGHT / 1.5 - 200, 
         "resource/img/fight/temp_chest.png");
         room->room_obj.tex = mx_init_texture(room->room_obj.img_path, win, rend);
@@ -48,6 +48,13 @@ void mx_render_room(t_room *room, SDL_Renderer *rend) {
 
     mx_render_character(room->player, rend, room->player_rect);
     SDL_RenderCopy(rend, room->room_obj.tex, NULL, &room->room_obj.d_rect);
+}
+
+int mx_handle_room(t_room *room) {
+    if (mx_handle_button(room->room_obj.d_rect)) {
+        return MAP;
+    }
+    return ROOM;
 }
 
 void mx_clear_room(t_room *room) {
