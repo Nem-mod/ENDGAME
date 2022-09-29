@@ -27,7 +27,7 @@ bool mx_handle_button(SDL_Rect rect){
       
         if (buttons & SDL_BUTTON(SDL_BUTTON_LEFT)) {
             
-            //SDL_Delay(100);
+            // SDL_Delay(100);
             return true;
         }
     }

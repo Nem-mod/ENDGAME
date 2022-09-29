@@ -32,7 +32,7 @@ typedef struct  s_fightground {
     t_character* enemy;
     t_game_card* cards[AMOUNT_OF_CARDS];
     t_button continue_button;
-    int cards_count;
+    int discard_cards_count;
 
     bool player_action_av;
     int player_energy;
