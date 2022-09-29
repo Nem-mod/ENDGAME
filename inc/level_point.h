@@ -8,7 +8,8 @@
 
 typedef enum e_type {
     ENEMY,
-    CHEST
+    CHEST,
+    BOSS
     // TRADER,
     // RESTPOINT
 } t_type;
