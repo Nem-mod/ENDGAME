@@ -29,7 +29,7 @@ int main() {
     gameWindow.active = true;
     gameWindow.scene = MENU;
 
-    t_menu menu = mx_create_menu(gameWindow.window, gameWindow.renderer, 1 );
+    t_menu menu = mx_create_menu(gameWindow.window, gameWindow.renderer, 1);
     t_map map = mx_create_map(gameWindow.window, gameWindow.renderer);
     char* palyer_img = "resource/img/player/default_player.png";
     t_character *player =  mx_create_character(palyer_img, 100, 5, 20, 50, 10, 2, gameWindow.window, gameWindow.renderer);
@@ -40,10 +40,8 @@ int main() {
     t_potion_bar *potions = mx_create_potion_bar(gameWindow.window, gameWindow.renderer);
     Mix_PlayMusic(background, -1);
     while (gameWindow.active) {
-
         SDL_RenderClear(gameWindow.renderer); // Каждый раз чистить экран чтоб картинки не накладывались друг на другаы
         if (gameWindow.scene == MENU) {
-            printf("menu render\n");
             mx_render_menu(&menu, gameWindow.renderer);
             gameWindow.scene = mx_handle_menu(&menu, gameWindow.renderer, 1);
         }
@@ -64,7 +62,7 @@ int main() {
         else if (gameWindow.scene == ROOM) {
             gameWindow.scene = mx_render_room(room, gameWindow.renderer, potions, gameWindow.window);
         }
-        else if (gameWindow.scene == EXIT) {
+        else if (gameWindow.scene == DEATH) {
             t_escene escene = mx_create_escene(gameWindow.window, gameWindow.renderer);
             mx_render_escene(&escene, gameWindow.renderer);
             SDL_RenderPresent(gameWindow.renderer);
@@ -78,24 +76,23 @@ int main() {
             mx_clear_points(&map);
             mx_clear_potion_bar(potions);
             mx_clear_character(player);
-            menu = mx_create_menu(gameWindow.window, gameWindow.renderer, 1 );
+            menu = mx_create_menu(gameWindow.window, gameWindow.renderer, 1);
             map = mx_create_map(gameWindow.window, gameWindow.renderer);
             player =  mx_create_character(palyer_img, 100, 5, 20, 50, 10, 2, gameWindow.window, gameWindow.renderer);
             potions = mx_create_potion_bar(gameWindow.window, gameWindow.renderer);
             gameWindow.active = true;
-            gameWindow.menu = true;
             gameWindow.scene = MENU;
             continue;
         }
 
-        // if(gameWindow.menu) {
-        //     mx_render_menu(&menu, gameWindow.renderer);
-        //     if(mx_handle_menu(&menu, gameWindow.renderer, 2) == CLOSE_MENU) {
-        //         gameWindow.menu = false;
-        //     } else if(mx_handle_menu(&menu, gameWindow.renderer, 2) == EXIT) {
-        //         gameWindow.scene = EXIT;
-        //     }
-        // }
+        if(gameWindow.menu) {
+            mx_render_menu(&menu, gameWindow.renderer);
+            if(mx_handle_menu(&menu, gameWindow.renderer, 2) == CLOSE_MENU) {
+                gameWindow.menu = false;
+            } else if(mx_handle_menu(&menu, gameWindow.renderer, 2) == EXIT) {
+                gameWindow.scene = EXIT;
+            }
+        }
 
         SDL_RenderPresent(gameWindow.renderer);
 

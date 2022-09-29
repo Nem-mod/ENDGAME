@@ -38,11 +38,11 @@ int mx_handle_menu(t_menu *menu, SDL_Renderer *renderer, int type) {
         if(mx_handle_button(menu->buttons[0].d_rect)){
             mx_clear_menu(menu);
             SDL_RenderClear(renderer);
-            return 1;
+            return MAP;
         } else if(mx_handle_button(menu->buttons[1].d_rect)) {
             mx_clear_menu(menu);
             SDL_RenderClear(renderer);
-            return 3;
+            return EXIT;
         } 
         else {
             menu->img_path = "resource/img/menu.png";
@@ -56,7 +56,7 @@ int mx_handle_menu(t_menu *menu, SDL_Renderer *renderer, int type) {
         } else if(mx_handle_button(menu->buttons[1].d_rect)) {
             mx_clear_menu(menu);
             SDL_RenderClear(renderer);
-            return 3;
+            return EXIT;
         } 
     }
     

@@ -18,6 +18,7 @@ typedef enum e_scenes {
     MENU,
     MAP,
     LEVEL,
+    DEATH,
     EXIT,
     ROOM,
     RESTART

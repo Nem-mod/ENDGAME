@@ -119,16 +119,17 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
             SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
     }
 
-    if (fg->player->current_hp <= 0)
-        return 3;
+    if (fg->player->current_hp <= 0) {
+        return DEATH;
+    }
 
     if(mx_fight(win, rend, fg)) {
-        return 2;
+        return LEVEL;
     }
     
     fg->player->shield = 0;
     mx_clear_fightground(&fg);
-    return 1;
+    return MAP;
     
 }
 
