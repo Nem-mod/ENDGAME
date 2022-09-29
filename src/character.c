@@ -6,9 +6,7 @@ t_character *mx_create_character(char *texture_path,
                                 int dodge_chance, int shield,
                                 SDL_Window *win, SDL_Renderer *rend) {
     t_character *c = malloc(sizeof(*c));
-
     c->character_path = texture_path;
-
     SDL_QueryTexture(mx_init_texture(texture_path, win, rend), NULL, NULL,
                                     &c->character_rect.w, &c->character_rect.h); // Тут берется размер спрайта. Нужно будет подгонять размер позже. Нужна функция для этого
     c->character_texture = mx_init_texture(texture_path, win, rend);
@@ -31,13 +29,13 @@ void mx_set_character(t_character *c,
     c->shield = shield;
 }
 void mx_set_enemy(t_character *c) {
-    c->max_hp = rand() % 80 + 50;
+    c->max_hp = mx_rand(20, 40) + 50;
     c->current_hp = c->max_hp;
-    c->attack = 20;
-    c->crit_chance = rand() % 10;
-    c->crit_dmg = rand() % 10;
-    c->dodge_chance = rand() % 10;
-    c->shield = 0;
+    c->attack = mx_rand(15, 25);
+    c->crit_chance = mx_rand(10, 20);
+    c->crit_dmg =  mx_rand(30, 40);
+    c->dodge_chance =  mx_rand(10, 12);
+    c->shield =  mx_rand(0, 30);
 }
 void mx_clear_character(t_character *character) {
     SDL_DestroyTexture(character->character_texture);

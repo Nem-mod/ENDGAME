@@ -43,7 +43,8 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->enemy_rect.w = 300;
     fg->enemy_rect.x = 750;
     fg->enemy_rect.y = WINDOW_HEIGHT / 1.5 - 200;
-    fg->enemy = mx_create_character(enemys_img[mx_rand(1, P_OF_ENEMYS)], 20, 1, 1, 1, 1, 1, win, rend);
+    int pos = mx_rand(0, P_OF_ENEMYS - 1);
+    fg->enemy = mx_create_character(enemys_img[pos], 20, 1, 1, 1, 1, 1, win, rend);
 
     mx_set_enemy(fg->enemy);
 
