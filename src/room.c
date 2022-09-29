@@ -33,7 +33,7 @@ t_character* player, int type) {
     room->player = player;
 
     if (type == CHEST) {
-        room->room_obj = mx_create_button(623, 736, 750, WINDOW_HEIGHT / 1.5 - 200, 
+        room->room_obj = mx_create_button(200, 200, 850, WINDOW_HEIGHT / 1.5 - 100, 
         "resource/img/chest.png");
         room->room_obj.tex = mx_init_texture(room->room_obj.img_path, win, rend);
     }

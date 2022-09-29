@@ -10,8 +10,8 @@ t_button mx_create_button(int w, int h,int x, int y, char* img_path){
     button.d_rect.h = h;
     button.img_rect.w = w;
     button.img_rect.h = h;
-    button.img_rect.x = x;
-    button.img_rect.y = x;
+    button.img_rect.x = 0;
+    button.img_rect.y = 0;
     return button;
 }
 
@@ -31,5 +31,19 @@ bool mx_handle_button(SDL_Rect rect){
             return true;
         }
     }
+    return false;
+}
+
+bool mx_cursor_on_button(const SDL_Rect rect) {
+    int mouse_x;
+    int mouse_y;
+    SDL_GetMouseState(&mouse_x, &mouse_y);
+
+    if (mouse_x > rect.x &&
+        mouse_x < rect.x + rect.w &&
+        mouse_y > rect.y &&
+        mouse_y < rect.y + rect.h) {
+            return true;
+        }
     return false;
 }

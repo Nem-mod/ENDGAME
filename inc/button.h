@@ -12,4 +12,5 @@ typedef struct s_button {
 
 t_button mx_create_button(int w, int h, int x, int y, char* img_path);
 bool mx_handle_button(SDL_Rect rect);
+bool mx_cursor_on_button(SDL_Rect rect);
 #endif
