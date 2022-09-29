@@ -37,6 +37,7 @@ typedef struct  s_fightground {
     int discard_cards_count;
 
     bool player_action_av;
+    bool exit_flag;
     int player_energy;
 
 
@@ -47,7 +48,7 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
 void mx_clear_fightground(t_fightground **fg);
 void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 void mx_handle_cards(t_fightground *fg);
-bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
+void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 void mx_update_fight_bars(t_fightground *fg);
 void mx_clear_cards(t_game_card **cards);
 

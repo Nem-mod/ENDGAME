@@ -70,6 +70,7 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     
     fg->energy = AMOUNT_OF_ENERGY;
     fg->player_action_av = true;
+    fg->exit_flag = false;
     mx_create_cards(win, rend, fg);
     return fg;
 }
@@ -123,10 +124,19 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
     if (fg->player->current_hp <= 0) {
         return DEATH;
     }
-
-    if(mx_fight(win, rend, fg)) {
+    if(!fg->exit_flag) {
+        
+        mx_fight(win, rend, fg);
+        if(fg->enemy->current_hp <= 0){
+            fg->enemy->character_texture = mx_init_texture("resource/img/dm.png", win, rend);
+            if(mx_handle_button(fg->button_rect)) {
+                fg->exit_flag = true;
+            }
+        }
         return LEVEL;
     }
+    
+    
     
     fg->player->shield = 0;
     mx_clear_fightground(&fg);
@@ -194,36 +204,28 @@ void mx_handle_cards(t_fightground *fg) {
     }
 }
 
-bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
+void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
     
     if(fg->player_action_av){
-        if(fg->player_action_av) // ??????????
-        {
-            SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
-            if(fg->energy >= 0) {
-                mx_handle_cards(fg);
+        SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
+        if(fg->energy >= 0) {
+            mx_handle_cards(fg);
+        }
+        
+        if(mx_handle_button(fg->button_rect)) {
+            if(fg->enemy->current_hp <= 0) {
+                mx_clear_cards(fg->cards);
             }
-            
-            if(mx_handle_button(fg->button_rect)) {
-                if(fg->enemy->current_hp <= 0) {
-                    mx_clear_cards(fg->cards);
-                    return false;
-                }
-                fg->discard_cards_count = 0;
-                fg->energy = AMOUNT_OF_ENERGY;
-                fg->player_action_av = false;
-                SDL_Delay(100); // Поменять на подсчет времени. Мб тупаяя и сложная идея
-
-            }
+            fg->discard_cards_count = 0;
+            fg->energy = AMOUNT_OF_ENERGY;
+            fg->player_action_av = false;
+            SDL_Delay(100); // Поменять на подсчет времени. Мб тупаяя и сложная идея
         }
     } else {
         mx_calculate_character_attack(fg->enemy, fg->player);
         mx_create_cards(win, rend, fg);
         fg->player_action_av = true;
     }
-    
-    return true;
-    
 }
 
 void mx_update_fight_bars(t_fightground *fg) {
@@ -241,4 +243,3 @@ void mx_clear_cards(t_game_card **cards) {
         }
     }
 }
-
