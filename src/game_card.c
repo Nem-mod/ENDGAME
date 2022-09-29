@@ -6,26 +6,11 @@ t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type typ
     switch (type)
     {
     case DMG:
-        card->img_path = "resource/img/card_sword.png";
-        card->attack = 10;
-        card->defence = 0;
-        card->cost = 1;
-        card->type = DMG;
+        card = mx_get_card_sword(card);
         break;
     
     case ARM:
-        card->img_path = "resource/img/card_shield.png";
-        card->attack = 0;
-        card->defence = 10;
-        card->cost = 1;
-        card->type = ARM;
-        break;
-    case MG:
-        card->img_path = "resource/img/card_gold_shield.png";
-        card->attack = 5;
-        card->defence = 7;
-        card->cost = 2;
-        card->type = MG;
+        card = mx_get_card_shield(card);
         break;
     }
     card->rect.h = 150; //мб попробовать другой способ
@@ -37,6 +22,51 @@ t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type typ
     return card;
 }
 
+t_game_card * mx_get_card_sword(t_game_card *card){
+    int value = mx_rand(1, 3);
+    switch (value)
+    {
+    case 1:
+        card->img_path = "resource/img/card_sword.png";
+        card->attack = 0;
+        break;
+    
+    case 2:
+        card->img_path = "resource/img/card_sword2.png";
+        card->attack = 4;
+        break;
+    case 3:
+        card->img_path = "resource/img/card_sword3.png";
+        card->attack = 7;
+        break;
+    }
+    card->attack += 10 * value;
+    card->defence = 0;
+    card->cost = value;
+    card->type = DMG;
+    return card;
+}
+t_game_card * mx_get_card_shield(t_game_card *card){
+    int value = mx_rand(1, 3);
+    switch (value)
+    {
+    case 1:
+        card->img_path = "resource/img/card_shield.png";
+        break;
+    
+    case 2:
+        card->img_path = "resource/img/card_shield2.png";
+        break;
+    case 3:
+        card->img_path = "resource/img/card_gold_shield.png";
+        card->attack = 10;
+        break;
+    }
+    card->defence = 10 * value;
+    card->cost = value;
+    card->type = ARM;
+    return card;
+}
 void mx_add_buff_card(t_character *player, t_game_card *card) { // В звязи с другой механикой боя, переделать
     player->attack += card->attack;
     player->shield += card->defence;
