@@ -27,8 +27,9 @@ typedef struct  s_room {
 }               t_room;
 
 t_room *mx_create_room(SDL_Window *win, SDL_Renderer *rend,
-                     t_character* player, t_level_point *level);
-void mx_render_room(t_room *fg, SDL_Renderer *rend);
-void mx_clear_room(t_room *fg);
+                     t_character* player, int type);
+void mx_render_room(t_room *room, SDL_Renderer *rend);
+void mx_clear_room(t_room *room);
+int mx_handle_room(t_room *room);
 
 #endif
