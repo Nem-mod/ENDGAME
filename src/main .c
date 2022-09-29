@@ -4,7 +4,6 @@
 #include "../inc/fight.h"
 
 int main() {
-
     
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0)
     {

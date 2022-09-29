@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
+#include <sys/time.h>
 #include <time.h>
 #include <stdbool.h>
 #include "button.h"
@@ -20,6 +21,9 @@ typedef enum e_scenes {
 }            t_scenes;
 
 typedef struct s_window_sdl {
+    struct timeval start;
+    struct timeval end;
+
     SDL_Window* window;
     SDL_Renderer* renderer;
     t_scenes scene;
