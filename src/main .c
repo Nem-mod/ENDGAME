@@ -65,8 +65,7 @@ int main() {
             mx_handle_potion(potions, player);
         }
         else if (gameWindow.scene == ROOM) {
-            mx_render_room(room, gameWindow.renderer);
-            gameWindow.scene = mx_handle_room(room);
+            gameWindow.scene = mx_render_room(room, gameWindow.renderer, potions, win);
         }
         SDL_RenderPresent(gameWindow.renderer);
 
@@ -80,7 +79,6 @@ int main() {
                 gameWindow.active = false;
             }
         }
-
         SDL_Delay(1000 / 24);
     }
     SDL_RenderClear(gameWindow.renderer);
