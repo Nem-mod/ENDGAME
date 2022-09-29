@@ -36,7 +36,11 @@ void mx_render_potion_bar(t_potion_bar* potions_bar, SDL_Renderer *renderer){
         SDL_RenderCopy(renderer, potions_bar->potions[i]->tex, NULL, &potions_bar->potions[i]->rect);
     }
 }
-void mx_clear_potion_bar(t_potion_bar* potions_bar);
+void mx_clear_potion_bar(t_potion_bar* potions_bar) {
+    SDL_DestroyTexture(potions_bar->tex);
+    free(potions_bar);
+    potions_bar = NULL;
+}
 
 void mx_handle_potion(t_potion_bar *potions_bar, t_character *player){
     for (int i = 0; i < potions_bar->potions_count; i++) {

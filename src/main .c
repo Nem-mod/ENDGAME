@@ -43,9 +43,8 @@ int main() {
 
         SDL_RenderClear(gameWindow.renderer); // Каждый раз чистить экран чтоб картинки не накладывались друг на другаы
         if (gameWindow.scene == MENU) {
-
+            printf("menu render\n");
             mx_render_menu(&menu, gameWindow.renderer);
-
             gameWindow.scene = mx_handle_menu(&menu, gameWindow.renderer, 1);
         }
         else if (gameWindow.scene == MAP) {
@@ -59,30 +58,45 @@ int main() {
         }
         else if (gameWindow.scene == LEVEL) {
             gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground);
-            if (gameWindow.scene == EXIT) {
-
-                t_escene escene = mx_create_escene(gameWindow.window, gameWindow.renderer);
-                mx_render_escene(&escene, gameWindow.renderer);
-                SDL_RenderPresent(gameWindow.renderer);
-                SDL_Delay(3000);
-                break;
-                
-            }
             mx_render_potion_bar(potions, gameWindow.renderer);
             mx_handle_potion(potions, player);
         }
         else if (gameWindow.scene == ROOM) {
             gameWindow.scene = mx_render_room(room, gameWindow.renderer, potions, gameWindow.window);
         }
-
-        if(gameWindow.menu) {
-            mx_render_menu(&menu, gameWindow.renderer);
-            if(mx_handle_menu(&menu, gameWindow.renderer, 2) == CLOSE_MENU) {
-                gameWindow.menu = false;
-            } else if(mx_handle_menu(&menu, gameWindow.renderer, 2) == EXIT) {
-                gameWindow.scene = EXIT;
-            }
+        else if (gameWindow.scene == EXIT) {
+            t_escene escene = mx_create_escene(gameWindow.window, gameWindow.renderer);
+            mx_render_escene(&escene, gameWindow.renderer);
+            SDL_RenderPresent(gameWindow.renderer);
+            SDL_Delay(3000);
+            mx_clear_escene(&escene);
+            gameWindow.scene = RESTART;
+            //break;
         }
+        else if (gameWindow.scene == RESTART) {
+            mx_clear_map(&map);
+            mx_clear_points(&map);
+            mx_clear_potion_bar(potions);
+            mx_clear_character(player);
+            menu = mx_create_menu(gameWindow.window, gameWindow.renderer, 1 );
+            map = mx_create_map(gameWindow.window, gameWindow.renderer);
+            player =  mx_create_character(palyer_img, 100, 5, 20, 50, 10, 2, gameWindow.window, gameWindow.renderer);
+            potions = mx_create_potion_bar(gameWindow.window, gameWindow.renderer);
+            gameWindow.active = true;
+            gameWindow.menu = true;
+            gameWindow.scene = MENU;
+            continue;
+        }
+
+        // if(gameWindow.menu) {
+        //     mx_render_menu(&menu, gameWindow.renderer);
+        //     if(mx_handle_menu(&menu, gameWindow.renderer, 2) == CLOSE_MENU) {
+        //         gameWindow.menu = false;
+        //     } else if(mx_handle_menu(&menu, gameWindow.renderer, 2) == EXIT) {
+        //         gameWindow.scene = EXIT;
+        //     }
+        // }
+
         SDL_RenderPresent(gameWindow.renderer);
 
         SDL_Event event;
