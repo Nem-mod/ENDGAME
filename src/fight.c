@@ -128,6 +128,7 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
         
         mx_fight(win, rend, fg);
         if(fg->enemy->current_hp <= 0){
+            SDL_DestroyTexture( fg->enemy->character_texture);
             fg->enemy->character_texture = mx_init_texture("resource/img/dm.png", win, rend);
             if(mx_handle_button(fg->button_rect)) {
                 fg->exit_flag = true;
