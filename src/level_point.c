@@ -5,9 +5,9 @@ t_level_point* mx_create_lp(SDL_Window* win, SDL_Renderer* renderer) {
     point->active = false;
     point->rect.h = 60;
     point->rect.w = 60;
-    point->rect.x = 800 + rand() % 100;
-    point->rect.y = 1000 - rand() % 40 - 150;
-    point->room = ENEMY;
+    point->rect.x = 850 + rand() % 50;
+    point->rect.y = 1150 + rand() % 50;
+    point->room = rand () % 2;
     point->next = NULL;
     point->img_path = "resource/img/point.png";
     point->tex = mx_init_texture(point->img_path, win, renderer);
@@ -48,7 +48,12 @@ int mx_handle_point_level(t_level_point *lp, SDL_Window* win, SDL_Renderer* rend
             lp->next->active = true;
             
             lp->active = false;
-            return_val = 2;
+            if (lp->room == ENEMY) {
+                return_val = LEVEL;
+            }
+            else if (lp->room == CHEST) {
+                return_val = ROOM;
+            }
         }
     }
     else {

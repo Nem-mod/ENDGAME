@@ -92,11 +92,16 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
 
     SDL_RenderCopy(rend, fg->floor_texture, NULL, &fg->floor_rect);
     SDL_RenderCopy(rend, fg->frontg_texture, NULL, &fg->frontg_rect);
-    for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
-        SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
-    }
     mx_render_character(fg->player, rend, fg->player_rect);
     mx_render_character(fg->enemy, rend, fg->enemy_rect);
+    for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
+        if (fg->cards[i]->is_active == false)
+            SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
+    }
+    for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
+        if (fg->cards[i]->is_active == true)
+            SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
+    }
     if(mx_fight(win, rend, fg)) {
         return 2;
     }
@@ -115,19 +120,49 @@ void mx_clear_fightground(t_fightground **fg) { // клир кардс нуже�
 }
 
 void mx_handle_cards(t_fightground *fg) { // Переделать на перетаскивания
+    int active_card = -1;
+    int mouse_x;
+    int mouse_y;
+    int button = SDL_GetMouseState(&mouse_x, &mouse_y);
+
+    for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
+        if (fg->cards[i]->is_active && active_card != -1)
+            printf("ERROR!!!!!!!!!!!!!!!!!!!\n");
+        else if(fg->cards[i]->is_active && active_card == -1)
+            active_card = i;
+    }
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
         if (mx_handle_button(fg->cards[i]->rect)) {
+            if (fg->cards[i]->is_active == false && active_card == -1) {
+                fg->cards[i]->is_active = true;
+                fg->energy -= fg->cards[i]->cost;
+            }
+        }
+        else if (!(button & SDL_BUTTON(SDL_BUTTON_LEFT)) && fg->cards[i]->is_active == true) {
+            fg->cards[i]->is_active = false;
+            fg->energy += fg->cards[i]->cost;
+        }
+            
+
+        /*if (mx_handle_button(fg->cards[i]->rect)) {
             if (fg->cards[i]->is_active == false && fg->cards[i]->cost <= fg->energy) {
                 fg->cards[i]->is_active = true;
-                fg->cards[i]->rect.y -= 10;
+                //fg->cards[i]->rect.y -= 10;
                 fg->energy -= fg->cards[i]->cost;
             }
             else if (fg->cards[i]->is_active == true){
                 fg->cards[i]->is_active = false;
-                fg->cards[i]->rect.y += 10;
+                //fg->cards[i]->rect.y += 10;
                 fg->energy += fg->cards[i]->cost;
             }
-        }
+        }*/
+    }
+
+    if (active_card != -1) {
+        printf("%d is active!\n", active_card);
+
+        fg->cards[active_card]->rect.x = mouse_x - fg->cards[active_card]->rect.w / 2;
+        fg->cards[active_card]->rect.y = mouse_y - fg->cards[active_card]->rect.h / 2;
     }
 }
 

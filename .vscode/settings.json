@@ -1,15 +1,6 @@
 {
     "files.associations": {
-        "window_sdl.h": "c",
-        "level_point.h": "c",
-        "character.h": "c",
-        "map.h": "c",
-        "gamemath.h": "c",
-        "stdbool.h": "c",
-        "button.h": "c",
-        "game_card.h": "c",
-        "bar.h": "c",
-        "stdio.h": "c"
+        "room.h": "c"
     },
     "makefile.launchConfigurations": [
         {
