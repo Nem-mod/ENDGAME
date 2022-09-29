@@ -65,8 +65,10 @@ int main() {
             mx_render_room(room, gameWindow.renderer);
             gameWindow.scene = mx_handle_room(room);
         }
-        if(gameWindow.scene != MENU)
+        if(gameWindow.scene != MENU) {
             mx_render_potion_bar(potions, gameWindow.renderer);
+            mx_handle_potion(potions, player);
+        }
         
         SDL_RenderPresent(gameWindow.renderer);
 
