@@ -46,9 +46,11 @@ t_character* player, int type) {
     return room;
 }
 
-int mx_render_room(t_room *room, SDL_Renderer *rend, t_potion_bar *potion_bar) {
+int mx_render_room(t_room *room, SDL_Renderer *rend, t_potion_bar *potion_bar, SDL_Window *win) {
     if (mx_handle_button(room->room_obj.d_rect) && room->chest_drop == 1) {
         room->room_obj.img_path = "resource/img/chest_def2.png";
+        SDL_DestroyTexture(room->room_obj.tex);
+        room->room_obj.tex = mx_init_texture(room->room_obj.img_path, win, rend);
         room->chest_drop = 0;
         potion_bar->potions_count += 1;
     }
