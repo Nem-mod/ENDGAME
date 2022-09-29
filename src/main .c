@@ -4,6 +4,8 @@
 #include "../inc/fight.h"
 #include "../inc/room.h"
 #include "../inc/potions.h"
+#include "../inc/escene.h"
+
 int main() {
     
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0)
@@ -59,6 +61,15 @@ int main() {
         }
         else if (gameWindow.scene == LEVEL) {
             gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground);
+            if (gameWindow.scene == EXIT) {
+
+                t_escene escene = mx_create_escene(gameWindow.window, gameWindow.renderer);
+                mx_render_escene(&escene, gameWindow.renderer);
+                SDL_RenderPresent(gameWindow.renderer);
+                SDL_Delay(3000);
+                break;
+                
+            }
             mx_render_potion_bar(potions, gameWindow.renderer);
             mx_handle_potion(potions, player);
         }

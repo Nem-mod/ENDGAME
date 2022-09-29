@@ -8,13 +8,12 @@ typedef struct s_escene {
     char* img_path;
     bool active; 
     SDL_Texture *tex;
-    t_button button_exit;
+
     
 }               t_escene;
 
 t_escene mx_create_escene(SDL_Window* win, SDL_Renderer* renderer);
 void mx_render_escene(t_escene *escene, SDL_Renderer *renderer);
-int mx_handle_escene(t_escene *escene, SDL_Renderer *renderer);
 void mx_clear_escene(t_escene *escene);
 
 #endif
