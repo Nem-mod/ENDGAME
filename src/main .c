@@ -13,26 +13,24 @@ int main() {
 
     Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT,2,2048);
     Mix_Music *background = Mix_LoadMUS("resource/audio/song.mp3");
-
-    SDL_Window* win = SDL_CreateWindow("Our game!",
+    t_window_sdl gameWindow;
+    gameWindow.window = SDL_CreateWindow("Our game!",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
                                        WINDOW_WIDTH, WINDOW_HEIGHT, 0);
     Uint32 render_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
-    SDL_Renderer* rend = SDL_CreateRenderer(win, -1, render_flags);
+    gameWindow.renderer = SDL_CreateRenderer(gameWindow.window , -1, render_flags);
    
 
 
-    t_window_sdl gameWindow;
-    gameWindow.window = win;
-    gameWindow.renderer = rend;
+ 
     gameWindow.active = true;
     gameWindow.scene = MENU;
 
-    t_menu menu = mx_create_menu(gameWindow.window, gameWindow.renderer);
+    t_menu menu = mx_create_menu(gameWindow.window, gameWindow.renderer, 1 );
     t_map map = mx_create_map(gameWindow.window, gameWindow.renderer);
     char* palyer_img = "resource/img/player/default_player.png";
-    t_character *player =  mx_create_character(palyer_img, 100, 5, 20, 50, 10, 2, win, rend);
+    t_character *player =  mx_create_character(palyer_img, 100, 5, 20, 50, 10, 2, gameWindow.window, gameWindow.renderer);
 
     t_fightground *fightground = NULL;
     t_room *room = NULL;
@@ -46,7 +44,7 @@ int main() {
 
             mx_render_menu(&menu, gameWindow.renderer);
 
-            gameWindow.scene = mx_handle_menu(&menu, gameWindow.renderer);
+            gameWindow.scene = mx_handle_menu(&menu, gameWindow.renderer, 1);
             //mx_clear_menu(&menu); // Зач чистить?
         }
         else if (gameWindow.scene == MAP) {
@@ -65,13 +63,29 @@ int main() {
             mx_handle_potion(potions, player);
         }
         else if (gameWindow.scene == ROOM) {
-            gameWindow.scene = mx_render_room(room, gameWindow.renderer, potions, win);
+            gameWindow.scene = mx_render_room(room, gameWindow.renderer, potions, gameWindow.window);
+        }
+
+        if(gameWindow.menu) {
+            mx_render_menu(&menu, gameWindow.renderer);
+            if(mx_handle_menu(&menu, gameWindow.renderer, 2) == CLOSE_MENU) {
+                gameWindow.menu = false;
+            } else if(mx_handle_menu(&menu, gameWindow.renderer, 2) == EXIT) {
+                gameWindow.scene = EXIT;
+            }
         }
         SDL_RenderPresent(gameWindow.renderer);
 
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
-        
+            
+            if(event.type == SDL_KEYUP) {
+                if(event.key.keysym.sym == SDLK_ESCAPE && gameWindow.scene > MENU) {
+                    menu = mx_create_menu(gameWindow.window, gameWindow.renderer, 2);
+                    gameWindow.menu = !gameWindow.menu;
+                }
+
+            }
             if (event.type == SDL_QUIT || gameWindow.scene == EXIT){
                 // clean up resources before exiting
                 mx_clear_map(&map);
@@ -84,8 +98,7 @@ int main() {
     SDL_RenderClear(gameWindow.renderer);
     SDL_DestroyRenderer(gameWindow.renderer);
     Mix_FreeMusic(background);
-    SDL_DestroyRenderer(rend);
-    SDL_DestroyWindow(win);
+   
     Mix_CloseAudio();
     IMG_Quit();
     SDL_Quit();
