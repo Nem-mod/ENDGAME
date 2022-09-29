@@ -7,7 +7,12 @@ t_level_point* mx_create_lp(SDL_Window* win, SDL_Renderer* renderer) {
     point->rect.w = 60;
     point->rect.x = 850 + rand() % 50;
     point->rect.y = 1150 + rand() % 50;
-    point->room = rand () % 2;
+    if (rand() % 3 == 0) {
+        point->room = CHEST;
+    }
+    else {
+        point->room = ENEMY;
+    }
     point->next = NULL;
     point->img_path = "resource/img/point.png";
     point->tex = mx_init_texture(point->img_path, win, renderer);
