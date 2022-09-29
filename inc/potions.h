@@ -2,6 +2,7 @@
 #define POTIONS_H
 
 #include "window_sdl.h"
+#include "character.h"
 #define MAX_AMOUNT_OF_PT 3
 typedef enum e_potion_type {
     HEAL
