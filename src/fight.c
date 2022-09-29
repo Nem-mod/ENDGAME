@@ -79,7 +79,7 @@ void mx_shift_cards(t_fightground *fg) {
 void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     for (int i = 0; i < AMOUNT_OF_CARDS; i++)
     {
-        fg->cards[i] = mx_create_card(win, rend, rand() % 3);
+        fg->cards[i] = mx_create_card(win, rend, rand() % 2);
         fg->cards[i]->rect.x = fg->cards_rect.x  + i * 155;
         fg->cards[i]->rect.y = fg->cards_rect.y ;
     }
