@@ -132,7 +132,7 @@ void mx_handle_cards(t_fightground *fg) { // Переделать на пере�
             active_card = i;
     }
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
-        if (mx_handle_button(fg->cards[i]->rect)) {
+        if (mx_handle_button(fg->cards[i]->rect) && fg->energy >= fg->cards[i]->cost) {
             if (fg->cards[i]->is_active == false && active_card == -1) {
                 fg->cards[i]->is_active = true;
                 fg->energy -= fg->cards[i]->cost;
@@ -186,6 +186,12 @@ bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
                 }
 
                 mx_calculate_attack(fg->player, fg->enemy);
+                for (int i = 0; i < AMOUNT_OF_CARDS; i++)
+                {   
+                    if(fg->cards[i]->is_active) {
+                        mx_substract_buff_card(fg->player, fg->cards[i]);
+                    }
+                }
                 if(fg->enemy->current_hp <= 0) {
                     mx_clear_cards(fg->cards);
                     return false;
@@ -220,3 +226,4 @@ void mx_clear_cards(t_game_card **cards) {
         }
     }
 }
+
