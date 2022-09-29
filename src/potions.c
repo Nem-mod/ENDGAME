@@ -41,7 +41,11 @@ void mx_clear_potion_bar(t_potion_bar* potions_bar);
 void mx_handle_potion(t_potion_bar *potions_bar, t_character *player){
     for (int i = 0; i < potions_bar->potions_count; i++) {
         if(mx_handle_button(potions_bar->potions[i]->rect)) {
-            player->current_hp += potions_bar->potions[i]->value;
+            if(player->current_hp + potions_bar->potions[i]->value > player->max_hp) {
+                player->current_hp = player->max_hp;
+            } else {
+                player->current_hp += potions_bar->potions[i]->value;
+            }
             potions_bar->potions_count--;
         }
 

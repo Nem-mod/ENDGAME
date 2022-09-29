@@ -60,16 +60,13 @@ int main() {
         }
         else if (gameWindow.scene == LEVEL) {
             gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground);
+            mx_render_potion_bar(potions, gameWindow.renderer);
+            mx_handle_potion(potions, player);
         }
         else if (gameWindow.scene == ROOM) {
             mx_render_room(room, gameWindow.renderer);
             gameWindow.scene = mx_handle_room(room);
         }
-        if(gameWindow.scene != MENU) {
-            mx_render_potion_bar(potions, gameWindow.renderer);
-            mx_handle_potion(potions, player);
-        }
-        
         SDL_RenderPresent(gameWindow.renderer);
 
         SDL_Event event;
