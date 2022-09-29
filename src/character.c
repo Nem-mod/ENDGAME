@@ -15,9 +15,6 @@ t_character *mx_create_character(char *texture_path,
 
     mx_set_character(c, max_hp, attack, crit_chance, crit_dmg, dodge_chance, shield);
 
-    c->healthbar = mx_create_bar(win, rend, HEALTH, &c->character_rect);
-    //mx_change_bar(&c->healthbar, 100);
-
     return c;
 }
 
@@ -36,7 +33,7 @@ void mx_set_character(t_character *c,
 void mx_set_enemy(t_character *c) {
     c->max_hp = rand() % 80 + 50;
     c->current_hp = c->max_hp;
-    c->attack = rand() % 10;
+    c->attack = 20;
     c->crit_chance = rand() % 10;
     c->crit_dmg = rand() % 10;
     c->dodge_chance = rand() % 10;
@@ -66,5 +63,6 @@ int mx_calculate_attack(t_character *from, t_character *to) {
 
 void mx_render_character(t_character *character, SDL_Renderer *rend, SDL_Rect rect) {
     SDL_RenderCopy(rend, character->character_texture, NULL, &rect);
-    //SDL_RenderCopy(rend, character->healthbar->bar_texture, NULL, &character->character_rect);
+    mx_render_bar(character->healthbar, rend);
+    // SDL_RenderCopy(rend, character->healthbar->bar_texture, NULL, &character->healthbar->bar_rect);
 }

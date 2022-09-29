@@ -31,14 +31,16 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->player_rect.x = 150;
     fg->player_rect.y = WINDOW_HEIGHT / 1.5 - 200;
     fg->player = player;
+    fg->player->healthbar = mx_create_bar(win, rend, HEALTH, &fg->player_rect);
 
+    char* enemy_img = "resource/img/fight/enemy.png"; // В отдельной функции создания противника сделать рандом
     fg->enemy_rect.h = 300;
     fg->enemy_rect.w = 300;
     fg->enemy_rect.x = 750;
     fg->enemy_rect.y = WINDOW_HEIGHT / 1.5 - 200;
-    char* enemy_img = "resource/img/fight/enemy.png";
     fg->enemy = mx_create_character(enemy_img, 20, 1, 1, 1, 1, 1, win, rend);
     mx_set_enemy(fg->enemy);
+    fg->enemy->healthbar = mx_create_bar(win, rend, HEALTH, &fg->enemy_rect);
 
     fg->cards_rect.h = 150;
     fg->cards_rect.w = 450;
@@ -81,6 +83,7 @@ void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
 }
 
 int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
+    mx_update_fight_bars(fg);
     SDL_RenderCopy(rend, fg->backg_texture, NULL, &fg->backg_rect);
 
     SDL_RenderCopy(rend, fg->floor_texture, NULL, &fg->floor_rect);
@@ -154,12 +157,18 @@ bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
         }
     } else {
         printf("FLoppa hp: %d\n", fg->enemy->current_hp);
+        mx_calculate_attack(fg->enemy, fg->player);
         mx_create_cards(win, rend, fg);
         fg->player_action_av = true;
     }
     
     return true;
     
+}
+
+void mx_update_fight_bars(t_fightground *fg) {
+    mx_change_bar(fg->player->healthbar, mx_get_percent_of_int(fg->player->max_hp, fg->player->current_hp));
+    mx_change_bar(fg->enemy->healthbar, mx_get_percent_of_int(fg->enemy->max_hp, fg->enemy->current_hp));
 }
 
 void mx_clear_cards(t_game_card **cards) {

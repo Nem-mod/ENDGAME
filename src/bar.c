@@ -13,14 +13,20 @@ t_bar *mx_create_bar(SDL_Window *win, SDL_Renderer *rend, t_bar_type type, SDL_R
     }
     bar->square_path = "resource/img/bar_border.png";
 
+    printf("%d, %d\n %d, %d\n", base->x, base->y, base->w, base->h);
+
     bar->square_rect.x = base->x + base->w / 2 - BAR_WIDTH / 2;
     bar->square_rect.y = base->y - 20;
+    // bar->square_rect.x = 20;
+    // bar->square_rect.y = 20;
     bar->square_rect.h = BAR_HEIGHT;
     bar->square_rect.w = BAR_WIDTH;
     bar->square_texture = mx_init_texture(bar->square_path, win, rend);
 
     bar->bar_rect.x = base->x + base->w / 2 - BAR_WIDTH / 2;
     bar->bar_rect.y = base->y - 20;
+    // bar->bar_rect.x = 20;
+    // bar->bar_rect.y = 20;
     bar->bar_rect.h = BAR_HEIGHT;
     bar->bar_rect.w = BAR_WIDTH;
     bar->percent = 100;
@@ -41,6 +47,7 @@ void mx_change_bar(t_bar *bar, int new_percent) {
 
 void mx_clear_bar(t_bar *bar) {
     SDL_DestroyTexture(bar->bar_texture);
+    SDL_DestroyTexture(bar->square_texture);
     free(bar);
     bar = NULL;
 }

@@ -17,6 +17,10 @@ int mx_percent_from_int(int num, int percent) {
     return num * percent / 100;
 }
 
+int mx_get_percent_of_int(int max_num, int num) {
+    return num * 100 / max_num;
+}
+
 int mx_int_dispersion(int num, int percent) {
     int sign = 1;
 
