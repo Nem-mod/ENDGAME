@@ -32,26 +32,47 @@ t_character* player, int type) {
     room->player_rect.y = WINDOW_HEIGHT / 1.5 - 200;
     room->player = player;
 
+    room->exit_btn = mx_create_button(150, 50, WINDOW_WIDTH / 2 - 75, WINDOW_HEIGHT - 100,
+    "resource/img/button_exit");
+    room->exit_btn.tex = mx_init_texture(room->exit_btn.img_path, win, rend);
+
+
     if (type == CHEST) {
+        room->chest_drop = 1;
         room->room_obj = mx_create_button(200, 200, 850, WINDOW_HEIGHT / 1.5 - 100, 
-        "resource/img/chest.png");
+        "resource/img/chest_def.png");
         room->room_obj.tex = mx_init_texture(room->room_obj.img_path, win, rend);
     }
     return room;
 }
 
-void mx_render_room(t_room *room, SDL_Renderer *rend) {
+int mx_render_room(t_room *room, SDL_Renderer *rend, t_potion_bar *potion_bar) {
+    if (mx_handle_button(room->room_obj.d_rect) && room->chest_drop == 1) {
+        room->room_obj.img_path = "resource/img/chest_def2.png";
+        room->chest_drop = 0;
+        potion_bar->potions_count += 1;
+    }
     SDL_RenderCopy(rend, room->backg_texture, NULL, &room->backg_rect);
 
     SDL_RenderCopy(rend, room->floor_texture, NULL, &room->floor_rect);
     SDL_RenderCopy(rend, room->frontg_texture, NULL, &room->frontg_rect);
 
     mx_render_character(room->player, rend, room->player_rect);
+    SDL_RenderCopy(rend, room->exit_btn.tex, NULL, &room->exit_btn.d_rect);
     SDL_RenderCopy(rend, room->room_obj.tex, NULL, &room->room_obj.d_rect);
+
+    if (mx_handle_button(room->exit_btn.d_rect)) {
+        return MAP;
+    }
+    return ROOM;
 }
 
-int mx_handle_room(t_room *room) {
+int mx_handle_room(t_room *room, t_potion_bar *potion_bar) {
     if (mx_handle_button(room->room_obj.d_rect)) {
+        room->room_obj.img_path = "resource/img/chest_def2.png";
+
+        potion_bar->potions_count += 1;
+        SDL_Delay(1000);
         return MAP;
     }
     return ROOM;

@@ -4,6 +4,7 @@
 #include "character.h"
 #include "button.h"
 #include "level_point.h"
+#include "potions.h"
 
 typedef struct  s_room {
     char *background_path;
@@ -16,6 +17,8 @@ typedef struct  s_room {
 
     SDL_Rect player_rect;
     t_button room_obj;
+    int chest_drop;
+    t_button exit_btn;
 
     SDL_Texture *backg_texture;
     SDL_Texture *floor_texture;
@@ -28,8 +31,8 @@ typedef struct  s_room {
 
 t_room *mx_create_room(SDL_Window *win, SDL_Renderer *rend,
                      t_character* player, int type);
-void mx_render_room(t_room *room, SDL_Renderer *rend);
+int mx_render_room(t_room *room, SDL_Renderer *rend, t_potion_bar *bar);
 void mx_clear_room(t_room *room);
-int mx_handle_room(t_room *room);
+// int mx_handle_room(t_room *room, t_potion_bar *bar);
 
 #endif
