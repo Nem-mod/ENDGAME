@@ -10,7 +10,7 @@ t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type typ
         break;
     
     case ARM:
-        card = mx_get_card_sword(card);
+        card = mx_get_card_shield(card);
         break;
     }
     card->rect.h = 150; //мб попробовать другой способ
