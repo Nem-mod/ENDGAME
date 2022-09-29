@@ -40,6 +40,7 @@ int main() {
     t_potion_bar *potions = mx_create_potion_bar(gameWindow.window, gameWindow.renderer);
     Mix_PlayMusic(background, -1);
     while (gameWindow.active) {
+
         SDL_RenderClear(gameWindow.renderer); // Каждый раз чистить экран чтоб картинки не накладывались друг на другаы
         if (gameWindow.scene == MENU) {
 
@@ -79,6 +80,7 @@ int main() {
                 gameWindow.active = false;
             }
         }
+
         SDL_Delay(1000 / 24);
     }
     SDL_RenderClear(gameWindow.renderer);
