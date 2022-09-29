@@ -1,6 +1,6 @@
 #include "../inc/game_card.h"
 
-t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type type){
+t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type type, int lvl){
     t_game_card* card = malloc(sizeof(*card));
 
     card->attack = 0;
@@ -9,11 +9,11 @@ t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type typ
     switch (type)
     {
     case DMG:
-        card = mx_get_card_sword(card);
+        card = mx_get_card_sword(card, lvl);
         break;
     
     case ARM:
-        card = mx_get_card_shield(card);
+        card = mx_get_card_shield(card, lvl);
         break;
     }
     card->rect.h = 150; //мб попробовать другой способ
@@ -25,14 +25,20 @@ t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type typ
     return card;
 }
 
-t_game_card * mx_get_card_sword(t_game_card *card){
+t_game_card * mx_get_card_sword(t_game_card *card, int lvl){
     int value = 1;
-    if(mx_rand(1, 100) > 80) {
+    
+    if (lvl != 0) {
+        if(mx_rand(1, 100) > 80) {
         value = 3;
+        }
+        if(mx_rand(1, 100) > 50) {
+            value = 2;
+        }
     }
-    if(mx_rand(1, 100) > 50) {
-        value = 2;
-    }
+    else
+        value = lvl;
+
     switch (value)
     {
     case 1:
@@ -54,14 +60,19 @@ t_game_card * mx_get_card_sword(t_game_card *card){
     card->type = DMG;
     return card;
 }
-t_game_card * mx_get_card_shield(t_game_card *card){
-     int value = 1;
-    if(mx_rand(1, 100) > 90) {
-        value = 3;
+t_game_card * mx_get_card_shield(t_game_card *card, int lvl){
+    int value = 1;
+
+    if (lvl != 0) {
+        if(mx_rand(1, 100) > 90) {
+            value = 3;
+        }
+        if(mx_rand(1, 100) > 60) {
+            value = 2;
+        }
     }
-    if(mx_rand(1, 100) > 60) {
-        value = 2;
-    }
+    else
+        value = lvl;
 
     switch (value)
     {
@@ -110,6 +121,22 @@ int mx_calculate_card_attack(t_game_card *from, t_character *to) {
 
     to->current_hp -= cur_dmg; // Надо ли отнимать в функции, или лучше каждый раз вручную?
     return cur_dmg;
+}
+
+t_game_card *mx_copy_card(t_game_card *src, SDL_Window *win, SDL_Renderer *rend) {
+    t_game_card *card = malloc(sizeof(*card));
+
+    card->attack = src->attack;
+    card->defence = src->defence;
+    card->heal = src->heal;
+    card->cost = src->cost;
+    card->type = src->type;
+    card->img_path = src->img_path;
+    card->rect = src->rect;
+    card->tex = mx_init_texture(card->img_path, win, rend);
+    card->is_active = src->is_active;
+
+    return card;
 }
 
 void mx_clear_card(t_game_card *card){

@@ -89,7 +89,7 @@ void mx_shift_cards(t_fightground *fg) {
 
 void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     for (int i = 0; i < AMOUNT_OF_CARDS; i++)
-        fg->cards[i] = mx_create_card(win, rend, rand() % 2);
+        fg->cards[i] = mx_create_card(win, rend, rand() % 2, mx_rand(1,3)); // Переделать под инвентарь
     mx_shift_cards(fg);
 }
 

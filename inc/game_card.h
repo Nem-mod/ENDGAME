@@ -6,6 +6,8 @@
 #include "gamemath.h"
 #include "button.h"
 
+#define CARD_TYPE_COUNT (2)
+
 typedef enum    e_card_type {
     DMG,
     ARM
@@ -22,13 +24,14 @@ typedef struct  s_game_card {
     bool is_active;
 }               t_game_card;
 
-t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type type);
+t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type type, int lvl);
 // void mx_add_buff_card(t_character *player, t_game_card *card);
 void mx_activate_card(t_character *player, t_game_card *card);
 int mx_calculate_card_attack(t_game_card *from, t_character *to);
+t_game_card *mx_copy_card(t_game_card *src, SDL_Window *win, SDL_Renderer *rend);
 void mx_clear_card(t_game_card *card);
 
-t_game_card * mx_get_card_sword(t_game_card *card);
-t_game_card * mx_get_card_shield(t_game_card *card);
+t_game_card * mx_get_card_sword(t_game_card *card, int lvl);
+t_game_card * mx_get_card_shield(t_game_card *card, int lvl);
 
 #endif

@@ -28,6 +28,7 @@ typedef struct   s_character {
     int crit_dmg;
     int dodge_chance;
     int shield;
+    
 }               t_character;
 
 t_character *mx_create_character(char *texture_path,
