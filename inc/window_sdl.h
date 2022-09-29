@@ -21,7 +21,8 @@ typedef enum e_scenes {
     DEATH,
     EXIT,
     ROOM,
-    RESTART
+    RESTART,
+    BOSSFIGHT
 }            t_scenes;
 
 typedef struct s_window_sdl {
