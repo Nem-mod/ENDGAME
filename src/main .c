@@ -3,7 +3,7 @@
 #include "../inc/menu.h"
 #include "../inc/fight.h"
 #include "../inc/room.h"
-
+#include "../inc/potions.h"
 int main() {
     
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0)
@@ -33,20 +33,22 @@ int main() {
     t_fightground *fightground = NULL;
     t_room *room = NULL;
 
+    t_potion_bar *potions = mx_create_potion_bar(gameWindow.window, gameWindow.renderer);
     while (gameWindow.active) {
         SDL_RenderClear(gameWindow.renderer); // Каждый раз чистить экран чтоб картинки не накладывались друг на другаы
-
         if (gameWindow.scene == MENU) {
 
             mx_render_menu(&menu, gameWindow.renderer);
+
             gameWindow.scene = mx_handle_menu(&menu, gameWindow.renderer);
             //mx_clear_menu(&menu); // Зач чистить?
         }
         else if (gameWindow.scene == MAP) {
             mx_render_map(&map, gameWindow.renderer);
             gameWindow.scene = mx_handle_map(&map, gameWindow.window, gameWindow.renderer);
-            if (gameWindow.scene == LEVEL)
+            if (gameWindow.scene == LEVEL) {
                 fightground = mx_create_fightground(gameWindow.window, gameWindow.renderer, player);
+            }
             else if (gameWindow.scene == ROOM)
                 room = mx_create_room(gameWindow.window, gameWindow.renderer, player, CHEST);
             //mx_clear_map(&map);
@@ -58,6 +60,8 @@ int main() {
             mx_render_room(room, gameWindow.renderer);
             gameWindow.scene = mx_handle_room(room);
         }
+        if(gameWindow.scene != MENU)
+            mx_render_potion_bar(potions, gameWindow.renderer);
         
         SDL_RenderPresent(gameWindow.renderer);
 
