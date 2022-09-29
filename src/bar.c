@@ -2,12 +2,18 @@
 
 t_bar *mx_create_bar(SDL_Window *win, SDL_Renderer *rend, t_bar_type type, SDL_Rect *base) {
     t_bar *bar = malloc(sizeof(*bar));
+    int bar_shift_x = 0;
+    int bar_shift_y = 0;
 
     switch(type) {
         case HEALTH:
             bar->bar_path = "resource/img/red.png";
+            bar_shift_x = base->x + base->w / 2 - BAR_WIDTH / 2;
+            bar_shift_y = base->y - 20;
             break;
         case SHIELD:
+            bar_shift_x = base->x + base->w / 2 - BAR_WIDTH / 2;
+            bar_shift_y = base->y - 40;
             bar->bar_path = "resource/img/blue.png";
             break;
     }
@@ -15,16 +21,16 @@ t_bar *mx_create_bar(SDL_Window *win, SDL_Renderer *rend, t_bar_type type, SDL_R
 
     printf("%d, %d\n %d, %d\n", base->x, base->y, base->w, base->h);
 
-    bar->square_rect.x = base->x + base->w / 2 - BAR_WIDTH / 2;
-    bar->square_rect.y = base->y - 20;
+    bar->square_rect.x = bar_shift_x;
+    bar->square_rect.y = bar_shift_y;
     // bar->square_rect.x = 20;
     // bar->square_rect.y = 20;
     bar->square_rect.h = BAR_HEIGHT;
     bar->square_rect.w = BAR_WIDTH;
     bar->square_texture = mx_init_texture(bar->square_path, win, rend);
 
-    bar->bar_rect.x = base->x + base->w / 2 - BAR_WIDTH / 2;
-    bar->bar_rect.y = base->y - 20;
+    bar->bar_rect.x = bar_shift_x;
+    bar->bar_rect.y = bar_shift_y;
     // bar->bar_rect.x = 20;
     // bar->bar_rect.y = 20;
     bar->bar_rect.h = BAR_HEIGHT;

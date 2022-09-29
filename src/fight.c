@@ -31,7 +31,7 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->player_rect.x = 150;
     fg->player_rect.y = WINDOW_HEIGHT / 1.5 - 200;
     fg->player = player;
-    fg->player->healthbar = mx_create_bar(win, rend, HEALTH, &fg->player_rect);
+    
 
     char* enemy_img = "resource/img/fight/enemy.png"; // В отдельной функции создания противника сделать рандом
     fg->enemy_rect.h = 300;
@@ -40,7 +40,11 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->enemy_rect.y = WINDOW_HEIGHT / 1.5 - 200;
     fg->enemy = mx_create_character(enemy_img, 20, 1, 1, 1, 1, 1, win, rend);
     mx_set_enemy(fg->enemy);
+
+    fg->player->healthbar = mx_create_bar(win, rend, HEALTH, &fg->player_rect);
     fg->enemy->healthbar = mx_create_bar(win, rend, HEALTH, &fg->enemy_rect);
+    fg->player->shieldbar = mx_create_bar(win, rend, SHIELD, &fg->player_rect);
+    fg->enemy->shieldbar = mx_create_bar(win, rend, SHIELD, &fg->enemy_rect);
 
     fg->cards_rect.h = 150;
     fg->cards_rect.w = 450;
@@ -169,6 +173,9 @@ bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
 void mx_update_fight_bars(t_fightground *fg) {
     mx_change_bar(fg->player->healthbar, mx_get_percent_of_int(fg->player->max_hp, fg->player->current_hp));
     mx_change_bar(fg->enemy->healthbar, mx_get_percent_of_int(fg->enemy->max_hp, fg->enemy->current_hp));
+
+    mx_change_bar(fg->player->shieldbar, mx_get_percent_of_int(fg->player->max_hp, fg->player->shield)); // Щит слишком жирный, надо сделать половину от макс хп
+    mx_change_bar(fg->enemy->shieldbar, mx_get_percent_of_int(fg->enemy->max_hp, fg->enemy->shield));
 }
 
 void mx_clear_cards(t_game_card **cards) {

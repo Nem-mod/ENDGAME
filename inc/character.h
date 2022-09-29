@@ -7,7 +7,6 @@
 #include <stdio.h> // for debug
 
 #define DMG_DISP_PERCENT (10)
-#define SHIELD_DMG_ABSORB_PERCENT (50)
 
 #define PLAYER_PATH "resource/img/floppa.jpeg"
 #define ENEMY_PATH "resource/img/mob.png"
@@ -20,7 +19,7 @@ typedef struct   s_character {
     SDL_Texture *character_texture;
 
     t_bar *healthbar;
-    //t_bar *shieldbar;
+    t_bar *shieldbar;
 
     int max_hp;
     int current_hp;

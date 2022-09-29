@@ -52,10 +52,16 @@ int mx_calculate_attack(t_character *from, t_character *to) {
         return -1; // -1 означает dodge. Надо придумать чет с этим и мб переделать т.к -1 не понять нихуя
     if (mx_chance(from->crit_chance))
         cur_dmg += mx_percent_from_int(from->attack, from->crit_dmg);
-    cur_dmg -= mx_percent_from_int(to->shield, SHIELD_DMG_ABSORB_PERCENT);
+
     cur_dmg = mx_int_dispersion(cur_dmg, DMG_DISP_PERCENT);
+
+    cur_dmg -= to->shield;
+    to->shield = -cur_dmg;
+
     if (cur_dmg < 0)
         cur_dmg = 0;
+    if (to->shield < 0)
+        to->shield = 0;
 
     to->current_hp -= cur_dmg; // Надо ли отнимать в функции, или лучше каждый раз вручную?
     return cur_dmg;
@@ -64,5 +70,6 @@ int mx_calculate_attack(t_character *from, t_character *to) {
 void mx_render_character(t_character *character, SDL_Renderer *rend, SDL_Rect rect) {
     SDL_RenderCopy(rend, character->character_texture, NULL, &rect);
     mx_render_bar(character->healthbar, rend);
+    mx_render_bar(character->shieldbar, rend);
     // SDL_RenderCopy(rend, character->healthbar->bar_texture, NULL, &character->healthbar->bar_rect);
 }
