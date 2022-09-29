@@ -7,6 +7,8 @@
 
 #define AMOUNT_OF_CARDS 5
 #define AMOUNT_OF_ENERGY 3
+#define P_OF_ENEMYS 3
+
 typedef struct  s_fightground {
     char *background_path;
     char *floor_path;
