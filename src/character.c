@@ -45,7 +45,7 @@ void mx_clear_character(t_character *character) {
     character = NULL;
 }
 
-int mx_calculate_attack(t_character *from, t_character *to) {
+int mx_calculate_character_attack(t_character *from, t_character *to) {
     int cur_dmg = from->attack;
 
     if (mx_chance(to->dodge_chance))

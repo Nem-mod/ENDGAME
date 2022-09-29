@@ -21,7 +21,6 @@ t_potion_bar* mx_create_potion_bar(SDL_Window* win, SDL_Renderer* renderer) {
     potion_bar->rect.x = 50;
     potion_bar->rect.y = 50;
     potion_bar->tex = mx_init_texture(potion_bar->img_path, win, renderer);
-    printf("%s", potion_bar->img_path);
     for (int i = 0; i < MAX_AMOUNT_OF_PT; i++){
         potion_bar->potions[i] = mx_create_potion(win, renderer);
         potion_bar->potions[i]->rect.x = potion_bar->rect.x  + i * 50;

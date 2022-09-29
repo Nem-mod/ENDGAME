@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_mixer.h>
 #include <sys/time.h>
 #include <time.h>
 #include <stdbool.h>
