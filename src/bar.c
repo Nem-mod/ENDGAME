@@ -19,8 +19,6 @@ t_bar *mx_create_bar(SDL_Window *win, SDL_Renderer *rend, t_bar_type type, SDL_R
     }
     bar->square_path = "resource/img/bar_border.png";
 
-    printf("%d, %d\n %d, %d\n", base->x, base->y, base->w, base->h);
-
     bar->square_rect.x = bar_shift_x;
     bar->square_rect.y = bar_shift_y;
     bar->square_rect.h = BAR_HEIGHT;
