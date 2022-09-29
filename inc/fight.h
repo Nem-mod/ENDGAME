@@ -39,6 +39,7 @@ typedef struct  s_fightground {
     int discard_cards_count;
 
     bool player_action_av;
+    bool exit_flag;
     int player_energy;
 
 

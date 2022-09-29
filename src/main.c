@@ -6,6 +6,7 @@
 #include "../inc/potions.h"
 #include "../inc/escene.h"
 #include "../inc/inventory.h"
+#include "../inc/boss_fight.h"
 
 int main() {
     
@@ -38,6 +39,7 @@ int main() {
     mx_generate_start_cards(gameWindow.window, gameWindow.renderer, inventory);
 
     t_fightground *fightground = NULL;
+    t_fightground *bossroom = NULL;
     t_room *room = NULL;
 
     t_potion_bar *potions = mx_create_potion_bar(gameWindow.window, gameWindow.renderer);
@@ -56,6 +58,8 @@ int main() {
             }
             else if (gameWindow.scene == ROOM)
                 room = mx_create_room(gameWindow.window, gameWindow.renderer, player, CHEST);
+            else if (gameWindow.scene == BOSS)
+                bossroom = mx_create_bossroom(gameWindow.window, gameWindow.renderer, player);
         }
         else if (gameWindow.scene == LEVEL) {
             gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground, inventory);
@@ -96,6 +100,12 @@ int main() {
             } else if(mx_handle_menu(&menu, gameWindow.renderer, 2) == EXIT) {
                 gameWindow.scene = EXIT;
             }
+        }
+
+        if (gameWindow.scene == BOSSFIGHT) {
+            gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, bossroom);
+            mx_render_potion_bar(potions, gameWindow.renderer);
+            mx_handle_potion(potions, player);
         }
 
         SDL_RenderPresent(gameWindow.renderer);
