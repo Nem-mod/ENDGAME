@@ -33,3 +33,17 @@ bool mx_handle_button(SDL_Rect rect){
     }
     return false;
 }
+
+bool mx_cursor_on_button(const SDL_Rect rect) {
+    int mouse_x;
+    int mouse_y;
+    SDL_GetMouseState(&mouse_x, &mouse_y);
+
+    if (mouse_x > rect.x &&
+        mouse_x < rect.x + rect.w &&
+        mouse_y > rect.y &&
+        mouse_y < rect.y + rect.h) {
+            return true;
+        }
+    return false;
+}

@@ -139,6 +139,9 @@ void mx_handle_cards(t_fightground *fg) { // Переделать на пере�
             }
         }
         else if (!(button & SDL_BUTTON(SDL_BUTTON_LEFT)) && fg->cards[i]->is_active == true) {
+            if (mx_cursor_on_button(fg->enemy_rect) || mx_cursor_on_button(fg->player_rect)) {
+                printf("ON CHARACTER\n");
+            }
             fg->cards[i]->is_active = false;
             fg->energy += fg->cards[i]->cost;
         }
