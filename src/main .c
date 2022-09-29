@@ -2,6 +2,7 @@
 #include "../inc/map.h"
 #include "../inc/menu.h"
 #include "../inc/fight.h"
+#include "../inc/room.h"
 
 int main() {
     
@@ -30,6 +31,7 @@ int main() {
     t_character *player =  mx_create_character(palyer_img, 100, 5, 20, 50, 10, 2, win, rend);
 
     t_fightground *fightground = NULL;
+    t_room *room = NULL;
 
     while (gameWindow.active) {
         SDL_RenderClear(gameWindow.renderer); // Каждый раз чистить экран чтоб картинки не накладывались друг на другаы
@@ -45,10 +47,16 @@ int main() {
             gameWindow.scene = mx_handle_map(&map, gameWindow.window, gameWindow.renderer);
             if (gameWindow.scene == LEVEL)
                 fightground = mx_create_fightground(gameWindow.window, gameWindow.renderer, player);
+            else if (gameWindow.scene == ROOM)
+                room = mx_create_room(gameWindow.window, gameWindow.renderer, player, CHEST);
             //mx_clear_map(&map);
         }
         else if (gameWindow.scene == LEVEL) {
             gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground);
+        }
+        else if (gameWindow.scene == ROOM) {
+            mx_render_room(room, gameWindow.renderer);
+            gameWindow.scene = mx_handle_room(room);
         }
         
         SDL_RenderPresent(gameWindow.renderer);
