@@ -1,13 +1,14 @@
 flags := -std=c11 -Wall -Wextra -Werror -Wpedantic
 conf := `pkg-config --libs --cflags sdl2`
-sdl_i := -lSDL2_image -lSDL2_mixer
+sdl_i := 
 name := endgame
 
+usdl := -Iresource/include/SDL2 -Lresousce/lib -lSDL2main -lSDL2 -lSDL2_image
 all: $(name)
 
 $(name):
 	rm -rf $(name)
-	clang $(flags) $(conf) $(sdl_i) -Iinc -o $(name) src/*.c
+	clang $(flags) $(conf)    ${usdl} -Iinc -o $(name) src/*.c
 
 clean:
 	rm -rf $(name)

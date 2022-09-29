@@ -1,0 +1,9 @@
+/home/nem/Desktop/hehea/UcodeEndgame/SDL_image/build/CMakeFiles/install/strip.dir
+/home/nem/Desktop/hehea/UcodeEndgame/SDL_image/build/CMakeFiles/install/local.dir
+/home/nem/Desktop/hehea/UcodeEndgame/SDL_image/build/CMakeFiles/install.dir
+/home/nem/Desktop/hehea/UcodeEndgame/SDL_image/build/CMakeFiles/list_install_components.dir
+/home/nem/Desktop/hehea/UcodeEndgame/SDL_image/build/CMakeFiles/rebuild_cache.dir
+/home/nem/Desktop/hehea/UcodeEndgame/SDL_image/build/CMakeFiles/edit_cache.dir
+/home/nem/Desktop/hehea/UcodeEndgame/SDL_image/build/CMakeFiles/showimage.dir
+/home/nem/Desktop/hehea/UcodeEndgame/SDL_image/build/CMakeFiles/showanim.dir
+/home/nem/Desktop/hehea/UcodeEndgame/SDL_image/build/CMakeFiles/SDL2_image.dir

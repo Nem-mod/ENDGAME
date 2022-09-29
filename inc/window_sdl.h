@@ -3,9 +3,9 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_timer.h>
-#include <SDL2/SDL_mixer.h>
+#include "../resource/include/SDL2/SDL_image.h"
+#include "../resource/include/SDL2/SDL_timer.h"
+//#include <SDL2/SDL_mixer.h>
 #include <time.h>
 #include <stdbool.h>
 #include "button.h"

@@ -1,12 +1,21 @@
 {
     "files.associations": {
         "game_card.h": "c",
-        "character.h": "c"
+        "character.h": "c",
+        "sdl_mixer.h": "c",
+        "sdl_timer.h": "c",
+        "sdl_image.h": "c",
+        "sdl.h": "c"
     },
     "makefile.launchConfigurations": [
         {
             "cwd": "/home/seva/.ssh/ENDGAME",
             "binaryPath": "/home/seva/.ssh/ENDGAME/endgame",
+            "binaryArgs": []
+        },
+        {
+            "cwd": "/home/nem/Desktop/ENDGAME",
+            "binaryPath": "/home/nem/Desktop/ENDGAME/endgame",
             "binaryArgs": []
         }
     ]
