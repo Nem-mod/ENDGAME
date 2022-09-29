@@ -71,5 +71,4 @@ void mx_render_character(t_character *character, SDL_Renderer *rend, SDL_Rect re
     SDL_RenderCopy(rend, character->character_texture, NULL, &rect);
     mx_render_bar(character->healthbar, rend);
     mx_render_bar(character->shieldbar, rend);
-    // SDL_RenderCopy(rend, character->healthbar->bar_texture, NULL, &character->healthbar->bar_rect);
 }

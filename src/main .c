@@ -47,7 +47,6 @@ int main() {
             mx_render_menu(&menu, gameWindow.renderer);
 
             gameWindow.scene = mx_handle_menu(&menu, gameWindow.renderer, 1);
-            //mx_clear_menu(&menu); // Зач чистить?
         }
         else if (gameWindow.scene == MAP) {
             mx_render_map(&map, gameWindow.renderer);
@@ -57,7 +56,6 @@ int main() {
             }
             else if (gameWindow.scene == ROOM)
                 room = mx_create_room(gameWindow.window, gameWindow.renderer, player, CHEST);
-            //mx_clear_map(&map);
         }
         else if (gameWindow.scene == LEVEL) {
             gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground);
