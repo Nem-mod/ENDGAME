@@ -74,6 +74,9 @@ void mx_add_buff_card(t_character *player, t_game_card *card) { // В звязи
     if (player->max_hp < player->current_hp)
         player->current_hp = player->max_hp;
 }
+void mx_substract_buff_card(t_character *player, t_game_card *card){
+    player->attack -= card->attack;
+}
 
 void mx_sub_buff_card(t_character *player, t_game_card *card) {
     player->attack -= card->attack;
