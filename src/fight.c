@@ -92,11 +92,16 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
 
     SDL_RenderCopy(rend, fg->floor_texture, NULL, &fg->floor_rect);
     SDL_RenderCopy(rend, fg->frontg_texture, NULL, &fg->frontg_rect);
-    for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
-        SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
-    }
     mx_render_character(fg->player, rend, fg->player_rect);
     mx_render_character(fg->enemy, rend, fg->enemy_rect);
+    for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
+        if (fg->cards[i]->is_active == false)
+            SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
+    }
+    for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
+        if (fg->cards[i]->is_active == true)
+            SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
+    }
     if(mx_fight(win, rend, fg)) {
         return 2;
     }
@@ -121,8 +126,14 @@ void mx_handle_cards(t_fightground *fg) { // Переделать на пере�
     int button = SDL_GetMouseState(&mouse_x, &mouse_y);
 
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
+        if (fg->cards[i]->is_active && active_card != -1)
+            printf("ERROR!!!!!!!!!!!!!!!!!!!\n");
+        else if(fg->cards[i]->is_active && active_card == -1)
+            active_card = i;
+    }
+    for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
         if (mx_handle_button(fg->cards[i]->rect)) {
-            if (fg->cards[i]->is_active == false) {
+            if (fg->cards[i]->is_active == false && active_card == -1) {
                 fg->cards[i]->is_active = true;
                 fg->energy -= fg->cards[i]->cost;
             }
@@ -145,12 +156,6 @@ void mx_handle_cards(t_fightground *fg) { // Переделать на пере�
                 fg->energy += fg->cards[i]->cost;
             }
         }*/
-    }
-    for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
-        if (fg->cards[i]->is_active && active_card != -1)
-            printf("ERROR!!!!!!!!!!!!!!!!!!!\n");
-        else if(fg->cards[i]->is_active && active_card == -1)
-            active_card = i;
     }
 
     if (active_card != -1) {
