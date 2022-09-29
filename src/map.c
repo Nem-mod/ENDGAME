@@ -48,6 +48,7 @@ void mx_generate_points(t_map *map, SDL_Window* win, SDL_Renderer* renderer) {
     map->start_point->active = true;
     SDL_DestroyTexture(map->start_point->tex);
     map->start_point->tex = mx_init_texture("resource/img/cpoint.png", win, renderer);
+    map->start_point->room = ENEMY;
     
     t_level_point *current_point = map->start_point;
     for (int i = 0; i < amount; i++) {
