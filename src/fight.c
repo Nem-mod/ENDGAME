@@ -120,9 +120,10 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
     }
     if(!fg->exit_flag) {
         mx_fight(win, rend, fg);
-        if (fg->enemy->current_hp <= 0 && !fg->win_flag)
+        if (fg->enemy->current_hp <= 0 && !fg->win_flag) {
+            printf("win level");
             mx_win_level(win, rend, fg);
-
+        }
         return LEVEL;
     }
     
@@ -226,7 +227,8 @@ void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
             fg->discard_cards_count = 0;
             fg->energy = AMOUNT_OF_ENERGY;
             fg->player_action_av = false;
-            SDL_Delay(100); // Поменять на подсчет времени. Мб тупаяя и сложная идея
+            fg->enemy->current_hp -= fg->player->attack;
+            SDL_Delay(300); // Поменять на подсчет времени. Мб тупаяя и сложная идея
         }
     } else {
         mx_calculate_character_attack(fg->enemy, fg->player);

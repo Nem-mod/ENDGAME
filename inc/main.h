@@ -1,14 +1,16 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "../inc/window_sdl.h"
-#include "../inc/menu.h"
-#include "../inc/map.h"
-#include "../inc/fight.h"
-#include "../inc/room.h"
-#include "../inc/potions.h"
-#include "../inc/escene.h"
-#include "../inc/inventory.h"
-#include "../inc/boss_fight.h"
+#include "window_sdl.h"
+#include "menu.h"
+#include "map.h"
+#include "fight.h"
+#include "room.h"
+#include "potions.h"
+#include "escene.h"
+#include "inventory.h"
+#include "boss_fight.h"
 
+t_window_sdl *mx_init_SDL2();
+void mx_init_game(t_window_sdl *gameWindow);
 #endif

@@ -3,7 +3,11 @@
         "game_card.h": "c",
         "character.h": "c",
         "inventory.h": "c",
-        "boss_fight.h": "c"
+        "boss_fight.h": "c",
+        "main.h": "c",
+        "window_sdl.h": "c",
+        "escene.h": "c",
+        "menu.h": "c"
     },
     "makefile.launchConfigurations": [
         {
