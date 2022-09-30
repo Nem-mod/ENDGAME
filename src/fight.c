@@ -133,7 +133,8 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
     mx_render_character(fg->player, rend, fg->player_rect);
     mx_render_character(fg->enemy, rend, fg->enemy_rect);
     SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
-    SDL_RenderCopy(rend, fg->energy_ind_texture[fg->energy], NULL, &fg->energy_ind_rect);
+    if (!fg->win_flag)
+        SDL_RenderCopy(rend, fg->energy_ind_texture[fg->energy], NULL, &fg->energy_ind_rect);
 
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
         if (fg->cards[i] != NULL && fg->cards[i]->is_active == false) {

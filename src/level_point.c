@@ -29,7 +29,7 @@ void mx_clear_lp(t_level_point* lp){
     free(lp);
     lp = NULL;
 }
-void mx_change_tex(t_level_point* lp, SDL_Window* win, SDL_Renderer* renderer ) {
+void mx_change_tex(t_level_point* lp, SDL_Window* win, SDL_Renderer* renderer) {
     SDL_DestroyTexture(lp->tex);
     lp->tex = mx_init_texture(lp->img_path, win, renderer);
     SDL_DestroyTexture(lp->next->tex);
