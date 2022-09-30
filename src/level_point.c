@@ -7,7 +7,7 @@ t_level_point* mx_create_lp(SDL_Window* win, SDL_Renderer* renderer) {
     point->rect.w = 60;
     point->rect.x = 850 + rand() % 50;
     point->rect.y = 1150 + rand() % 50;
-    if (mx_rand(0, 6) == 0) {
+    if (mx_rand(0, 4) == 0) {
         point->room = CHEST;
     }
     else {

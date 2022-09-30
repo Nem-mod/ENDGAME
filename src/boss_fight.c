@@ -38,7 +38,7 @@ t_fightground *mx_create_bossroom(SDL_Window *win, SDL_Renderer *rend, t_charact
     bossground->enemy_rect.w = 300;
     bossground->enemy_rect.x = 750;
     bossground->enemy_rect.y = WINDOW_HEIGHT / 1.5 - 200;
-    bossground->enemy = mx_create_character("resource/img/Boss.png", 150, 35, 10, 15, 10, 50, win, rend);
+    bossground->enemy = mx_create_character("resource/img/Boss.png", 150, 27, 10, 15, 10, 50, win, rend);
 
 
     bossground->player->healthbar = mx_create_bar(win, rend, HEALTH, &bossground->player_rect);
