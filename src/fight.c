@@ -166,8 +166,11 @@ void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     fg->continue_button.tex = mx_init_texture(fg->bag_path, win, rend);
     fg->continue_button.d_rect.w = 100;
     fg->continue_button.d_rect.h = 100;
-    fg->continue_button.d_rect.x = WINDOW_WIDTH / 2 - fg->continue_button.d_rect.w / 2 - 25;
-    fg->continue_button.d_rect.y = WINDOW_HEIGHT / 2 - fg->continue_button.d_rect.h / 2;
+    // fg->continue_button.d_rect.x = WINDOW_WIDTH / 2 - fg->continue_button.d_rect.w / 2 - 25;
+    // fg->continue_button.d_rect.y = WINDOW_HEIGHT / 2 - fg->continue_button.d_rect.h / 2;
+    fg->continue_button.d_rect.x = fg->player_rect.x + fg->player_rect.w + fg->continue_button.d_rect.w;
+    fg->continue_button.d_rect.y = fg->player_rect.y + fg->player_rect.h - fg->continue_button.d_rect.h * 2;
+    printf("%d\n", fg->player->character_rect.y);
     fg->win_flag = true;
     fg->energy = AMOUNT_OF_ENERGY;
 
