@@ -33,7 +33,8 @@ void mx_render_inventory(SDL_Renderer *rend, t_inventory *inv) {
 
 void mx_generate_start_cards(SDL_Window *win, SDL_Renderer *rend, t_inventory *inv) {
     inv->current_cards = START_AMOUNT_OF_CARDS;
-    for (int i = 0; i < START_AMOUNT_OF_CARDS; i++)
+    inv->cards[0] = mx_create_card(win, rend, DMG, 1);
+    for (int i = 1; i < START_AMOUNT_OF_CARDS; i++)
         inv->cards[i] = mx_create_card(win, rend, mx_rand(0, CARD_TYPE_COUNT - 1), 1);
 }
 
