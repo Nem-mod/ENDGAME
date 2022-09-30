@@ -4,7 +4,6 @@
 
 #define AMOUNT_OF_CARDS 5
 #define AMOUNT_OF_ENERGY 3
-#define P_OF_ENEMYS 3
 
 
 t_fightground *mx_create_bossroom(SDL_Window *win, SDL_Renderer *rend, t_character* player, t_inventory *inv);
