@@ -2,7 +2,8 @@
     "files.associations": {
         "game_card.h": "c",
         "character.h": "c",
-        "inventory.h": "c"
+        "inventory.h": "c",
+        "boss_fight.h": "c"
     },
     "makefile.launchConfigurations": [
         {

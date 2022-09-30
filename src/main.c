@@ -58,8 +58,8 @@ int main() {
             }
             else if (gameWindow.scene == ROOM)
                 room = mx_create_room(gameWindow.window, gameWindow.renderer, player, CHEST);
-            else if (gameWindow.scene == BOSS)
-                bossroom = mx_create_bossroom(gameWindow.window, gameWindow.renderer, player);
+            else if (gameWindow.scene == BOSSFIGHT)
+                bossroom = mx_create_bossroom(gameWindow.window, gameWindow.renderer, player, inventory);
         }
         else if (gameWindow.scene == LEVEL) {
             gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground, inventory);
@@ -103,7 +103,7 @@ int main() {
         }
 
         if (gameWindow.scene == BOSSFIGHT) {
-            gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, bossroom);
+            gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, bossroom, inventory);
             mx_render_potion_bar(potions, gameWindow.renderer);
             mx_handle_potion(potions, player);
         }

@@ -126,7 +126,7 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
     }
     if(!fg->exit_flag) {
         
-        mx_fight(win, rend, fg);
+        mx_fight(win, rend, fg, inv);
         if(fg->enemy->current_hp <= 0){
             fg->enemy->character_texture = mx_init_texture("resource/img/dm.png", win, rend);
             if(mx_handle_button(fg->button_rect)) {
@@ -204,7 +204,7 @@ void mx_handle_cards(t_fightground *fg) {
     }
 }
 
-bool mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg, t_inventory *inv){
+void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg, t_inventory *inv){
     if(fg->player_action_av){
         SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
         if(fg->energy >= 0) {
