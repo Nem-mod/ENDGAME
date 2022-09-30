@@ -175,12 +175,12 @@ void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     for (int i = 0; i < 3; i++) {
         fg->cards[i] = mx_create_card(win, rend, mx_rand(0, 1), 0);
     }
-    for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
-        if (fg->cards[i] != NULL)
-            printf("%d not null\n", i);
-        else
-            printf("%d null\n", i);
-    }
+    // for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
+    //     if (fg->cards[i] != NULL)
+    //         printf("%d not null\n", i);
+    //     else
+    //         printf("%d null\n", i);
+    // }
     fg->discard_cards_count = AMOUNT_OF_CARDS - 3;
     mx_shift_cards(fg);
     

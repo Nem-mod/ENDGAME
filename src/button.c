@@ -1,7 +1,7 @@
 #include "../inc/button.h"
 
 
-t_button mx_create_button(int w, int h,int x, int y, char* img_path){
+t_button mx_create_button(int w, int h, int x, int y, char* img_path){
     t_button button;
     button.img_path = img_path;
     button.d_rect.x = x;

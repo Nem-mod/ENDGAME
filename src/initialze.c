@@ -91,6 +91,7 @@ void mx_init_game(t_window_sdl *gameWindow) {
         if(gameWindow->menu) {
             mx_render_menu(&menu, gameWindow->renderer);
             mx_render_inventory(gameWindow->renderer, inventory);
+            mx_handle_inventory(inventory);
             if(mx_handle_menu(&menu, gameWindow->renderer, 2) == CLOSE_MENU) {
                 gameWindow->menu = false;
             } else if(mx_handle_menu(&menu, gameWindow->renderer, 2) == EXIT) {
@@ -116,6 +117,7 @@ void mx_init_game(t_window_sdl *gameWindow) {
             
             if(event.type == SDL_KEYUP) {
                 if(event.key.keysym.sym == SDLK_ESCAPE && gameWindow->scene > MENU) {
+                    mx_deactivate_all_cards(inventory);
                     menu = mx_create_menu(gameWindow->window, gameWindow->renderer, 2);
                     gameWindow->menu = !gameWindow->menu;
                 }
