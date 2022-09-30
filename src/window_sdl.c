@@ -1,4 +1,4 @@
-#include "../inc/window_sdl.h"
+#include "window_sdl.h"
 
 SDL_Texture* mx_init_texture(char* path, SDL_Window* win, SDL_Renderer* renderer) {
     SDL_Surface* surface = IMG_Load(path);

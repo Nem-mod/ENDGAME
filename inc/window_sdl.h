@@ -26,6 +26,8 @@ typedef enum e_scenes {
 }            t_scenes;
 
 typedef struct s_window_sdl {
+    char *music_path;
+    Mix_Music *bg_music;
     SDL_Window* window;
     SDL_Renderer* renderer;
     t_scenes scene;
@@ -35,13 +37,6 @@ typedef struct s_window_sdl {
     bool menu;
 }              t_window_sdl;
 
-
-void mx_init_menu();
-void mx_destroy(char* ms); 
 SDL_Texture* mx_init_texture(char* path, SDL_Window* win, SDL_Renderer* renderer);
-bool mx_chance(int percent);
-
-
-
 
 #endif
