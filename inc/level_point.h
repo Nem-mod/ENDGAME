@@ -10,8 +10,6 @@ typedef enum e_type {
     ENEMY,
     CHEST,
     BOSS
-    // TRADER,
-    // RESTPOINT
 } t_type;
 
 typedef struct s_level_point
