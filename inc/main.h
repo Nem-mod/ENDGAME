@@ -13,7 +13,7 @@
 #include "vscene.h"
 
 int main();
-// t_window_sdl *mx_init_SDL2();
-// void mx_init_game(t_window_sdl *gameWindow);
+t_window_sdl *mx_init_SDL2();
+void mx_init_game(t_window_sdl *gameWindow);
 
 #endif
