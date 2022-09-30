@@ -107,6 +107,6 @@ int mx_render_bossroom(SDL_Window *win, SDL_Renderer *rend, t_fightground* bossr
     
     bossroom->player->shield = 0;
     mx_clear_fightground(&bossroom);
-    return MAP;
+    return VICTORY;
 }
 

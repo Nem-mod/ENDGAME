@@ -10,6 +10,7 @@
 #include "escene.h"
 #include "inventory.h"
 #include "boss_fight.h"
+#include "vscene.h"
 
 t_window_sdl *mx_init_SDL2();
 void mx_init_game(t_window_sdl *gameWindow);

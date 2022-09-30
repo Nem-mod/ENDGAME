@@ -28,6 +28,7 @@ void mx_init_game(t_window_sdl *gameWindow) {
     t_character *player =  mx_create_character(palyer_img, 100, 5, 20, 50, 10, 2, gameWindow->window, gameWindow->renderer);
     t_inventory *inventory = mx_create_inventory(gameWindow->window, gameWindow->renderer);
     mx_generate_start_cards(gameWindow->window, gameWindow->renderer, inventory);
+    t_vscene victory = mx_create_vscene(gameWindow->window, gameWindow->renderer);
 
     t_fightground *fightground = NULL;
     t_fightground *bossroom = NULL;
@@ -101,6 +102,11 @@ void mx_init_game(t_window_sdl *gameWindow) {
             gameWindow->scene = mx_render_bossroom(gameWindow->window, gameWindow->renderer, bossroom);
             mx_render_potion_bar(potions, gameWindow->renderer);
             mx_handle_potion(potions, player);
+        }
+
+        if (gameWindow->scene == VICTORY) {
+            mx_render_vscene(&victory, gameWindow->renderer);
+
         }
 
         SDL_RenderPresent(gameWindow->renderer);
