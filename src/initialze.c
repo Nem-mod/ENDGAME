@@ -32,7 +32,7 @@ void mx_init_game(t_window_sdl *gameWindow) {
     t_fightground *fightground = NULL;
     t_fightground *bossroom = NULL;
     t_room *room = NULL;
-
+    int diff_count = 0;
 
     t_potion_bar *potions = mx_create_potion_bar(gameWindow->window, gameWindow->renderer);
 
@@ -46,7 +46,8 @@ void mx_init_game(t_window_sdl *gameWindow) {
             mx_render_map(&map, gameWindow->renderer);
             gameWindow->scene = mx_handle_map(&map, gameWindow->window, gameWindow->renderer);
             if (gameWindow->scene == LEVEL) {
-                fightground = mx_create_fightground(gameWindow->window, gameWindow->renderer, player, inventory);
+                fightground = mx_create_fightground(gameWindow->window, gameWindow->renderer, player, inventory, diff_count);
+                diff_count++;
             }
             else if (gameWindow->scene == ROOM)
                 room = mx_create_room(gameWindow->window, gameWindow->renderer, player, CHEST);

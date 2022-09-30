@@ -1,6 +1,6 @@
 #include "../inc/fight.h"
 
-t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_character* player, t_inventory *inv) {
+t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_character* player, t_inventory *inv, int diff) {
     
     t_fightground *fg = malloc(sizeof(*fg));
 
@@ -51,6 +51,16 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->enemy = mx_create_character(enemys_img[pos], 20, 1, 1, 1, 1, 1, win, rend);
 
     mx_set_enemy(fg->enemy);
+    if (diff <= 2) {
+        fg->enemy->max_hp -= 40;
+        fg->enemy->current_hp = fg->enemy->max_hp;
+        fg->enemy->attack -= 15;
+    }
+    else if (diff <= 4) {
+        fg->enemy->max_hp -= 20;
+        fg->enemy->current_hp = fg->enemy->max_hp;
+        fg->enemy->attack -= 10;
+    }
 
     fg->player->healthbar = mx_create_bar(win, rend, HEALTH, &fg->player_rect);
     fg->enemy->healthbar = mx_create_bar(win, rend, HEALTH, &fg->enemy_rect);
