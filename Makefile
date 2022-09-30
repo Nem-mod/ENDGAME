@@ -1,6 +1,4 @@
-# CFLAGS = -std=c11 -Wall -Wextra -Wpedantic
 CFLAGS := `sdl2-config --libs --cflags` --std=c11 -Wall -Wextra -Wpedantic -lSDL2_image -lSDL2_mixer -lm
-# SDL = -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 LANG = clang
 
 PROJ_NAME = ENDGAME
