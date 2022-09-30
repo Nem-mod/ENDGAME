@@ -93,7 +93,7 @@ int mx_render_bossroom(SDL_Window *win, SDL_Renderer *rend, t_fightground* bossr
     }
     if(!bossroom->exit_flag) {
         
-        mx_fight(win, rend, bossroom); // ИЗМЕНИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        mx_fight(win, rend, bossroom);
         if(bossroom->enemy->current_hp <= 0){
             SDL_DestroyTexture( bossroom->enemy->character_texture);
             bossroom->enemy->character_texture = mx_init_texture("resource/img/dm.png", win, rend);
