@@ -33,6 +33,6 @@ t_room *mx_create_room(SDL_Window *win, SDL_Renderer *rend,
                      t_character* player, int type);
 int mx_render_room(t_room *room, SDL_Renderer *rend, t_potion_bar *bar, SDL_Window *win);
 void mx_clear_room(t_room *room);
-// int mx_handle_room(t_room *room, t_potion_bar *bar);
+int mx_handle_room(t_room *room, t_potion_bar *bar);
 
 #endif

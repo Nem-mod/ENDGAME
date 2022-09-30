@@ -4,7 +4,7 @@ t_potion* mx_create_potion(SDL_Window* win, SDL_Renderer* renderer){
     t_potion* potion = malloc(sizeof(*potion));
     potion->value = 30;
     potion->img_path = "resource/img/health_potion.png";
-    potion->rect.h = 50; //мб попробовать другой способ
+    potion->rect.h = 50;
     potion->rect.w = 50;
     potion->rect.x = 0;
     potion->rect.y = 0;
