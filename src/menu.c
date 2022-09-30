@@ -9,15 +9,17 @@ t_menu mx_create_menu(SDL_Window* win, SDL_Renderer* renderer, int type) {
     menu.rect.y = (WINDOW_HEIGHT - menu.rect.h) / 2;
     menu.img_path = "resource/img/menu-background.jpg";
     menu.tex = mx_init_texture(menu.img_path, win, renderer);
-    menu.count_of_buttons = MAX_BUTTONS;
     if(type == 1) {
         menu.buttons[0] = mx_create_button(480, 110, (WINDOW_WIDTH - 480) / 2,  (WINDOW_HEIGHT) / 2 - 300, "resource/img/button-start.png");
         menu.buttons[1] = mx_create_button(480, 110, (WINDOW_WIDTH - 480) / 2,  (WINDOW_HEIGHT) / 2 - 150, "resource/img/button-start.png");
         menu.buttons[2] = mx_create_button(480, 110, (WINDOW_WIDTH - 480) / 2,  (WINDOW_HEIGHT) / 2, "resource/img/button-exit.png");
+        menu.count_of_buttons = 3;
+
     } else {
         menu.buttons[0] = mx_create_button(480, 110, (WINDOW_WIDTH - 480) / 2,  (WINDOW_HEIGHT) / 2 - 150, "resource/img/button-resume.png");
         menu.buttons[1] = mx_create_button(480, 110, (WINDOW_WIDTH - 480) / 2,  (WINDOW_HEIGHT) / 2, "resource/img/button-exit.png");
-    }
+        menu.count_of_buttons = 2;
+    }   
     
     for (int i = 0; i < menu.count_of_buttons; i++) {
         menu.buttons[i].tex = mx_init_texture(menu.buttons[i].img_path, win, renderer);
