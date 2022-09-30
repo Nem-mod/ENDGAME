@@ -1,20 +1,31 @@
-flags := -std=c11 -Wall -Wextra -Werror -Wpedantic
-conf := `pkg-config --libs --cflags sdl2`
-sdl_i := -lSDL2_image -lSDL2_mixer
-name := endgame
+# CFLAGS = -std=c11 -Wall -Wextra -Wpedantic
+CFLAGS := `sdl2-config --libs --cflags` --std=c11 -Wall -Wextra -Wpedantic -lSDL2_image -lSDL2_mixer -lm
+# SDL = -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
+LANG = clang
 
-all: $(name)
+PROJ_NAME = ENDGAME
+EXEC_NAME = endgame
 
-$(name):
-	rm -rf $(name)
-	clang $(flags) $(conf) $(sdl_i) -Iinc -o $(name) src/*.c
+.PHONY: all clean uninstall reinstall
 
-clean:
-	rm -rf $(name)
+all: $(PROJ_NAME) clean
+
+$(PROJ_NAME):
+	mkdir -p ./obj
+	mkdir -p ./temp
+	cp ./inc/* ./temp/
+	cp ./src/* ./temp/
+	$(LANG) $(CFLAGS) ./temp/*.c -include ./temp/*.h -c
+	rm -rf ./temp
+	mv *.o ./obj
+	$(LANG) ./obj/* $(SDL) -o $(EXEC_NAME) $(CFLAGS)
+	rm -rf ./obj
 
 uninstall:
-	rm -rf $(name)
+	rm -rf ./obj $(EXEC_NAME)
+	
+clean:
+	rm -rf ./obj
 
-reinstall:
-	make uninstall
-	make
+reinstall: uninstall $(PROJ_NAME)
+
