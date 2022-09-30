@@ -5,7 +5,7 @@ t_window_sdl *mx_init_SDL2() {
 
     gameWindow->bg_music = Mix_LoadMUS(gameWindow->music_path);
 
-    gameWindow->window = SDL_CreateWindow("Our game!",
+    gameWindow->window = SDL_CreateWindow("The legends of Horned Cave",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
                                        WINDOW_WIDTH, WINDOW_HEIGHT, 0);

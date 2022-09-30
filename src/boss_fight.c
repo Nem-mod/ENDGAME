@@ -4,7 +4,7 @@ t_fightground *mx_create_bossroom(SDL_Window *win, SDL_Renderer *rend, t_charact
     
     t_fightground *bossroom = malloc(sizeof(*bossroom));
 
-    bossroom->background_path = "resource/img/fight/background.jfif";
+    bossroom->background_path = "resource/img/fight/floor.jpg";
     bossroom->floor_path = "resource/img/fight/floor.jpg";
     bossroom->frontground_path = "resource/img/fight/column.png";
 
