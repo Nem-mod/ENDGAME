@@ -48,16 +48,18 @@ t_game_card * mx_get_card_sword(t_game_card *card, int lvl){
         break;
     
     case 2:
-        v = mx_rand(0, 1);
-        if(v == 0)
+        v = mx_rand(0, 100);
+        if(v > 50)
             card->img_path = "resource/img/card_sword2.png";
+        else
         card->img_path = "resource/img/sword22.png";
         card->attack = 6;
         break;
     case 3:
-        v = mx_rand(0, 1);
-        if(v == 0)
+        v = mx_rand(0, 100);
+        if(v > 50)
             card->img_path = "resource/img/card_sword3.png";
+        else
         card->img_path = "resource/img/satt.png";
         card->attack = 10;
         break;
@@ -93,9 +95,10 @@ t_game_card * mx_get_card_shield(t_game_card *card, int lvl){
         card->defence = 4;
         break;
     case 3:
-        v = mx_rand(0, 1);
-        if(v == 0)
+        v = mx_rand(0, 100);
+        if(v > 50)
             card->img_path = "resource/img/card_gold_shield.png";
+        else
         card->img_path = "resource/img/shield32.png";
         card->defence = 7;
         break;
