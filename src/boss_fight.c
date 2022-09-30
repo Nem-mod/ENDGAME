@@ -67,12 +67,16 @@ t_fightground *mx_create_bossroom(SDL_Window *win, SDL_Renderer *rend, t_charact
     bossroom->continue_button = mx_create_button(bossroom->button_rect.w, bossroom->button_rect.h, bossroom->button_rect.x, bossroom->button_rect.y, button);
     bossroom->continue_button.tex = mx_init_texture(button, win, rend);
 
+    for (int i = 0; i < 4; i++)
+        bossroom->energy_ind_texture[i] = mx_init_texture(bossroom->energy_ind_path[i], win, rend);
+
     SDL_QueryTexture(bossroom->energy_ind_texture[0], NULL, NULL, &bossroom->energy_ind_rect.w, &bossroom->energy_ind_rect.h);
     bossroom->energy_ind_rect.w *= 2;
     bossroom->energy_ind_rect.h *= 2;
     bossroom->energy_ind_rect.x = WINDOW_WIDTH - bossroom->energy_ind_rect.w - 50;
     bossroom->energy_ind_rect.y = 50;
     
+    bossroom->win_flag = false;
     bossroom->energy = AMOUNT_OF_ENERGY;
     bossroom->player_action_av = true;
     mx_create_cards(win, rend, bossroom, AMOUNT_OF_CARDS);
@@ -91,7 +95,8 @@ int mx_render_bossroom(SDL_Window *win, SDL_Renderer *rend, t_fightground* bossr
     mx_render_bar(bossroom->enemy->healthbar, rend);
     mx_render_bar(bossroom->enemy->shieldbar, rend);
     SDL_RenderCopy(rend, bossroom->continue_button.tex, NULL, &bossroom->button_rect);
-    SDL_RenderCopy(rend, bossroom->energy_ind_texture[bossroom->energy], NULL, &bossroom->energy_ind_rect);
+    if (!bossroom->win_flag)
+        SDL_RenderCopy(rend, bossroom->energy_ind_texture[bossroom->energy], NULL, &bossroom->energy_ind_rect);
 
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
         if (bossroom->cards[i] != NULL && bossroom->cards[i]->is_active == false)
