@@ -60,7 +60,7 @@ void mx_generate_points(t_map *map, SDL_Window* win, SDL_Renderer* renderer) {
             next_point->room = CHEST;
         }
         if (i == amount - 2) {
-            next_point->tex = mx_init_texture("resource/img/mob.png", win, renderer);
+            next_point->tex = mx_init_texture("resource/img/Boss.png", win, renderer);
             next_point->rect.y = 300; 
             next_point->rect.x = 230;
             next_point->room = BOSS;

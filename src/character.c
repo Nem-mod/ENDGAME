@@ -67,6 +67,8 @@ int mx_calculate_character_attack(t_character *from, t_character *to) {
 
 void mx_render_character(t_character *character, SDL_Renderer *rend, SDL_Rect rect) {
     SDL_RenderCopy(rend, character->character_texture, NULL, &rect);
-    mx_render_bar(character->healthbar, rend);
-    mx_render_bar(character->shieldbar, rend);
+    if(character->current_hp > 0) {
+        mx_render_bar(character->healthbar, rend);
+        mx_render_bar(character->shieldbar, rend);
+    }
 }

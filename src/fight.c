@@ -34,7 +34,7 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->player_rect.h = 300;
     fg->player_rect.w = 300;
     fg->player_rect.x = 150;
-    fg->player_rect.y = WINDOW_HEIGHT / 1.5 - 200;
+    fg->player_rect.y = WINDOW_HEIGHT / 1.5 - 150;
     fg->player = player;
 
     fg->inv = inv;    
@@ -50,7 +50,7 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->enemy_rect.h = 300;
     fg->enemy_rect.w = 300;
     fg->enemy_rect.x = 750;
-    fg->enemy_rect.y = WINDOW_HEIGHT / 1.5 - 200;
+    fg->enemy_rect.y = WINDOW_HEIGHT / 1.5 - 150;
     int pos = mx_rand(0, P_OF_ENEMYS - 1);
     fg->enemy = mx_create_character(enemys_img[pos], 20, 1, 1, 1, 1, 1, win, rend);
 
@@ -126,16 +126,13 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
         if (fg->cards[i] != NULL && fg->cards[i]->is_active == false) {
             SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
-            //printf("%d card rendered\n", i);
         }
     }
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
         if (fg->cards[i] != NULL && fg->cards[i]->is_active == true) {
             SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
-            //printf(" %d card rendered\n", i);
         }
     }
-    //printf("\n");
 
     if (fg->player->current_hp <= 0) {
         return DEATH;
@@ -161,6 +158,10 @@ void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     
     SDL_DestroyTexture(fg->enemy->character_texture);
     fg->enemy->character_texture = mx_init_texture(fg->dm_path, win, rend);
+    fg->enemy_rect.w = 100;
+    fg->enemy_rect.h = 100;
+    fg->enemy_rect.x = 900;
+    fg->enemy_rect.y = WINDOW_HEIGHT / 1.5;
     SDL_DestroyTexture(fg->continue_button.tex);
     fg->continue_button.tex = mx_init_texture(fg->bag_path, win, rend);
     fg->continue_button.d_rect.w = 100;

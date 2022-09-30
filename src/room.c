@@ -27,24 +27,24 @@ t_character* player, int type) {
     room->player_rect.h = 300;
     room->player_rect.w = 300;
     room->player_rect.x = 150;
-    room->player_rect.y = WINDOW_HEIGHT / 1.5 - 200;
+    room->player_rect.y = WINDOW_HEIGHT / 1.5 - 150;
     room->player = player;
 
-    room->exit_btn = mx_create_button(150, 50, WINDOW_WIDTH / 2 - 75, WINDOW_HEIGHT - 100,
+    room->exit_btn = mx_create_button(150, 50, WINDOW_WIDTH / 2 - 75, WINDOW_HEIGHT - 75,
                                         "resource/img/button-finish.png");
     room->exit_btn.tex = mx_init_texture(room->exit_btn.img_path, win, rend);
 
 
     if (type == CHEST) {
         room->chest_drop = 1;
-        room->room_obj = mx_create_button(200, 200, 850, WINDOW_HEIGHT / 1.5 - 100, 
+        room->room_obj = mx_create_button(200, 200, 850, WINDOW_HEIGHT / 1.5, 
                                             "resource/img/chest_def.png");
         room->room_obj.tex = mx_init_texture(room->room_obj.img_path, win, rend);
     }
 
     room->treasure = mx_create_potion(win, rend);
     room->treasure->rect.x = 900 + 25;
-    room->treasure->rect.y = WINDOW_HEIGHT / 1.5 - 45;
+    room->treasure->rect.y = WINDOW_HEIGHT / 1.5 + 50;
     room->chest_drop_f = false;
     return room;
 }
