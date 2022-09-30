@@ -50,7 +50,7 @@ typedef struct  s_fightground {
 
 }               t_fightground;
 
-t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_character* player, t_inventory *inv);
+t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_character* player, t_inventory *inv, int diff);
 int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 void mx_clear_fightground(t_fightground **fg);
 void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg, int cards_ammount);
