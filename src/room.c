@@ -47,6 +47,7 @@ t_character* player, int type) {
     room->treasure = mx_create_potion(win, rend);
     room->treasure->rect.x = 850;
     room->treasure->rect.y = WINDOW_HEIGHT / 1.5 - 100;
+    room->chest_drop_f = false;
     return room;
 }
 
@@ -65,13 +66,19 @@ int mx_render_room(t_room *room, SDL_Renderer *rend, t_potion_bar *potion_bar, S
         room->room_obj.img_path = "resource/img/chest_def2.png";
         SDL_DestroyTexture(room->room_obj.tex);
         room->room_obj.tex = mx_init_texture(room->room_obj.img_path, win, rend);
-        SDL_RenderCopy(rend, room->treasure->tex, NULL, &room->room_obj.d_rect);
+        room->chest_drop_f = true;
+
+        
+    }
+    if(room->chest_drop_f) {
+        SDL_RenderCopy(rend, room->treasure->tex, NULL, &room->treasure->rect);
         if(mx_handle_button(room->treasure->rect)) {
             room->chest_drop = 0;
             if(potion_bar->potions_count < MAX_AMOUNT_OF_PT)
                 potion_bar->potions_count += 1;
         }
     }
+
     if (mx_handle_button(room->exit_btn.d_rect)) {
         return MAP;
     }

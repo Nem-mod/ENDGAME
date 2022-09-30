@@ -26,6 +26,7 @@ typedef struct  s_room {
     
     t_character* player;
     t_potion* treasure;
+    bool chest_drop_f;
 
 }               t_room;
 
