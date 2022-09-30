@@ -23,7 +23,8 @@ typedef enum e_scenes {
     ROOM,
     RESTART,
     BOSSFIGHT,
-    VICTORY
+    VICTORY,
+    TUTORIAL
 }            t_scenes;
 
 typedef struct s_window_sdl {

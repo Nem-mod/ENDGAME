@@ -4,7 +4,7 @@
 #include "window_sdl.h"
 #include "stdbool.h"
 
-#define MAX_BUTTONS 2
+#define MAX_BUTTONS 3
 
 typedef struct s_menu {
     SDL_Rect rect; 

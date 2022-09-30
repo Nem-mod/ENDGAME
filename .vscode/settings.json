@@ -8,7 +8,11 @@
         "window_sdl.h": "c",
         "escene.h": "c",
         "menu.h": "c",
-        "button.h": "c"
+        "button.h": "c",
+        "tutorial.h": "c",
+        "stdio.h": "c",
+        "sdl_image.h": "c",
+        "sdl_timer.h": "c"
     },
     "makefile.launchConfigurations": [
         {
