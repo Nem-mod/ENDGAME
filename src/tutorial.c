@@ -17,9 +17,10 @@ t_tutorial* mx_create_tutorial(SDL_Window* win, SDL_Renderer* renderer) {
 t_scenes mx_render_tutorial(t_tutorial *tutorial, SDL_Renderer *renderer){
     if(tutorial->slide < SLIDES){
         SDL_RenderCopy(renderer, tutorial->textures[tutorial->slide], NULL, &tutorial->rect);
+        SDL_Delay(50);
         if(mx_handle_button(tutorial->rect)) {
-            tutorial->slide++;
             SDL_RenderPresent(renderer);
+            tutorial->slide++;
             SDL_Delay(500);
 
         }

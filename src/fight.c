@@ -187,12 +187,6 @@ void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     for (int i = 0; i < 3; i++) {
         fg->cards[i] = mx_create_card(win, rend, mx_rand(0, 1), 0);
     }
-    // for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
-    //     if (fg->cards[i] != NULL)
-    //         printf("%d not null\n", i);
-    //     else
-    //         printf("%d null\n", i);
-    // }
     fg->discard_cards_count = AMOUNT_OF_CARDS - 3;
     mx_shift_cards(fg);
     
@@ -201,7 +195,6 @@ void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
 void mx_clear_fightground(t_fightground **fg) {
     SDL_DestroyTexture((*fg)->backg_texture);
     SDL_DestroyTexture((*fg)->floor_texture);
-    //SDL_DestroyTexture((*fg)->frontg_texture);
     for (int i = 0; i < 4; i++)
         SDL_DestroyTexture((*fg)->energy_ind_texture[i]);
     mx_clear_cards(*fg);
@@ -277,7 +270,6 @@ void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
             fg->discard_cards_count = 0;
             fg->energy = AMOUNT_OF_ENERGY;
             fg->player_action_av = false;
-            //mx_calculate_character_attack(fg->player, fg->enemy);
             SDL_Delay(100); // Поменять на подсчет времени. Мб тупаяя и сложная идея
         }
     } else {
