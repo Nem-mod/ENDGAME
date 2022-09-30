@@ -80,7 +80,7 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->button_rect.h = 50;
     fg->button_rect.w = 200;
     fg->button_rect.x = (WINDOW_WIDTH - 200) / 2;
-    fg->button_rect.y = (WINDOW_HEIGHT - 75) / 2;
+    fg->button_rect.y = (WINDOW_HEIGHT - 75) / 3;
 
     fg->continue_button = mx_create_button(fg->button_rect.w, fg->button_rect.h, fg->button_rect.x, fg->button_rect.y, fg->button_path);
     fg->continue_button.tex = mx_init_texture(fg->button_path, win, rend);
@@ -166,8 +166,6 @@ void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     fg->continue_button.tex = mx_init_texture(fg->bag_path, win, rend);
     fg->continue_button.d_rect.w = 100;
     fg->continue_button.d_rect.h = 100;
-    // fg->continue_button.d_rect.x = WINDOW_WIDTH / 2 - fg->continue_button.d_rect.w / 2 - 25;
-    // fg->continue_button.d_rect.y = WINDOW_HEIGHT / 2 - fg->continue_button.d_rect.h / 2;
     fg->continue_button.d_rect.x = fg->player_rect.x + fg->player_rect.w + fg->continue_button.d_rect.w;
     fg->continue_button.d_rect.y = fg->player_rect.y + fg->player_rect.h - fg->continue_button.d_rect.h * 2;
     printf("%d\n", fg->player->character_rect.y);
