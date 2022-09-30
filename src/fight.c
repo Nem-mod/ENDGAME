@@ -124,13 +124,18 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
     SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
 
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
-        if (fg->cards[i] != NULL && fg->cards[i]->is_active == false)
+        if (fg->cards[i] != NULL && fg->cards[i]->is_active == false) {
             SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
+            //printf("%d card rendered\n", i);
+        }
     }
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
-        if (fg->cards[i] != NULL && fg->cards[i]->is_active == true)
+        if (fg->cards[i] != NULL && fg->cards[i]->is_active == true) {
             SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
+            //printf(" %d card rendered\n", i);
+        }
     }
+    //printf("\n");
 
     if (fg->player->current_hp <= 0) {
         return DEATH;
@@ -257,13 +262,15 @@ void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
             fg->discard_cards_count = 0;
             fg->energy = AMOUNT_OF_ENERGY;
             fg->player_action_av = false;
-            mx_calculate_character_attack(fg->player, fg->enemy);
+            //mx_calculate_character_attack(fg->player, fg->enemy);
             SDL_Delay(100); // Поменять на подсчет времени. Мб тупаяя и сложная идея
         }
     } else {
-        mx_calculate_character_attack(fg->enemy, fg->player);
-        mx_create_cards(win, rend, fg, AMOUNT_OF_CARDS);
-        fg->player_action_av = true;
+        if (fg->enemy->current_hp > 0) {
+            mx_calculate_character_attack(fg->enemy, fg->player);
+            mx_create_cards(win, rend, fg, AMOUNT_OF_CARDS);
+            fg->player_action_av = true;
+        }
     }
 }
 

@@ -57,6 +57,14 @@ void mx_shift_inventory_cards(t_inventory *inv) {
     }
 }
 
+// void mx_clear_active_card(t_inventory *inv) {
+//     int 
+    
+//     for (int i = 0; i < inv->current_cards; i++) {
+//         if ()
+//     }
+// }
+
 void mx_clear_inventory(t_inventory *inv) {
     for (int i = 0; i < inv->current_cards; i++) {
         mx_clear_card(inv->cards[i]);
