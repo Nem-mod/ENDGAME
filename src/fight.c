@@ -121,11 +121,12 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
         return DEATH;
     }
     if(!fg->exit_flag) {
-        mx_fight(win, rend, fg);
         if (fg->enemy->current_hp <= 0 && !fg->win_flag) {
-            fg->discard_cards_count = AMOUNT_OF_CARDS;
+            fg->discard_cards_count = 0;
             mx_win_level(win, rend, fg);
         }
+        mx_fight(win, rend, fg);
+
         return LEVEL;
     }
     
@@ -145,11 +146,13 @@ void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     fg->continue_button.tex = mx_init_texture(fg->bag_path, win, rend);
     fg->continue_button.d_rect.w = 100;
     fg->continue_button.d_rect.h = 100;
-    fg->continue_button.d_rect.x = WINDOW_WIDTH / 2 - fg->continue_button.d_rect.w / 2;
+    fg->continue_button.d_rect.x = WINDOW_WIDTH / 2 - fg->continue_button.d_rect.w / 2 - 25;
     fg->continue_button.d_rect.y = WINDOW_HEIGHT / 2 - fg->continue_button.d_rect.h / 2;
     fg->win_flag = true;
     fg->energy = AMOUNT_OF_ENERGY;
     mx_clear_cards(fg->cards);
+
+   
     for (int i = 0; i < 3; i++) {
         fg->cards[i] = mx_create_card(win, rend, mx_rand(0, 1), 0);
     }
@@ -236,7 +239,7 @@ void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
             fg->energy = AMOUNT_OF_ENERGY;
             fg->player_action_av = false;
             fg->enemy->current_hp -= fg->player->attack;
-            SDL_Delay(500); // Поменять на подсчет времени. Мб тупаяя и сложная идея
+            SDL_Delay(100); // Поменять на подсчет времени. Мб тупаяя и сложная идея
         }
     } else {
         mx_calculate_character_attack(fg->enemy, fg->player);
@@ -254,7 +257,7 @@ void mx_update_fight_bars(t_fightground *fg) {
 }
 
 void mx_clear_cards(t_game_card **cards) {
-     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
+     for (int i = 0; i <= AMOUNT_OF_CARDS; i++) {
         if(cards[i] != NULL && cards[i]->is_active) {
             mx_clear_card(cards[i]);
         }
