@@ -32,7 +32,7 @@ t_fightground *mx_create_bossroom(SDL_Window *win, SDL_Renderer *rend, t_charact
     bossground->player_rect.y = WINDOW_HEIGHT / 1.5 - 200;
     bossground->player = player;
     
-
+    bossground->inv = inv; 
     
     bossground->enemy_rect.h = 300;
     bossground->enemy_rect.w = 300;
@@ -63,12 +63,12 @@ t_fightground *mx_create_bossroom(SDL_Window *win, SDL_Renderer *rend, t_charact
     
     bossground->energy = AMOUNT_OF_ENERGY;
     bossground->player_action_av = true;
-    mx_create_cards(win, rend, bossground, inv);
+    mx_create_cards(win, rend, bossground, AMOUNT_OF_CARDS);
     bossground->exit_flag = false;
     return bossground;
 }
 
-int mx_render_bossroom(SDL_Window *win, SDL_Renderer *rend, t_fightground* bossroom, t_inventory *inv) {
+int mx_render_bossroom(SDL_Window *win, SDL_Renderer *rend, t_fightground* bossroom) {
     mx_update_fight_bars(bossroom);
     SDL_RenderCopy(rend, bossroom->backg_texture, NULL, &bossroom->backg_rect);
 
@@ -92,7 +92,7 @@ int mx_render_bossroom(SDL_Window *win, SDL_Renderer *rend, t_fightground* bossr
     }
     if(!bossroom->exit_flag) {
         
-        mx_fight(win, rend, bossroom, inv);
+        mx_fight(win, rend, bossroom); // ИЗМЕНИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if(bossroom->enemy->current_hp <= 0){
             SDL_DestroyTexture( bossroom->enemy->character_texture);
             bossroom->enemy->character_texture = mx_init_texture("resource/img/dm.png", win, rend);

@@ -45,7 +45,7 @@ int main() {
     t_potion_bar *potions = mx_create_potion_bar(gameWindow.window, gameWindow.renderer);
     Mix_PlayMusic(background, -1);
     while (gameWindow.active) {
-        SDL_RenderClear(gameWindow.renderer); // Каждый раз чистить экран чтоб картинки не накладывались друг на другаы
+        SDL_RenderClear(gameWindow.renderer);
         if (gameWindow.scene == MENU) {
             mx_render_menu(&menu, gameWindow.renderer);
             gameWindow.scene = mx_handle_menu(&menu, gameWindow.renderer, 1);
@@ -102,11 +102,7 @@ int main() {
         }
 
         if (gameWindow.scene == BOSSFIGHT) {
-<<<<<<< HEAD
-            gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, bossroom);
-=======
-            gameWindow.scene = mx_render_bossroom(gameWindow.window, gameWindow.renderer, bossroom, inventory);
->>>>>>> 81bdb34bb845b3600914c8d439eaf5c7539e3985
+            gameWindow.scene = mx_render_bossroom(gameWindow.window, gameWindow.renderer, bossroom);
             mx_render_potion_bar(potions, gameWindow.renderer);
             mx_handle_potion(potions, player);
         }

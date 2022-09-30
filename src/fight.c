@@ -74,9 +74,7 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->energy = AMOUNT_OF_ENERGY;
     fg->player_action_av = true;
     fg->win_flag = false;
-    printf("pre create cards\n");
     mx_create_cards(win, rend, fg, AMOUNT_OF_CARDS);
-    printf("created cards\n");
     fg->exit_flag = false;
     return fg;
 }

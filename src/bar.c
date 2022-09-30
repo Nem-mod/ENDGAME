@@ -36,7 +36,6 @@ t_bar *mx_create_bar(SDL_Window *win, SDL_Renderer *rend, t_bar_type type, SDL_R
 }
 
 void mx_render_bar(t_bar *bar, SDL_Renderer *rend) {
-    printf("%d\n", bar->percent);
     SDL_RenderCopy(rend, bar->bar_texture, NULL, &bar->bar_rect);
     SDL_RenderCopy(rend, bar->square_texture, NULL, &bar->square_rect);
 }
