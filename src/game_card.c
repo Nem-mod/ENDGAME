@@ -27,7 +27,7 @@ t_game_card* mx_create_card(SDL_Window *win, SDL_Renderer *rend, t_card_type typ
 
 t_game_card * mx_get_card_sword(t_game_card *card, int lvl){
     int value = 1;
-    
+    int v = 0;
     if (lvl == 0) {
         if(mx_rand(1, 100) > 80) {
         value = 3;
@@ -42,16 +42,23 @@ t_game_card * mx_get_card_sword(t_game_card *card, int lvl){
     switch (value)
     {
     case 1:
+        
         card->img_path = "resource/img/card_sword.png";
         card->attack = 0;
         break;
     
     case 2:
-        card->img_path = "resource/img/card_sword2.png";
+        v = mx_rand(0, 1);
+        if(v == 0)
+            card->img_path = "resource/img/card_sword2.png";
+        card->img_path = "resource/img/sword22.png";
         card->attack = 6;
         break;
     case 3:
-        card->img_path = "resource/img/card_sword3.png";
+        v = mx_rand(0, 1);
+        if(v == 0)
+            card->img_path = "resource/img/card_sword3.png";
+        card->img_path = "resource/img/satt.png";
         card->attack = 10;
         break;
     }
@@ -62,7 +69,7 @@ t_game_card * mx_get_card_sword(t_game_card *card, int lvl){
 }
 t_game_card * mx_get_card_shield(t_game_card *card, int lvl){
     int value = 1;
-
+    int v = 0;
     if (lvl == 0) {
         if(mx_rand(1, 100) > 90) {
             value = 3;
@@ -78,16 +85,22 @@ t_game_card * mx_get_card_shield(t_game_card *card, int lvl){
     {
     case 1:
         card->img_path = "resource/img/card_shield.png";
+        card->defence = 0;
         break;
     
     case 2:
         card->img_path = "resource/img/card_shield2.png";
+        card->defence = 4;
         break;
     case 3:
-        card->img_path = "resource/img/card_gold_shield.png";
+        v = mx_rand(0, 1);
+        if(v == 0)
+            card->img_path = "resource/img/card_gold_shield.png";
+        card->img_path = "resource/img/shield32.png";
+        card->defence = 7;
         break;
     }
-    card->defence = 10 * value;
+    card->defence += 10 * value;
     card->cost = value;
     card->type = ARM;
     return card;

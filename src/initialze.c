@@ -90,6 +90,9 @@ void mx_init_game(t_window_sdl *gameWindow) {
             mx_handle_potion(potions, player);
         } else if (gameWindow->scene == VICTORY) {
             mx_render_vscene(&victory, gameWindow->renderer);
+            SDL_RenderPresent(gameWindow->renderer);
+            SDL_Delay(3000);
+            gameWindow->scene = RESTART;
         } else if (gameWindow->scene == TUTORIAL) {
             gameWindow->scene = mx_render_tutorial(tutorial, gameWindow->renderer);
         }

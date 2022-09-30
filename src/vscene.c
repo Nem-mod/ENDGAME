@@ -13,7 +13,6 @@ t_vscene mx_create_vscene(SDL_Window* win, SDL_Renderer* renderer) {
 
 }
 void mx_render_vscene(t_vscene *vscene, SDL_Renderer *renderer) {
-    // draw the image to the window
     SDL_RenderCopy(renderer, vscene->tex, NULL,  &vscene->rect);
 }
 
