@@ -40,7 +40,7 @@ void mx_init_game(t_window_sdl *gameWindow) {
 
     t_potion_bar *potions = mx_create_potion_bar(gameWindow->window, gameWindow->renderer);
 
-     while (gameWindow->active) {
+    while (gameWindow->active) {
         SDL_RenderClear(gameWindow->renderer);
         if (gameWindow->scene == MENU) {
             tutorial->slide = 0;
