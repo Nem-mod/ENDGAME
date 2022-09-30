@@ -21,5 +21,6 @@ void mx_render_inventory(SDL_Renderer *rend, t_inventory *inv);
 void mx_generate_start_cards(SDL_Window *win, SDL_Renderer *rend, t_inventory *inv);
 bool mx_add_card_to_inventory(t_inventory *inv, t_game_card *src_card, SDL_Window *win, SDL_Renderer *rend);
 void mx_shift_inventory_cards(t_inventory *inv);
+void mx_clear_inventory(t_inventory *inv);
 
 #endif

@@ -56,3 +56,13 @@ void mx_shift_inventory_cards(t_inventory *inv) {
         }
     }
 }
+
+void mx_clear_inventory(t_inventory *inv) {
+    for (int i = 0; i < inv->current_cards; i++) {
+        mx_clear_card(inv->cards[i]);
+        inv->cards[i] = NULL;
+    }
+    SDL_DestroyTexture(inv->texture);
+    free(inv);
+    inv = NULL;
+}
