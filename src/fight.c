@@ -90,9 +90,9 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->continue_button = mx_create_button(fg->button_rect.w, fg->button_rect.h, fg->button_rect.x, fg->button_rect.y, fg->button_path);
     fg->continue_button.tex = mx_init_texture(fg->button_path, win, rend);
 
-    //SDL_QueryTexture(fg->energy_ind_texture[0], NULL, NULL, &fg->energy_ind_rect.w, &fg->energy_ind_rect.h);
-    fg->energy_ind_rect.w = 20;
-    fg->energy_ind_rect.h = 20;
+    SDL_QueryTexture(fg->energy_ind_texture[0], NULL, NULL, &fg->energy_ind_rect.w, &fg->energy_ind_rect.h);
+    fg->energy_ind_rect.w *= 2;
+    fg->energy_ind_rect.h *= 2;
     fg->energy_ind_rect.x = WINDOW_WIDTH - fg->energy_ind_rect.w - 50;
     fg->energy_ind_rect.y = 50;
     
@@ -133,8 +133,7 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
     mx_render_character(fg->player, rend, fg->player_rect);
     mx_render_character(fg->enemy, rend, fg->enemy_rect);
     SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
-    if (!fg->win_flag)
-        SDL_RenderCopy(rend, fg->energy_ind_texture[fg->energy], NULL, &fg->energy_ind_rect);
+    SDL_RenderCopy(rend, fg->energy_ind_texture[fg->energy], NULL, &fg->energy_ind_rect);
 
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
         if (fg->cards[i] != NULL && fg->cards[i]->is_active == false) {
@@ -188,7 +187,12 @@ void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     for (int i = 0; i < 3; i++) {
         fg->cards[i] = mx_create_card(win, rend, mx_rand(0, 1), 0);
     }
-   
+    // for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
+    //     if (fg->cards[i] != NULL)
+    //         printf("%d not null\n", i);
+    //     else
+    //         printf("%d null\n", i);
+    // }
     fg->discard_cards_count = AMOUNT_OF_CARDS - 3;
     mx_shift_cards(fg);
     
@@ -197,6 +201,7 @@ void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
 void mx_clear_fightground(t_fightground **fg) {
     SDL_DestroyTexture((*fg)->backg_texture);
     SDL_DestroyTexture((*fg)->floor_texture);
+    //SDL_DestroyTexture((*fg)->frontg_texture);
     for (int i = 0; i < 4; i++)
         SDL_DestroyTexture((*fg)->energy_ind_texture[i]);
     mx_clear_cards(*fg);
