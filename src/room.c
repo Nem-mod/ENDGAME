@@ -45,8 +45,8 @@ t_character* player, int type) {
     }
 
     room->treasure = mx_create_potion(win, rend);
-    room->treasure->rect.x = 850;
-    room->treasure->rect.y = WINDOW_HEIGHT / 1.5 - 100;
+    room->treasure->rect.x = 950;
+    room->treasure->rect.y = WINDOW_HEIGHT / 1.5 - 200;
     room->chest_drop_f = false;
     return room;
 }
