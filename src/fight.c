@@ -202,7 +202,7 @@ void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
 void mx_clear_fightground(t_fightground **fg) {
     SDL_DestroyTexture((*fg)->backg_texture);
     SDL_DestroyTexture((*fg)->floor_texture);
-    SDL_DestroyTexture((*fg)->frontg_texture);
+    //SDL_DestroyTexture((*fg)->frontg_texture);
     for (int i = 0; i < 4; i++)
         SDL_DestroyTexture((*fg)->energy_ind_texture[i]);
     mx_clear_cards(*fg);

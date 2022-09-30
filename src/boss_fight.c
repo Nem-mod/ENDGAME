@@ -1,17 +1,21 @@
 #include "../inc/boss_fight.h"
 
 t_fightground *mx_create_bossroom(SDL_Window *win, SDL_Renderer *rend, t_character* player, t_inventory *inv) {
-    
+    printf("pre create\n");
+
     t_fightground *bossroom = malloc(sizeof(*bossroom));
+    if (bossroom == NULL)
+        printf("NULL\n");
 
-    bossroom->background_path = "resource/img/fight/background.jfif";
+
+    bossroom->background_path = "resource/img/fight/back_2.png";
     bossroom->floor_path = "resource/img/fight/floor.jpg";
-    bossroom->frontground_path = "resource/img/fight/column.png";
+    //bossroom->frontground_path = "resource/img/fight/column.png";
 
-    bossroom->energy_ind_path[0] = "resource/img/indicator1.png",
-    bossroom->energy_ind_path[1] = "resource/img/indicator2.png";
-    bossroom->energy_ind_path[2] = "resource/img/indicator3.png";
-    bossroom->energy_ind_path[3] = "resource/img/indicator4.png";
+    // bossroom->energy_ind_path[0] = "resource/img/indicator1.png",
+    // bossroom->energy_ind_path[1] = "resource/img/indicator2.png";
+    // bossroom->energy_ind_path[2] = "resource/img/indicator3.png";
+    // bossroom->energy_ind_path[3] = "resource/img/indicator4.png";
 
     bossroom->backg_rect.x = 0;
     bossroom->backg_rect.y = 0;
@@ -25,11 +29,11 @@ t_fightground *mx_create_bossroom(SDL_Window *win, SDL_Renderer *rend, t_charact
     bossroom->floor_rect.w = WINDOW_WIDTH;
     bossroom->floor_texture = mx_init_texture(bossroom->floor_path, win, rend);
 
-    bossroom->frontg_rect.x = 0;
-    bossroom->frontg_rect.y = 0;
-    bossroom->frontg_rect.h = WINDOW_HEIGHT / 1.5;
-    bossroom->frontg_rect.w = WINDOW_WIDTH;
-    bossroom->frontg_texture = mx_init_texture(bossroom->frontground_path, win, rend);
+    // bossroom->frontg_rect.x = 0;
+    // bossroom->frontg_rect.y = 0;
+    // bossroom->frontg_rect.h = WINDOW_HEIGHT / 1.5;
+    // bossroom->frontg_rect.w = WINDOW_WIDTH;
+    // bossroom->frontg_texture = mx_init_texture(bossroom->frontground_path, win, rend);
 
     bossroom->player_rect.h = 300;
     bossroom->player_rect.w = 300;
@@ -67,31 +71,38 @@ t_fightground *mx_create_bossroom(SDL_Window *win, SDL_Renderer *rend, t_charact
     bossroom->continue_button = mx_create_button(bossroom->button_rect.w, bossroom->button_rect.h, bossroom->button_rect.x, bossroom->button_rect.y, button);
     bossroom->continue_button.tex = mx_init_texture(button, win, rend);
 
-    SDL_QueryTexture(bossroom->energy_ind_texture[0], NULL, NULL, &bossroom->energy_ind_rect.w, &bossroom->energy_ind_rect.h);
-    bossroom->energy_ind_rect.w *= 2;
-    bossroom->energy_ind_rect.h *= 2;
-    bossroom->energy_ind_rect.x = WINDOW_WIDTH - bossroom->energy_ind_rect.w - 50;
-    bossroom->energy_ind_rect.y = 50;
+    // SDL_QueryTexture(bossroom->energy_ind_texture[0], NULL, NULL, &bossroom->energy_ind_rect.w, &bossroom->energy_ind_rect.h);
+    // bossroom->energy_ind_rect.w *= 2;
+    // bossroom->energy_ind_rect.h *= 2;
+    // bossroom->energy_ind_rect.x = WINDOW_WIDTH - bossroom->energy_ind_rect.w - 50;
+    // bossroom->energy_ind_rect.y = 50;
     
+    printf("pre winflag\n");
+    bossroom->win_flag = false;
+    printf("winflag set\n");
     bossroom->energy = AMOUNT_OF_ENERGY;
     bossroom->player_action_av = true;
     mx_create_cards(win, rend, bossroom, AMOUNT_OF_CARDS);
     bossroom->exit_flag = false;
+    printf("create done\n");
     return bossroom;
 }
 
 int mx_render_bossroom(SDL_Window *win, SDL_Renderer *rend, t_fightground* bossroom) {
+    printf("render in");
     mx_update_fight_bars(bossroom);
     SDL_RenderCopy(rend, bossroom->backg_texture, NULL, &bossroom->backg_rect);
 
     SDL_RenderCopy(rend, bossroom->floor_texture, NULL, &bossroom->floor_rect);
-    SDL_RenderCopy(rend, bossroom->frontg_texture, NULL, &bossroom->frontg_rect);
+    //SDL_RenderCopy(rend, bossroom->frontg_texture, NULL, &bossroom->frontg_rect);
     mx_render_character(bossroom->player, rend, bossroom->player_rect);
     SDL_RenderCopy(rend, bossroom->enemy->character_texture, NULL, &bossroom->enemy_rect);
     mx_render_bar(bossroom->enemy->healthbar, rend);
     mx_render_bar(bossroom->enemy->shieldbar, rend);
     SDL_RenderCopy(rend, bossroom->continue_button.tex, NULL, &bossroom->button_rect);
-    SDL_RenderCopy(rend, bossroom->energy_ind_texture[bossroom->energy], NULL, &bossroom->energy_ind_rect);
+
+    if (!bossroom->win_flag)
+        SDL_RenderCopy(rend, bossroom->energy_ind_texture[bossroom->energy], NULL, &bossroom->energy_ind_rect);
 
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
         if (bossroom->cards[i] != NULL && bossroom->cards[i]->is_active == false)
@@ -102,9 +113,13 @@ int mx_render_bossroom(SDL_Window *win, SDL_Renderer *rend, t_fightground* bossr
             SDL_RenderCopy(rend, bossroom->cards[i]->tex, NULL, &bossroom->cards[i]->rect);
     }
 
+    if (!bossroom->win_flag)
+        SDL_RenderCopy(rend, bossroom->energy_ind_texture[bossroom->energy], NULL, &bossroom->energy_ind_rect);
+
     if (bossroom->player->current_hp <= 0) {
         return DEATH;
     }
+    printf("pre exit_flag");
     if(!bossroom->exit_flag) {
         
         mx_fight(win, rend, bossroom);
@@ -115,13 +130,16 @@ int mx_render_bossroom(SDL_Window *win, SDL_Renderer *rend, t_fightground* bossr
                 bossroom->exit_flag = true;
             }
         }
+        printf("return bossfight");
         return BOSSFIGHT;
     }
+    printf("after exit_flag");
     
     
     
     bossroom->player->shield = 0;
     mx_clear_fightground(&bossroom);
+    printf("render out");
     return VICTORY;
 }
 

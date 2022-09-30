@@ -40,8 +40,14 @@ void mx_init_game(t_window_sdl *gameWindow) {
 
     t_potion_bar *potions = mx_create_potion_bar(gameWindow->window, gameWindow->renderer);
 
-     while (gameWindow->active) {
+    bossroom = mx_create_bossroom(gameWindow->window, gameWindow->renderer, player, inventory);
+    printf("while pre in");
+    while (gameWindow->active) {
+        printf("while in");
         SDL_RenderClear(gameWindow->renderer);
+
+        
+
         if (gameWindow->scene == MENU) {
             tutorial->slide = 0;
             mx_render_menu(&menu, gameWindow->renderer);
@@ -94,9 +100,9 @@ void mx_init_game(t_window_sdl *gameWindow) {
             SDL_Delay(3000);
             gameWindow->scene = RESTART;
         } else if (gameWindow->scene == TUTORIAL) {
-            gameWindow->scene = mx_render_tutorial(tutorial, gameWindow->renderer);
+            gameWindow->scene = BOSSFIGHT;
+            //gameWindow->scene = mx_render_tutorial(tutorial, gameWindow->renderer);
         }
-
         
 
 
