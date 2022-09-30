@@ -102,7 +102,11 @@ int main() {
         }
 
         if (gameWindow.scene == BOSSFIGHT) {
+<<<<<<< HEAD
             gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, bossroom);
+=======
+            gameWindow.scene = mx_render_bossroom(gameWindow.window, gameWindow.renderer, bossroom, inventory);
+>>>>>>> 81bdb34bb845b3600914c8d439eaf5c7539e3985
             mx_render_potion_bar(potions, gameWindow.renderer);
             mx_handle_potion(potions, player);
         }

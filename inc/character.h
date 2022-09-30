@@ -4,7 +4,6 @@
 #include "gamemath.h"
 #include "bar.h"
 #include <stdbool.h>
-#include <stdio.h> // for debug
 
 #define DMG_DISP_PERCENT (10)
 
