@@ -19,6 +19,7 @@ typedef struct  s_fightground {
     char *button_path;
     char *dm_path;
     char *bag_path;
+    char *energy_ind_path[4];
 
     int energy;
 
@@ -30,11 +31,13 @@ typedef struct  s_fightground {
     SDL_Rect enemy_rect;
     SDL_Rect cards_rect;
     SDL_Rect button_rect;
+    SDL_Rect energy_ind_rect;
 
     SDL_Texture *backg_texture;
     SDL_Texture *floor_texture;
     SDL_Texture *frontg_texture;
-    
+    SDL_Texture *energy_ind_texture[4];
+
     t_character* player;
     t_character* enemy;
     t_game_card* cards[AMOUNT_OF_CARDS];
@@ -46,7 +49,6 @@ typedef struct  s_fightground {
     bool exit_flag;
     bool win_flag;
     int player_energy;
-
 
 }               t_fightground;
 
