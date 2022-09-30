@@ -56,9 +56,6 @@ void mx_generate_points(t_map *map, SDL_Window* win, SDL_Renderer* renderer) {
         t_level_point *next_point = mx_create_lp(win, renderer);
         next_point->rect.y -= 300 + (i + 2) * (WINDOW_HEIGHT - 200) / (amount + 2);
         next_point->rect.x -= -100 + (i + 1) * (WINDOW_WIDTH) / (amount + 2);
-        if (i == 0) {
-            next_point->room = CHEST;
-        }
         if (i == amount - 2) {
             next_point->tex = mx_init_texture("resource/img/Boss.png", win, renderer);
             next_point->rect.y = 300; 
