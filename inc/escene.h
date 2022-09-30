@@ -1,5 +1,5 @@
-#ifndef ENDSCENE_H
-#define ENDSCENE_H
+#ifndef ESCENE_H
+#define ESCENE_H
 
 #include "window_sdl.h"
 #include "stdbool.h"

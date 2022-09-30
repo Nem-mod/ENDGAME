@@ -118,6 +118,8 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
     SDL_RenderCopy(rend, fg->frontg_texture, NULL, &fg->frontg_rect);
     mx_render_character(fg->player, rend, fg->player_rect);
     mx_render_character(fg->enemy, rend, fg->enemy_rect);
+    SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
+
     for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
         if (fg->cards[i] != NULL && fg->cards[i]->is_active == false)
             SDL_RenderCopy(rend, fg->cards[i]->tex, NULL, &fg->cards[i]->rect);
@@ -141,7 +143,6 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
     }
     
     
-    
     fg->player->shield = 0;
     mx_clear_fightground(&fg);
     return MAP;
@@ -160,12 +161,18 @@ void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg) {
     fg->continue_button.d_rect.y = WINDOW_HEIGHT / 2 - fg->continue_button.d_rect.h / 2;
     fg->win_flag = true;
     fg->energy = AMOUNT_OF_ENERGY;
-    mx_clear_cards(fg->cards);
 
-   
+    mx_clear_cards(fg);
     for (int i = 0; i < 3; i++) {
         fg->cards[i] = mx_create_card(win, rend, mx_rand(0, 1), 0);
     }
+    for (int i = 0; i < AMOUNT_OF_CARDS; i++) {
+        if (fg->cards[i] != NULL)
+            printf("%d not null\n", i);
+        else
+            printf("%d null\n", i);
+    }
+    fg->discard_cards_count = AMOUNT_OF_CARDS - 3;
     mx_shift_cards(fg);
     
 }
@@ -174,7 +181,7 @@ void mx_clear_fightground(t_fightground **fg) {
     SDL_DestroyTexture((*fg)->backg_texture);
     SDL_DestroyTexture((*fg)->floor_texture);
     SDL_DestroyTexture((*fg)->frontg_texture);
-    mx_clear_cards((*fg)->cards);
+    mx_clear_cards(*fg);
     free(*fg);
     *fg = NULL;
 }
@@ -236,14 +243,13 @@ void mx_handle_cards(t_fightground *fg, SDL_Window *win, SDL_Renderer *rend) {
 
 void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
     if(fg->player_action_av){
-        SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);
         if(fg->energy >= 0) {
             mx_handle_cards(fg, win, rend);
         }
         
         if(mx_handle_button(fg->button_rect) && !fg->win_flag) {
             if(fg->enemy->current_hp <= 0) {
-                mx_clear_cards(fg->cards);
+                mx_clear_cards(fg);
             }
             fg->discard_cards_count = 0;
             fg->energy = AMOUNT_OF_ENERGY;
@@ -266,10 +272,11 @@ void mx_update_fight_bars(t_fightground *fg) {
     mx_change_bar(fg->enemy->shieldbar, mx_get_percent_of_int(fg->enemy->max_hp, fg->enemy->shield));
 }
 
-void mx_clear_cards(t_game_card **cards) {
-     for (int i = 0; i <= AMOUNT_OF_CARDS; i++) {
-        if(cards[i] != NULL && cards[i]->is_active) {
-            mx_clear_card(cards[i]);
+void mx_clear_cards(t_fightground *fg) {
+    for (int i = 0; i <= AMOUNT_OF_CARDS; i++) {
+        if(fg->cards[i] != NULL) {
+            mx_clear_card(fg->cards[i]);
         }
+        fg->cards[i] = NULL;
     }
 }
