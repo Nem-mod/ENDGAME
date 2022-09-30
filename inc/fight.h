@@ -51,13 +51,15 @@ typedef struct  s_fightground {
 }               t_fightground;
 
 t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_character* player, t_inventory *inv, int diff);
+void mx_shift_cards(t_fightground *fg);
+void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg, int cards_ammount);
 int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 void mx_clear_fightground(t_fightground **fg);
-void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg, int cards_ammount);
+void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
+void mx_clear_fightground(t_fightground **fg);
 void mx_handle_cards(t_fightground *fg, SDL_Window *win, SDL_Renderer *rend);
 void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 void mx_update_fight_bars(t_fightground *fg);
 void mx_clear_cards(t_fightground *fg);
-void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 
 #endif
