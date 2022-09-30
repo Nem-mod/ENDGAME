@@ -25,7 +25,7 @@ typedef struct  s_room {
     SDL_Texture *frontg_texture;
     
     t_character* player;
-
+    t_potion* treasure;
 
 }               t_room;
 

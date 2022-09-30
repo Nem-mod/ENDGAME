@@ -43,18 +43,15 @@ t_character* player, int type) {
                                             "resource/img/chest_def.png");
         room->room_obj.tex = mx_init_texture(room->room_obj.img_path, win, rend);
     }
+
+    room->treasure = mx_create_potion(win, rend);
+    room->treasure->rect.x = 850;
+    room->treasure->rect.y = WINDOW_HEIGHT / 1.5 - 100;
     return room;
 }
 
 int mx_render_room(t_room *room, SDL_Renderer *rend, t_potion_bar *potion_bar, SDL_Window *win) {
-    if (mx_handle_button(room->room_obj.d_rect) && room->chest_drop == 1) {
-        room->room_obj.img_path = "resource/img/chest_def2.png";
-        SDL_DestroyTexture(room->room_obj.tex);
-        room->room_obj.tex = mx_init_texture(room->room_obj.img_path, win, rend);
-        room->chest_drop = 0;
-        if(potion_bar->potions_count < MAX_AMOUNT_OF_PT)
-            potion_bar->potions_count += 1;
-    }
+   
     SDL_RenderCopy(rend, room->backg_texture, NULL, &room->backg_rect);
 
     SDL_RenderCopy(rend, room->floor_texture, NULL, &room->floor_rect);
@@ -64,6 +61,17 @@ int mx_render_room(t_room *room, SDL_Renderer *rend, t_potion_bar *potion_bar, S
     SDL_RenderCopy(rend, room->exit_btn.tex, NULL, &room->exit_btn.d_rect);
     SDL_RenderCopy(rend, room->room_obj.tex, NULL, &room->room_obj.d_rect);
 
+    if (mx_handle_button(room->room_obj.d_rect) && room->chest_drop == 1) {
+        room->room_obj.img_path = "resource/img/chest_def2.png";
+        SDL_DestroyTexture(room->room_obj.tex);
+        room->room_obj.tex = mx_init_texture(room->room_obj.img_path, win, rend);
+        SDL_RenderCopy(rend, room->treasure->tex, NULL, &room->room_obj.d_rect);
+        if(mx_handle_button(room->treasure->rect)) {
+            room->chest_drop = 0;
+            if(potion_bar->potions_count < MAX_AMOUNT_OF_PT)
+                potion_bar->potions_count += 1;
+        }
+    }
     if (mx_handle_button(room->exit_btn.d_rect)) {
         return MAP;
     }
