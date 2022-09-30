@@ -8,6 +8,9 @@ t_tutorial* mx_create_tutorial(SDL_Window* win, SDL_Renderer* renderer) {
     tutorial->rect.y = 0;
     tutorial->textures[0] = mx_init_texture("resource/img/tutorial1.png", win, renderer);
     tutorial->textures[1] = mx_init_texture("resource/img/tutorial2.png", win, renderer);
+    tutorial->textures[2] = mx_init_texture("resource/img/tutorial3.png", win, renderer);
+    tutorial->textures[3] = mx_init_texture("resource/img/tutorial4.png", win, renderer);
+    tutorial->textures[4] = mx_init_texture("resource/img/tutorial5.png", win, renderer);
     tutorial->slide = 0;
     return tutorial;
 }

@@ -1,7 +1,7 @@
 #ifndef TUTORIAL_H
 #define TUTORIAL_H
 #include "window_sdl.h"
-#define SLIDES 2
+#define SLIDES 5
 
 typedef struct s_tutorial {
     SDL_Rect rect; 
