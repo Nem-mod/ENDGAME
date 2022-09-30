@@ -85,19 +85,22 @@ t_game_card * mx_get_card_shield(t_game_card *card, int lvl){
     {
     case 1:
         card->img_path = "resource/img/card_shield.png";
+        card->defence = 0;
         break;
     
     case 2:
         card->img_path = "resource/img/card_shield2.png";
+        card->defence = 4;
         break;
     case 3:
         v = mx_rand(0, 1);
         if(v == 0)
             card->img_path = "resource/img/card_gold_shield.png";
         card->img_path = "resource/img/shield32.png";
+        card->defence = 7;
         break;
     }
-    card->defence = 10 * value;
+    card->defence += 10 * value;
     card->cost = value;
     card->type = ARM;
     return card;
