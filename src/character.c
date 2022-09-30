@@ -61,7 +61,7 @@ int mx_calculate_character_attack(t_character *from, t_character *to) {
     if (to->shield < 0)
         to->shield = 0;
 
-    to->current_hp -= cur_dmg; // Надо ли отнимать в функции, или лучше каждый раз вручную?
+    to->current_hp -= cur_dmg;
     return cur_dmg;
 }
 

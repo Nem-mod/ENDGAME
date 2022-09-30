@@ -57,7 +57,7 @@ void mx_create_cards(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg, int
 void mx_handle_cards(t_fightground *fg, SDL_Window *win, SDL_Renderer *rend);
 void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 void mx_update_fight_bars(t_fightground *fg);
-void mx_clear_cards(t_game_card **cards);
+void mx_clear_cards(t_fightground *fg);
 void mx_win_level(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg);
 
 #endif
