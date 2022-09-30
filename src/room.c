@@ -54,7 +54,6 @@ int mx_render_room(t_room *room, SDL_Renderer *rend, t_potion_bar *potion_bar, S
     SDL_RenderCopy(rend, room->backg_texture, NULL, &room->backg_rect);
 
     SDL_RenderCopy(rend, room->floor_texture, NULL, &room->floor_rect);
-    SDL_RenderCopy(rend, room->frontg_texture, NULL, &room->frontg_rect);
 
     mx_render_character(room->player, rend, room->player_rect);
     SDL_RenderCopy(rend, room->exit_btn.tex, NULL, &room->exit_btn.d_rect);
