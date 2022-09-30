@@ -4,30 +4,32 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     
     t_fightground *fg = malloc(sizeof(*fg));
 
-    fg->background_path = "resource/img/fight/background.jfif";
-    fg->floor_path = "resource/img/fight/floor.jpg";
-    fg->frontground_path = "resource/img/fight/column.png";
+    if(mx_rand(0, 1) == 1) {
+        fg->background_path = "resource/img/fight/back_1.png";
+        fg->floor_path = "resource/img/fight/ground_1.png";
+    } else {
+        fg->background_path = "resource/img/fight/back_2.png";
+        fg->floor_path = "resource/img/fight/ground_2.png";
+    }
+    
     fg->button_path = "resource/img/button-finish.png";
+
     fg->dm_path = "resource/img/dm.png";
     fg->bag_path = "resource/img/bag.png";
 
     fg->backg_rect.x = 0;
     fg->backg_rect.y = 0;
-    fg->backg_rect.h = WINDOW_HEIGHT / 1.5;
+    fg->backg_rect.h = WINDOW_HEIGHT / 1.2;
     fg->backg_rect.w = WINDOW_WIDTH;
     fg->backg_texture = mx_init_texture(fg->background_path, win, rend);
 
     fg->floor_rect.x = 0;
     fg->floor_rect.y = WINDOW_HEIGHT / 1.5;
-    fg->floor_rect.h = WINDOW_HEIGHT / 4;
+    fg->floor_rect.h = WINDOW_HEIGHT / 3.5;
     fg->floor_rect.w = WINDOW_WIDTH;
     fg->floor_texture = mx_init_texture(fg->floor_path, win, rend);
 
-    fg->frontg_rect.x = 0;
-    fg->frontg_rect.y = 0;
-    fg->frontg_rect.h = WINDOW_HEIGHT / 1.5;
-    fg->frontg_rect.w = WINDOW_WIDTH;
-    fg->frontg_texture = mx_init_texture(fg->frontground_path, win, rend);
+
 
     fg->player_rect.h = 300;
     fg->player_rect.w = 300;
@@ -117,7 +119,6 @@ int mx_render_fightground(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg
     SDL_RenderCopy(rend, fg->backg_texture, NULL, &fg->backg_rect);
 
     SDL_RenderCopy(rend, fg->floor_texture, NULL, &fg->floor_rect);
-    SDL_RenderCopy(rend, fg->frontg_texture, NULL, &fg->frontg_rect);
     mx_render_character(fg->player, rend, fg->player_rect);
     mx_render_character(fg->enemy, rend, fg->enemy_rect);
     SDL_RenderCopy(rend, fg->continue_button.tex, NULL, &fg->continue_button.d_rect);

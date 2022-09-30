@@ -4,27 +4,25 @@ t_room *mx_create_room(SDL_Window *win, SDL_Renderer *rend,
 t_character* player, int type) {
     t_room *room = malloc(sizeof(*room));
 
-    room->background_path = "resource/img/fight/background.jfif";
-    room->floor_path = "resource/img/fight/floor.jpg";
-    room->frontground_path = "resource/img/fight/column.png";
-
+   if(mx_rand(0, 1) == 1) {
+        room->background_path = "resource/img/fight/back_1.png";
+        room->floor_path = "resource/img/fight/ground_1.png";
+    } else {
+        room->background_path = "resource/img/fight/back_2.png";
+        room->floor_path = "resource/img/fight/ground_2.png";
+    }
+    
     room->backg_rect.x = 0;
     room->backg_rect.y = 0;
-    room->backg_rect.h = WINDOW_HEIGHT / 1.5;
+    room->backg_rect.h = WINDOW_HEIGHT / 1.2;
     room->backg_rect.w = WINDOW_WIDTH;
     room->backg_texture = mx_init_texture(room->background_path, win, rend);
 
     room->floor_rect.x = 0;
     room->floor_rect.y = WINDOW_HEIGHT / 1.5;
-    room->floor_rect.h = WINDOW_HEIGHT / 4;
+    room->floor_rect.h = WINDOW_HEIGHT / 3.5;
     room->floor_rect.w = WINDOW_WIDTH;
     room->floor_texture = mx_init_texture(room->floor_path, win, rend);
-
-    room->frontg_rect.x = 0;
-    room->frontg_rect.y = 0;
-    room->frontg_rect.h = WINDOW_HEIGHT / 1.5;
-    room->frontg_rect.w = WINDOW_WIDTH;
-    room->frontg_texture = mx_init_texture(room->frontground_path, win, rend);
 
     room->player_rect.h = 300;
     room->player_rect.w = 300;
