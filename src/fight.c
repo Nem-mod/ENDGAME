@@ -38,9 +38,11 @@ t_fightground *mx_create_fightground(SDL_Window *win, SDL_Renderer *rend, t_char
     fg->inv = inv;    
 
     char* enemys_img[P_OF_ENEMYS] = {
-        "resource/img/fight/enemy.png",
         "resource/img/chest_def3.png",
-        "resource/img/mob.png",
+        "resource/img/firebock.png",
+        "resource/img/goblin.png",
+        "resource/img/bear.png",
+        "resource/img/player_reverse.png",
         }; // В отдельной функции создания противника сделать рандом
 
     fg->enemy_rect.h = 300;
