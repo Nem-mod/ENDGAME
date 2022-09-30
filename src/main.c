@@ -62,7 +62,7 @@ int main() {
                 bossroom = mx_create_bossroom(gameWindow.window, gameWindow.renderer, player, inventory);
         }
         else if (gameWindow.scene == LEVEL) {
-            gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground, inventory);
+            gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, fightground);
             mx_render_potion_bar(potions, gameWindow.renderer);
             mx_handle_potion(potions, player);
         }
@@ -76,7 +76,6 @@ int main() {
             SDL_Delay(3000);
             mx_clear_escene(&escene);
             gameWindow.scene = RESTART;
-            //break;
         }
         else if (gameWindow.scene == RESTART) {
             mx_clear_map(&map);
@@ -103,7 +102,7 @@ int main() {
         }
 
         if (gameWindow.scene == BOSSFIGHT) {
-            gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, bossroom, inventory);
+            gameWindow.scene = mx_render_fightground(gameWindow.window, gameWindow.renderer, bossroom);
             mx_render_potion_bar(potions, gameWindow.renderer);
             mx_handle_potion(potions, player);
         }

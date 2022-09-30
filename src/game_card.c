@@ -132,7 +132,10 @@ t_game_card *mx_copy_card(t_game_card *src, SDL_Window *win, SDL_Renderer *rend)
     card->cost = src->cost;
     card->type = src->type;
     card->img_path = src->img_path;
-    card->rect = src->rect;
+    card->rect.x = src->rect.x;
+    card->rect.y = src->rect.y;
+    card->rect.h = src->rect.h;
+    card->rect.w = src->rect.w;
     card->tex = mx_init_texture(card->img_path, win, rend);
     card->is_active = src->is_active;
 
