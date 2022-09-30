@@ -31,7 +31,7 @@ void mx_set_character(t_character *c,
 void mx_set_enemy(t_character *c) {
     c->max_hp = mx_rand(20, 40) + 50;
     c->current_hp = c->max_hp;
-    c->attack = mx_rand(15, 25);
+    c->attack = mx_rand(20, 30);
     c->crit_chance = mx_rand(10, 20);
     c->crit_dmg =  mx_rand(30, 40);
     c->dodge_chance =  mx_rand(10, 12);

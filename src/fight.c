@@ -245,8 +245,8 @@ void mx_fight(SDL_Window *win, SDL_Renderer *rend, t_fightground* fg){
             fg->discard_cards_count = 0;
             fg->energy = AMOUNT_OF_ENERGY;
             fg->player_action_av = false;
-            fg->enemy->current_hp -= fg->player->attack;
-            SDL_Delay(500); // Поменять на подсчет времени. Мб тупаяя и сложная идея
+            mx_calculate_character_attack(fg->player, fg->enemy);
+            SDL_Delay(100); // Поменять на подсчет времени. Мб тупаяя и сложная идея
         }
     } else {
         mx_calculate_character_attack(fg->enemy, fg->player);

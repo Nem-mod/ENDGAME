@@ -81,6 +81,7 @@ void mx_init_game(t_window_sdl *gameWindow) {
             player =  mx_create_character(palyer_img, 100, 15, 20, 50, 10, 2, gameWindow->window, gameWindow->renderer);
             potions = mx_create_potion_bar(gameWindow->window, gameWindow->renderer);
             inventory = mx_create_inventory(gameWindow->window, gameWindow->renderer);
+            mx_generate_start_cards(gameWindow->window, gameWindow->renderer, inventory);
             gameWindow->active = true;
             gameWindow->scene = MENU;
             continue;
