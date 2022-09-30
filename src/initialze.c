@@ -128,7 +128,7 @@ void mx_init_game(t_window_sdl *gameWindow) {
                 gameWindow->active = false;
             }
         }
-        SDL_Delay(1000 / 60);
+        SDL_Delay(1000 / 24);
     }
 
 }

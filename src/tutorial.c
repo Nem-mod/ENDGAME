@@ -16,6 +16,9 @@ t_scenes mx_render_tutorial(t_tutorial *tutorial, SDL_Renderer *renderer){
         SDL_RenderCopy(renderer, tutorial->textures[tutorial->slide], NULL, &tutorial->rect);
         if(mx_handle_button(tutorial->rect)) {
             tutorial->slide++;
+            SDL_RenderPresent(renderer);
+            SDL_Delay(500);
+
         }
         return TUTORIAL;
     } else {
@@ -23,4 +26,11 @@ t_scenes mx_render_tutorial(t_tutorial *tutorial, SDL_Renderer *renderer){
 
     }
 }
-void mx_clear_tutorial(t_tutorial *tutorial);
+void mx_clear_tutorial(t_tutorial *tutorial) {
+    for (int i = 0; i < SLIDES; i++) {
+        SDL_DestroyTexture(tutorial->textures[i]);
+    }
+    free(tutorial);
+    tutorial = NULL;
+    
+}
